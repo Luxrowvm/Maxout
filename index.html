@@ -92,6 +92,12 @@ main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
 .tm{font-size:64px;font-weight:700;color:var(--ac);font-variant-numeric:tabular-nums;margin:10px 0}
 .ms{background:var(--card);border:1px solid var(--ac);border-radius:16px;padding:12px;margin:8px 0}.ms p{margin:6px 0 10px}.ms small{color:var(--mu)}
 .ems{font-size:26px;width:44px;height:44px;border-radius:12px;background:var(--bg)}
+.bi{font-size:64px;animation:pop .5s}
+.tw{animation:tw 2s ease-in-out infinite}@keyframes tw{50%{opacity:.15}}.sw2.bn{animation:bn .5s}
+.stars{display:flex;gap:6px;justify-content:center;margin:8px 0}.stars button{font-size:34px;color:var(--mu);line-height:1}.stars .on{color:#facc15}
+.fc{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px;margin:10px 0}.fc .stars{justify-content:flex-start;margin:6px 0 0}.fc .stars button{font-size:26px}
+.fh{display:flex;align-items:center;gap:8px}.fh b{flex:1}.fh>button{font-size:18px;padding:6px}
+.rv{margin-top:6px;color:var(--mu);white-space:pre-wrap;cursor:pointer}.bb span{font-size:22px}
 </style>
 </head>
 <body>
@@ -361,33 +367,169 @@ neck|Estrella de crítico|⭐||132
 shirt|Gabardina de realidad virtual|🕶️|#0a0a0a|148
 hand|Esfera de dragón|🟠||146
 hand|Entrada de cine|🎟️||129
-hand|Brújula de aventurero|🧭||139`.split('\n').map(l=>{const a=l.split('|');return{s:a[0],n:a[1],e:a[2],c:a[3],a:a[4]===''?null:+a[4]}});
+hand|Brújula de aventurero|🧭||139
+hat|Bola disco|🪩||~p
+hat|Calabaza maldita|🎃||~p
+hat|Gorro navideño|🎄||~t
+hat|Aura estelar|🌟||~n
+hat|Tridente de rey|🔱||~n
+hat|Anillo de Saturno|🪐||~n
+hat|Cerebro genio|🧠||~t
+hat|Casco dragón|🐉||~r
+hat|Máscara de zorro|🦊||~p
+hat|Capucha nocturna|🦇||~p
+hat|Gorra de general|🎖️||~g
+hat|OVNI amigo|🛸||~p
+hat|Televisión retro|📺||~p
+hat|Cascarón|🐣||~s
+hat|Arcoíris|🌈||~s
+hat|Nube mágica|☁️||~s
+hat|Tornado|🌪️||~m
+hat|Halo celestial|😇||~n
+neck|Serpiente guardiana|🐍||~r
+neck|Lazo de campeón|🎗️||~s
+neck|Cadena de hierro|🔗||~g
+neck|Imán de fuerza|🧲||~g
+neck|Amuleto de ojo|🪬||~t
+neck|Pase VIP|🎫||~p
+neck|Llave maestra|🔑||~m
+neck|Llave antigua|🗝️||~m
+neck|Radio vintage|📻||~p
+neck|Pieza de puzle|🧩||~t
+neck|Micro de estudio|🎙️||~p
+neck|Carta de amor|💌||~s
+neck|Pluma de fénix|🪶||~r
+neck|Trébol de la suerte|🍀||~t
+neck|Estrella fugaz|🌠||~n
+neck|Concha marina|🐚||~t
+neck|Colgante antiguo|🏺||~n
+shirt|Camiseta de ramen|🍜|#f59e0b|~p
+shirt|Chaqueta de equipo|⚽|#0ea5e9|~t
+shirt|Kimono blanco|🥋|#f3f4f6|~g
+shirt|Traje de cazador|🗡️|#1f2937|~n
+shirt|Capa de mago|🪄|#6d28d9|~p
+shirt|Sudadera gamer|🎮|#8b5cf6|~p
+shirt|Camiseta de pirata|☠️|#111827|~p
+shirt|Armadura dorada|🏆|#eab308|~n
+shirt|Chaleco de explorador|🧭|#a16207|~m
+shirt|Camiseta de robot|🤖|#64748b|~p
+shirt|Bata de científico|🧪|#f9fafb|~t
+shirt|Poncho del desierto|🏜️|#d97706|~r
+shirt|Traje de buzo|🤿|#0369a1|~g
+shirt|Camiseta de flores|🌺|#db2777|~s
+shirt|Jersey de nieve|❄️|#93c5fd|~t
+shirt|Traje de espía|🕴️|#0f172a|~p
+shirt|Camisa de lava|🌋|#b91c1c|~r
+shirt|Túnica zen|☯️|#0f766e|~t
+shirt|Traje de rey|👑|#7e22ce|~n
+pants|Pantalón de explorador|🧗|#854d0e|~m
+pants|Pantalón de skater|🛹|#374151|~t
+pants|Pantalón de karate|🥋|#f8fafc|~g
+pants|Pantalón de cazador|🗡️|#111827|~n
+pants|Pantalón de mago|🪄|#4c1d95|~p
+pants|Pantalón gamer|🕹️|#7c3aed|~p
+pants|Pantalón pirata|🏴‍☠️|#78350f|~p
+pants|Pantalón dorado|🏆|#ca8a04|~n
+pants|Pantalón de buzo|🤿|#075985|~g
+pants|Pantalón de robot|🤖|#475569|~p
+pants|Pantalón de laboratorio|🧪|#e5e7eb|~t
+pants|Pantalón del desierto|🏜️|#b45309|~r
+pants|Pantalón de campeón|🥇|#f59e0b|~g
+pants|Pantalón floral|🌼|#ec4899|~s
+pants|Pantalón de nieve|⛄|#bfdbfe|~t
+pants|Pantalón de espía|🕶️|#1e293b|~p
+pants|Pantalón de lava|🌋|#991b1b|~r
+pants|Pantalón zen|☯️|#115e59|~t
+pants|Pantalón real|👑|#6b21a8|~n
+pants|Pantalón arcoíris|🌈|#f43f5e|~s
+shoes|Zapatillas turbo|🚀|#f97316|~g
+shoes|Botas de explorador|🧗|#78350f|~m
+shoes|Zapatillas de karate|🥋|#f1f5f9|~g
+shoes|Botas de cazador|🗡️|#1f2937|~n
+shoes|Botas de mago|🪄|#5b21b6|~p
+shoes|Zapatillas gamer|🎮|#a78bfa|~p
+shoes|Botas de pirata|☠️|#451a03|~p
+shoes|Botas doradas|🏆|#facc15|~n
+shoes|Aletas de buzo|🤿|#0284c7|~g
+shoes|Pies de robot|🤖|#94a3b8|~p
+shoes|Zapatos de laboratorio|🧪|#d1d5db|~t
+shoes|Botas del desierto|🏜️|#a16207|~r
+shoes|Zapatillas de campeón|🥇|#fbbf24|~g
+shoes|Zapatillas floreadas|🌸|#f9a8d4|~s
+shoes|Botas de nieve|❄️|#60a5fa|~t
+shoes|Zapatos de espía|🕴️|#0f172a|~p
+shoes|Botas de lava|🌋|#dc2626|~r
+shoes|Sandalias zen|☯️|#14b8a6|~t
+shoes|Zapatos reales|👑|#9333ea|~n
+shoes|Zapatillas arcoíris|🌈|#fb7185|~s
+hand|Mochila escolar|🎒||~t
+hand|Cámara de fotos|📷||~p
+hand|Telescopio|🔭||~n
+hand|Microscopio|🔬||~t
+hand|Linterna|🔦||~m
+hand|Paraguas|☂️||~s
+hand|Libro de hechizos|📚||~p
+hand|Doble espada|⚔️||~g
+hand|Hacha|🪓||~g
+hand|Arco|🏹||~g
+hand|Escudo|🛡️||~g
+hand|Bumerán|🪃||~m
+hand|Moneda de oro|🪙||~n
+hand|Cometa|🪁||~s`.split('\n').map(l=>{const a=l.split('|');return{s:a[0],n:a[1],e:a[2],c:a[3],a:a[4]===''?null:a[4][0]=='~'?-1:+a[4],th:(a[4]||'')[1]}});
+{const TH=k=>/^(gw|gr|tm|gm|gx|ee|eb|en)$/.test(k)?'g':/^(fl|fs|fr|al|as|wn|x\d)$/.test(k)?'p':/^(md|mw|mrr)$/.test(k)?'m':/^(b|dy|p|pb|pm)$/.test(k)?'r':/^(l|x|rk|ac)$/.test(k)?'n':/^(tp|fd|pl|wc|fu|pw|nt)$/.test(k)?'s':'t',L={},cn={};
+AD.forEach((a,i)=>(L[TH(a.k)]=L[TH(a.k)]||[]).push(i));
+PC.forEach(c=>{if(c.a===-1){const l=L[c.th]||L.t;c.a=l[((cn[c.th]=(cn[c.th]||0)+1)-1)%l.length]}})}
 const SL=[['hat','🎩 Cabeza'],['neck','📿 Cuello'],['shirt','👕 Camisa'],['pants','👖 Pantalón'],['shoes','👟 Zapatos'],['hand','✋ Mano']],FUR=['#c08457','#8b5a2b','#6b7280','#f5c26b','#3f3f46','#ef9a9a'];
-const BG={gym:`<path d='M14 28v8M20 24v16M20 32h24M44 24v16M50 28v8' stroke='@' stroke-width='3' fill='none' stroke-linecap='round'/>`,hoy:`<path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='@'/>`,saru:`<path d='M14 30q0-14 14-14 0 14-14 14zM44 52q0-12 12-12 0 12-12 12z' fill='@'/><circle cx='48' cy='18' r='3' fill='@'/>`,notas:`<path d='M0 21h64M0 42h64' stroke='@' fill='none'/><circle cx='10' cy='10' r='2' fill='@'/>`,stats:`<path d='M32 12l16 9v19l-16 9-16-9V21z' fill='none' stroke='@' stroke-width='1.5'/>`};
+const BG={cine:`<rect x='4' y='8' width='7' height='9' rx='2' fill='@'/><rect x='4' y='40' width='7' height='9' rx='2' fill='@'/><rect x='53' y='8' width='7' height='9' rx='2' fill='@'/><rect x='53' y='40' width='7' height='9' rx='2' fill='@'/><path d='M24 26h18v14H24z' fill='none' stroke='@' stroke-width='1.5'/><path d='M24 26l5-6h5l-5 6zM34 26l5-6h4l-5 6z' fill='@'/>`,gym:`<path d='M14 28v8M20 24v16M20 32h24M44 24v16M50 28v8' stroke='@' stroke-width='3' fill='none' stroke-linecap='round'/>`,hoy:`<path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='@'/>`,saru:`<path d='M14 30q0-14 14-14 0 14-14 14zM44 52q0-12 12-12 0 12-12 12z' fill='@'/><circle cx='48' cy='18' r='3' fill='@'/>`,notas:`<path d='M0 21h64M0 42h64' stroke='@' fill='none'/><circle cx='10' cy='10' r='2' fill='@'/>`,stats:`<path d='M32 12l16 9v19l-16 9-16-9V21z' fill='none' stroke='@' stroke-width='1.5'/>`};
 const bgi=col=>{const c=`hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)`;return`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'>${BG[scr].replace(/@/g,c)}</svg>`)}")`};
-function svg(p,s,g){const z=p.sr,f=FUR[z.fur||0],bw=[38,46,56][z.bd??1],q=k=>z.eq[k]!=null?PC[z.eq[k]]:null,sh=q('shirt'),pa=q('pants'),so=q('shoes'),nk=q('neck'),ht=q('hat'),hd=q('hand'),be='#f3d9b1';
-return`<svg viewBox="0 0 200 250" class=sv style="filter:drop-shadow(0 0 ${s.rk*3}px var(--ac))">
-<path d="M135 205q55 5 45-55 0-12-12-6" fill=none stroke="${f}" stroke-width=14 stroke-linecap=round />
-<ellipse cx=100 cy=172 rx=${bw} ry=50 fill="${f}"/><ellipse cx=100 cy=180 rx=${bw*.6} ry=34 fill="${be}"/>
-<ellipse cx=80 cy=222 rx=17 ry=12 fill="${f}"/><ellipse cx=120 cy=222 rx=17 ry=12 fill="${f}"/>
-${pa?`<rect x=${100-bw*.85} y=194 width=${bw*1.7} height=20 rx=8 fill="${pa.c}"/><rect x=63 y=208 width=34 height=16 rx=7 fill="${pa.c}"/><rect x=103 y=208 width=34 height=16 rx=7 fill="${pa.c}"/>`:''}
-${sh?`<ellipse cx=100 cy=162 rx=${bw+4} ry=36 fill="${sh.c}"/><text x=100 y=172 font-size=26 text-anchor=middle>${sh.e}</text>`:''}
-<ellipse cx=${100-bw-6} cy=170 rx=11 ry=30 fill="${f}" transform="rotate(12 ${100-bw-6} 170)"/><ellipse cx=${100+bw+6} cy=170 rx=11 ry=30 fill="${f}" transform="rotate(-12 ${100+bw+6} 170)"/>
-${so&&so.c?`<ellipse cx=80 cy=228 rx=20 ry=10 fill="${so.c}"/><ellipse cx=120 cy=228 rx=20 ry=10 fill="${so.c}"/>`:''}
-<circle cx=52 cy=96 r=18 fill="${f}"/><circle cx=148 cy=96 r=18 fill="${f}"/><circle cx=52 cy=96 r=9 fill="${be}"/><circle cx=148 cy=96 r=9 fill="${be}"/>
-<circle cx=100 cy=98 r=50 fill="${f}"/><ellipse cx=100 cy=108 rx=35 ry=30 fill="${be}"/>
-<ellipse class=eye cx=84 cy=96 rx=5 ry=7 fill=#111 /><ellipse class=eye cx=116 cy=96 rx=5 ry=7 fill=#111 />
-<path d="${g>0?'M88 124q12-9 24 0':'M88 117q12 10 24 0'}" fill=none stroke=#111 stroke-width=3 stroke-linecap=round />
-<circle cx=95 cy=108 r=2 fill=#111 /><circle cx=105 cy=108 r=2 fill=#111 />
-${nk?`<text x=100 y=150 font-size=30 text-anchor=middle>${nk.e}</text>`:''}
-${ht?`<text x=100 y=62 font-size=56 text-anchor=middle>${ht.e}</text>`:''}
-${hd?`<text x=${100+bw+14} y=190 font-size=40 text-anchor=middle>${hd.e}</text>`:''}</svg>`}
+const shd=(c,a)=>'#'+[1,3,5].map(i=>Math.max(0,Math.min(255,Math.round(parseInt(c.substr(i,2),16)*(1+a)))).toString(16).padStart(2,'0')).join('');
+function svg(p,s,g,an){const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},f=FUR[z.fur||0],bw=[36,44,52][z.bd??1]+s.rk*1.5,q=k=>z.eq[k]!=null?PC[z.eq[k]]:null,sr=q('shirt'),pa=q('pants'),so=q('shoes'),nk=q('neck'),ht=q('hat'),hd=q('hand'),cr='#f6dfbd',dk2=shd(f,-.3),x1=100-bw,x2=100+bw,hp=an=='jp',sd=g>0,tl=`M${x2-6} 214C170 232 196 196 176 164S150 150 160 138`;
+return`<svg viewBox="0 0 200 260" class=sv><defs><radialGradient id=fg cx=.35 cy=.3 r=.9><stop offset=0 stop-color="${shd(f,.3)}" /><stop offset=.6 stop-color="${f}" /><stop offset=1 stop-color="${shd(f,-.25)}" /></radialGradient></defs>
+<circle cx=100 cy=150 r=100 style="fill:var(--ac);opacity:${.05+s.rk*.035}" />
+<ellipse cx=100 cy=248 rx=${bw+20} ry=8 fill="#0005" />
+${s.rk>=3?'<text class=tw x=22 y=70 font-size=16 fill="#fde047">✦</text><text class=tw x=170 y=50 font-size=20 fill="#fde047" style="animation-delay:.7s">✦</text><text class=tw x=176 y=140 font-size=14 fill="#fde047" style="animation-delay:1.3s">✦</text>':''}
+<path d="${tl}" fill=none stroke="${dk2}" stroke-width=15 stroke-linecap=round /><path d="${tl}" fill=none stroke="url(#fg)" stroke-width=11 stroke-linecap=round />
+<ellipse cx=82 cy=216 rx=16 ry=22 fill="url(#fg)" /><ellipse cx=118 cy=216 rx=16 ry=22 fill="url(#fg)" />
+<ellipse cx=76 cy=238 rx=21 ry=11 fill="url(#fg)" /><ellipse cx=124 cy=238 rx=21 ry=11 fill="url(#fg)" />
+<g fill="${cr}"><circle cx=64 cy=240 r=3.5 /><circle cx=73 cy=244 r=3.5 /><circle cx=82 cy=244 r=3.5 /><circle cx=118 cy=244 r=3.5 /><circle cx=127 cy=244 r=3.5 /><circle cx=136 cy=240 r=3.5 /></g>
+<ellipse cx=100 cy=170 rx=${bw} ry=54 fill="url(#fg)" /><ellipse cx=100 cy=178 rx=${bw*.62} ry=38 fill="${cr}" opacity=.95 />
+${pa?`<path d="M${x1+4} 198Q100 214 ${x2-4} 198L${x2-8} 228H105V218H95V228H${x1+8}Z" fill="${pa.c}" />`:''}
+${so&&so.c?`<ellipse cx=76 cy=239 rx=23 ry=11 fill="${so.c}" /><ellipse cx=124 cy=239 rx=23 ry=11 fill="${so.c}" /><path d="M54 243H98M102 243H146" stroke="#0003" stroke-width=3 />`:''}
+${sr?`<path d="M${x1-2} 150Q100 132 ${x2+2} 150L${x2-2} 196Q100 206 ${x1+2} 196Z" fill="${sr.c}" /><text x=100 y=178 font-size=26 text-anchor=middle>${sr.e}</text>`:''}
+<path d="M${x1+6} 144Q${x1-16} 178 ${x1-4} 208" fill=none stroke="${dk2}" stroke-width=19 stroke-linecap=round /><path d="M${x1+6} 144Q${x1-16} 178 ${x1-4} 208" fill=none stroke="url(#fg)" stroke-width=15 stroke-linecap=round /><circle cx=${x1-4} cy=210 r=11 fill="url(#fg)" />
+<path d="M${x2-6} 144Q${x2+16} 178 ${x2+4} 208" fill=none stroke="${dk2}" stroke-width=19 stroke-linecap=round /><path d="M${x2-6} 144Q${x2+16} 178 ${x2+4} 208" fill=none stroke="url(#fg)" stroke-width=15 stroke-linecap=round /><circle cx=${x2+4} cy=210 r=11 fill="url(#fg)" />
+<circle cx=50 cy=100 r=20 fill="url(#fg)" /><circle cx=150 cy=100 r=20 fill="url(#fg)" /><circle cx=50 cy=100 r=11 fill="#e9b8a0" /><circle cx=150 cy=100 r=11 fill="#e9b8a0" />
+<circle cx=100 cy=96 r=52 fill="url(#fg)" />
+<circle cx=84 cy=104 r=23 fill="${cr}" /><circle cx=116 cy=104 r=23 fill="${cr}" /><ellipse cx=100 cy=122 rx=28 ry=21 fill="${cr}" />
+<g class=eye><ellipse cx=84 cy=98 rx=7 ry=9 fill="#1c1917" /><circle cx=86.5 cy=94.5 r=2.6 fill="#fff" /><circle cx=82 cy=102 r=1.2 fill="#fff" /></g>
+<g class=eye><ellipse cx=116 cy=98 rx=7 ry=9 fill="#1c1917" /><circle cx=118.5 cy=94.5 r=2.6 fill="#fff" /><circle cx=114 cy=102 r=1.2 fill="#fff" /></g>
+<path d="${sd?'M74 84Q83 82 92 76':'M74 80Q83 74 92 80'}" fill=none stroke="${dk2}" stroke-width=3.5 stroke-linecap=round /><path d="${sd?'M108 76Q117 82 126 84':'M108 80Q117 74 126 80'}" fill=none stroke="${dk2}" stroke-width=3.5 stroke-linecap=round />
+<circle cx=70 cy=113 r=6 fill="#f472b6" opacity=.35 /><circle cx=130 cy=113 r=6 fill="#f472b6" opacity=.35 />
+<ellipse cx=100 cy=114 rx=9 ry=5 fill="${shd(cr,-.18)}" /><circle cx=96.5 cy=114 r=1.6 fill="#1c1917" /><circle cx=103.5 cy=114 r=1.6 fill="#1c1917" />
+${hp?'<path d="M84 124Q100 148 116 124Z" fill="#7f1d1d" /><ellipse cx=100 cy=134 rx=8 ry=4.5 fill="#f87171" />':sd?'<path d="M89 132Q100 123 111 132" fill=none stroke="#1c1917" stroke-width=3 stroke-linecap=round />':'<path d="M88 124Q100 134 112 124" fill=none stroke="#1c1917" stroke-width=3 stroke-linecap=round />'}
+${sd?'<path d="M122 106q-5 9 0 12q5-3 0-12z" fill="#7dd3fc" />':''}
+${nk?`<text x=100 y=152 font-size=28 text-anchor=middle>${nk.e}</text>`:''}
+${ht?`<text x=100 y=60 font-size=54 text-anchor=middle>${ht.e}</text>`:''}
+${hd?`<text x=${x2+10} y=214 font-size=38 text-anchor=middle>${hd.e}</text>`:''}</svg>`}
+const AQ=[];let am=null;
+function apop(j){AQ.push(j);anx()}
+function anx(){if(am||!AQ.length)return;const j=AQ.shift(),a=AD[j],ps=PC.filter(c=>c.a===j);
+am=document.createElement('div');
+am.innerHTML=`<div class=ov style="z-index:11"></div><div class="pu ap" style="z-index:12"><div class=bi>${a.i}</div><b style="font-size:22px">¡Logro desbloqueado!</b><b>${E(a.n)}</b><p class=mu>${E(a.d.replace(/^\?/,''))}</p><p>+25 XP</p>${ps.length?`<p>🎁 ${ps.length>1?'Nuevas piezas':'Nueva pieza'}: ${ps.map(c=>c.e+' '+E(c.n)).join(', ')}</p>`:''}<button class=pri id=apx>Cancelar</button></div>`;
+document.body.appendChild(am);confetti();
+$('#apx').onclick=()=>{am.remove();am=null;anx()}}
+
 const HS=(a,j,p)=>a.d[0]=='?'&&!p.ach[j];
 const gy=p=>p.gym=p.gym||{rs:[
 {id:'r0',n:'Empuje',ex:[{n:'Flexiones',s:3,r:12,d:0,p:60},{n:'Fondos en silla',s:3,r:10,d:0,p:60},{n:'Pike push-ups',s:3,r:8,d:0,p:60},{n:'Plancha',s:3,r:0,d:40,p:45}]},
 {id:'r1',n:'Piernas',ex:[{n:'Sentadillas',s:4,r:15,d:0,p:60},{n:'Zancadas',s:3,r:12,d:0,p:60},{n:'Puente de glúteos',s:3,r:15,d:0,p:45},{n:'Elevación de talones',s:3,r:20,d:0,p:45}]},
 {id:'r2',n:'Core y cardio',ex:[{n:'Plancha',s:3,r:0,d:40,p:30},{n:'Mountain climbers',s:3,r:0,d:30,p:30},{n:'Burpees',s:3,r:10,d:0,p:60},{n:'Abdominales',s:3,r:20,d:0,p:45}]}]};
+const lk=()=>scr=='cine'?'films':'anime';
 const SC={
+cine:p=>{const L=p.films=p.films||[],ST3={p:'📌',w:'👀',v:'✅'};
+return`<main><form id=cf><input id=ct placeholder="Título de la película" value="${E(cd.t)}" required><textarea id=cr rows=3 placeholder="Tu reseña: ¿qué te pareció?">${E(cd.r)}</textarea><div class=stars>${[1,2,3,4,5].map(n=>`<button type=button data-a=cst data-v=${n} class="${cd.n>=n?'on':''}" aria-label="${n} estrellas">${cd.n>=n?'★':'☆'}</button>`).join('')}</div><button class=pri>Guardar película</button></form>
+<div class=g style="margin:12px 0">${[['all','Todo'],['p','📌 Por ver'],['w','👀 Viendo'],['v','✅ Vistas']].map(([a,b])=>`<button class="${lfl==a?'on':''}" data-a=lfl data-v=${a}>${b}</button>`).join('')}</div>
+${L.map((x,i)=>lfl=='all'||x.st==lfl?`<div class=fc><div class=fh><button class=ems data-a=lem data-v=${i} aria-label="Emoji">${x.e}</button><b>${E(x.t)}</b><button data-a=lst data-v=${i} aria-label="Estado">${ST3[x.st]}</button><button data-a=ldl data-v=${i} aria-label="Borrar">🗑</button></div><div class=stars>${[1,2,3,4,5].map(n=>`<button data-a=fst data-v="${i},${n}" class="${x.r>=n?'on':''}" aria-label="${n} estrellas">${x.r>=n?'★':'☆'}</button>`).join('')}</div><p class=rv data-a=frv data-v=${i}>${x.rv?E(x.rv):'Toca para escribir tu reseña…'}</p></div>`:'').join('')||'<p class=empty>Aún no has añadido ninguna película.</p>'}</main>`},
 gym:(p,s)=>{const G=gy(p),fm=t=>Math.floor(t/60)+':'+String(t%60).padStart(2,'0');
 if(W&&W.q)return`<main><div class=run><small>Temporizador</small><div class=tm id=tm>${fm(W.t)}</div><div class=g style="justify-content:center"><button data-a=gend>Cancelar</button></div></div></main>`;
 if(W){const R=G.rs.find(x=>x.id==W.rid),e=R.ex[W.ei],rs=W.ph=='r',nx=W.si+1<e.s?e:R.ex[W.ei+1];
@@ -398,13 +540,13 @@ return`<main><div class=sg><div class=sc><b>${s.gw}</b><small>Entrenos</small></
 <h3>📋 Rutinas</h3>${G.rs.map(t=>`<div class=row><div style="flex:1"><b>${E(t.n)}</b><small style="display:block">${t.ex.length} ejercicios · ~${Math.max(1,Math.round(t.ex.reduce((a,e)=>a+e.s*((e.d||e.r*3)+e.p),0)/60))} min</small></div><button data-a=gs data-v=${t.id} aria-label="Empezar">▶</button><button data-a=ged data-v=${t.id} aria-label="Editar">✎</button><button data-a=gdl data-v=${t.id} aria-label="Borrar">🗑</button></div>`).join('')}
 <form id=gf><input id=gn placeholder="Nueva rutina" required><button class=pri>Crear rutina</button></form></main>`},
 saru:(p,s,g,say)=>{const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},an=anim;anim='';
-return`<main><div class="sw2 ${an}" data-a=pet>${svg(p,s,g)}</div><p class=say>${say}</p><div class=g style="margin-top:10px"><button data-a=fd>🍌 Dar de comer</button><button data-a=pl>🎾 Jugar</button></div>
+return`<main><div class="sw2 ${an}" data-a=pet>${svg(p,s,g,an)}</div><p class=say>${say}</p><div class=g style="margin-top:10px"><button data-a=fd>🍌 Dar de comer</button><button data-a=pl>🎾 Jugar</button></div>
 <h3>🧬 Cuerpo</h3><div class=g>${FUR.map((c,i)=>`<button class="sw ${z.fur==i?'on':''}" style="background:${c}" data-a=fur data-v=${i} aria-label="Pelaje"></button>`).join('')}</div>
 <div class=g style="margin-top:8px">${['Delgado','Normal','Fuerte'].map((n,i)=>`<button class="${z.bd==i?'on':''}" data-a=bd data-v=${i}>${n}</button>`).join('')}</div>
 <h3>👕 Armario · ${s.pw}/${PC.length}</h3><div class=g>${SL.map(([k,n])=>`<button class="${wt==k?'on':''}" data-a=wt data-v=${k}>${n}</button>`).join('')}</div>
 <div class=wg style="margin-top:10px">${PC.map((c,i)=>{const own=c.a===null||p.ach[c.a];return c.s!=wt?'':`<button class="pcard ${z.eq[c.s]==i?'on':''} ${own?'':'lk'}" data-a=eqp data-v=${i}><span style="${c.c?`background:${c.c};border-radius:50%`:''}">${c.e}</span><small>${E(c.n)}</small>${own?'':`<small>🔒 ${E(AD[c.a].n)}</small>`}</button>`}).join('')}</div></main>`},
 notas:p=>{p.notes=p.notes||[];p.shop=p.shop||[];
-return`<main><div class=tabs style="margin:0 0 8px"><button data-a=nv data-v=idea class="${nv=='idea'?'on':''}">💡 Ideas</button><button data-a=nv data-v=compra class="${nv=='compra'?'on':''}">🛒 Compra</button><button data-a=nv data-v=film class="${nv=='film'?'on':''}">🎬 Pelis</button><button data-a=nv data-v=anime class="${nv=='anime'?'on':''}">🍥 Anime</button></div>`+(nv=='film'||nv=='anime'?LS(p):nv=='idea'?`<form id=nf><textarea id=nx rows=3 placeholder="Escribe una idea…" required></textarea><button class=pri>Guardar nota</button></form>`+p.notes.map((n,i)=>`<div class=row><span style="white-space:pre-wrap">${E(n)}</span><button data-a=dnote data-v=${i} aria-label="Borrar">🗑</button></div>`).join(''):`<form id=sf><input id=sx placeholder="Añadir a la compra" required><button class=pri>Añadir</button></form>`+p.shop.map((x,i)=>`<div class="row s${x.d?1:0}"><button class=box data-a=sd data-v=${i}>${x.d?'✓':''}</button><span>${E(x.t)}</span><button data-a=ds data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')+(p.shop.some(x=>x.d)?`<button class=sec data-a=cs>Quitar lo comprado</button>`:''))+`</main>`},
+return`<main><div class=tabs style="margin:0 0 8px"><button data-a=nv data-v=idea class="${nv=='idea'?'on':''}">💡 Ideas</button><button data-a=nv data-v=compra class="${nv=='compra'?'on':''}">🛒 Compra</button><button data-a=nv data-v=anime class="${nv=='anime'?'on':''}">🍥 Anime</button></div>`+(nv=='anime'?LS(p):nv=='idea'?`<form id=nf><textarea id=nx rows=3 placeholder="Escribe una idea…" required></textarea><button class=pri>Guardar nota</button></form>`+p.notes.map((n,i)=>`<div class=row><span style="white-space:pre-wrap">${E(n)}</span><button data-a=dnote data-v=${i} aria-label="Borrar">🗑</button></div>`).join(''):`<form id=sf><input id=sx placeholder="Añadir a la compra" required><button class=pri>Añadir</button></form>`+p.shop.map((x,i)=>`<div class="row s${x.d?1:0}"><button class=box data-a=sd data-v=${i}>${x.d?'✓':''}</button><span>${E(x.t)}</span><button data-a=ds data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')+(p.shop.some(x=>x.d)?`<button class=sec data-a=cs>Quitar lo comprado</button>`:''))+`</main>`},
 stats:(p,s)=>{const A=[['💪 Fuerza',(s.cEjercicio||0)+s.gw*2],['🧠 Mente',(s.cMente||0)+(s.cClase||0)],['❤️ Vitalidad',(s.cSueño||0)+(s.cComida||0)+(s.cSalud||0)],['🎭 Carisma',s.cSocial||0],['🔥 Disciplina',s.b*3]],M=Math.max(1,...A.map(a=>a[1]));
 const ds=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return[d.toLocaleDateString('es-ES',{weekday:'narrow'}),Object.values(p.done[dk(d)]||{}).filter(v=>v==1).length]}),dm=Math.max(1,...ds.map(x=>x[1]));
 const T=[['Nivel',s.l],['XP',s.x],['Racha',s.cur],['Mejor racha',s.b],['Tareas hechas',s.t],['Días activos',s.dy],['Días redondos',s.p],['Logros',s.ac+'/'+AD.length],['Piezas',s.pw+'/'+PC.length],['Notas',s.nt],['Entrenos',s.gw],['Misiones',s.md+s.mw],['Pelis vistas',s.fs],['Animes vistos',s.as]];
@@ -421,7 +563,7 @@ const P=()=>S.p[S.cur];
 const cats=p=>[...new Set(p.tasks.map(t=>t.c))];
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const dn=k=>Date.parse(k)/864e5,td=()=>dk(new Date());
-let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='',gv='list',ge=null,W=null,tmr=0,lfl='all';
+let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='',gv='list',ge=null,W=null,tmr=0,lfl='all',cd={t:'',r:'',n:0};
 const rel=()=>{const a=new Date();a.setHours(0,0,0,0);const b=new Date(D);b.setHours(0,0,0,0);return({'-1':'Ayer','0':'Hoy','1':'Mañana'})[Math.round((b-a)/864e5)]||''};
 
 function st(p){
@@ -452,7 +594,7 @@ p.pg=g;const x1=Math.max(0,base(p,s)-p.pen);
 if(pop&&x1<x0){p.fx=1;const m=Math.max(0,Math.floor((Date.now()-(p.act||dn(s.last)*864e5+864e5))/6e4));PU={d:Math.floor(m/1440),h:Math.floor(m%1440/60),xp:x0-x1,a:LV(x0),b:LV(x1)}}}}
 function chk(q){const p=P();let s=fs(p);
 for(let r=0;r<4;r++){let g=0;
-AD.forEach((a,j)=>{if(!p.ach[j]&&(s[a.k]||0)>=a.v){p.ach[j]=1;g=1;if(!q)toast(a.i,'¡Logro desbloqueado!',a.n)}});
+AD.forEach((a,j)=>{if(!p.ach[j]&&(s[a.k]||0)>=a.v){p.ach[j]=1;g=1;if(!q)apop(j)}});
 if(!g)break;s=fs(p)}
 return s}
 
@@ -475,7 +617,7 @@ const R=document.documentElement,col=S.base=='color';
 R.dataset.b=S.base;R.style.setProperty('--h',S.h);
 document.body.style.backgroundImage=`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)'/></svg>`)}")`;
 let h=`<header><button data-a=menu aria-label="Menú">☰</button>${p.pic?`<img class=av src="${p.pic}" alt="">`:''}<div><b>${E(S.cur)}</b><small>${rel()}</small></div></header>
-<section class=hero><div class=pw data-a=pet><span class=pet style="font-size:${44+6*s.rk}px;--st:${s.rk+1}">${g>0?'🙈':ST[s.rk]}</span><small class=ax>${AX[s.rk]}</small></div>
+<section class=hero><div class="pw pet" data-a=pet style="--st:${s.rk+1};width:88px">${svg(p,s,g)}</div>
 <div class=hi><b>${E(S.pet)}</b> · ${E(S.rk[s.rk])}<small>Nivel ${s.l}${s.l>99?' (MAX)':''} · ${s.x} XP</small><div class=bar><i style="width:${s.l>99?100:(s.x-l0)/(l1-l0)*100}%"></i></div></div>
 <div class=fire>🔥<b>${s.cur}</b><small>racha</small></div></section><p class=say>${say}</p>
 <nav class=dn><button data-a=d data-v=-1 aria-label="Día anterior">‹</button><span>${tit}</span><button data-a=d data-v=1 aria-label="Día siguiente">›</button></nav>
@@ -494,7 +636,7 @@ h+=`<form id=f><input id=nt placeholder="Nueva tarea" required><input id=nc list
 cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3>`+p.tasks.filter(t=>t.c==c).map(t=>`<div class=row><span>${E(t.t)}</span><button data-a=ed data-v="${t.id}" aria-label="Editar">✎</button><button data-a=del data-v="${t.id}" aria-label="Borrar">🗑</button></div>`).join('')});
 }
 h+=`</main>`;document.body.style.backgroundImage=bgi(col);if(scr!='hoy')h=h.slice(0,h.indexOf('<section'))+SC[scr](p,s,g,say);
-h+=`<nav class=bb>${[['hoy','🏠','Hoy'],['gym','🏋️','Gym'],['saru','🐒','Saru'],['notas','📝','Notas'],['stats','📊','Stats']].map(([a,i,n])=>`<button data-a=sc data-v=${a} class="${scr==a?'on':''}"><span>${i}</span><small>${n}</small></button>`).join('')}</nav>`;
+h+=`<nav class=bb>${[['hoy','🏠','Hoy'],['gym','🏋️','Gym'],['saru','🐒','Saru'],['cine','🎬','Cine'],['notas','📝','Notas'],['stats','📊','Stats']].map(([a,i,n])=>`<button data-a=sc data-v=${a} class="${scr==a?'on':''}"><span>${i}</span><small>${n}</small></button>`).join('')}</nav>`;
 if(PU){const ra=RL.filter(v=>PU.a>=v).length-1,rb=RL.filter(v=>PU.b>=v).length-1;h+=`<div class=ov style="z-index:9"></div><div class=pu><b style="font-size:22px">⚠️ ${E(S.pet)} te ha echado de menos</b><p>Llevas ${PU.d} días y ${PU.h} horas sin completar tareas.</p><p>Has perdido ${PU.xp} XP${PU.a>PU.b?` y ${PU.a-PU.b} niveles (de ${PU.a} a ${PU.b})`:''}.</p>${ra>rb?`<p>Has bajado de <b>${E(S.rk[ra])}</b> a <b>${E(S.rk[rb])}</b>.</p>`:''}<button class=pri data-a=ok>Entendido</button></div>`}
 if(menu)h+=drawer(p,s,col);if(0)h+=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
 <h2>Perfil</h2><div class=g>${Object.keys(S.p).map(n=>`<button class="${n==S.cur?'on':''}" data-a=pf data-v="${E(n)}">${E(n)}</button>`).join('')}</div>
@@ -625,7 +767,8 @@ ${HU.map(c=>`<button class="sw ${col&&S.h==c?'on':''}" style="background:hsl(${c
 <h3>⚙️ Datos</h3><button class=sec data-a=rst>Borrar todo</button></aside>`}
 function act(a,v){
 const p=P(),k=dk(D);
-if(a=='pet'){const e=$('.pet');e.classList.remove('bn');void e.offsetWidth;e.classList.add('bn');S.taps=(S.taps||0)+1;chk();save();return}
+if(scr=='cine'&&$('#ct')){cd.t=$('#ct').value;cd.r=$('#cr').value}
+if(a=='pet'){const e=$('.pet')||$('.sw2');if(e){e.classList.remove('bn');void e.offsetWidth;e.classList.add('bn')}S.taps=(S.taps||0)+1;chk();save();return}
 if(a=='ok')PU=null;
 else if(a=='menu')menu=1;
 else if(a=='close')menu=0;
@@ -641,15 +784,18 @@ else if(a=='hc'){S.base='color';S.h=+v}
 else if(a=='pn'){const n=(prompt('Nombre de tu mascota',S.pet)||'').trim();if(n)S.pet=n}
 else if(a=='rr'){const n=(prompt('Nombre del rango',S.rk[v])||'').trim();if(n)S.rk[v]=n}
 else if(a=='pf')S.cur=v;
+else if(a=='cst')cd.n=cd.n==+v?0:+v;
+else if(a=='fst'){const[i,n]=v.split(',').map(Number),x=p.films[i];x.r=x.r==n?0:n;if(x.r&&x.st=='p')x.st='v'}
+else if(a=='frv'){const x=p.films[+v],n=prompt('Tu reseña',x.rv||'');if(n!==null)x.rv=n.trim()}
 else if(a=='mdn')mok(p,'d');
 else if(a=='mwk')mok(p,'w');
 else if(a=='mrd')mre(p,'d');
 else if(a=='mrw')mre(p,'w');
 else if(a=='lfl')lfl=v;
-else if(a=='lem'){const x=p[nv=='film'?'films':'anime'][+v],n=(prompt('Emoji para '+x.t,x.e)||'').trim();if(n)x.e=n}
-else if(a=='lst'){const x=p[nv=='film'?'films':'anime'][+v];x.st={p:'w',w:'v',v:'p'}[x.st]}
-else if(a=='lrt'){const x=p[nv=='film'?'films':'anime'][+v];x.r=((x.r||0)+1)%6}
-else if(a=='ldl'){if(confirm('¿Quitar de la lista?'))p[nv=='film'?'films':'anime'].splice(+v,1)}
+else if(a=='lem'){const x=p[lk()][+v],n=(prompt('Emoji para '+x.t,x.e)||'').trim();if(n)x.e=n}
+else if(a=='lst'){const x=p[lk()][+v];x.st={p:'w',w:'v',v:'p'}[x.st]}
+else if(a=='lrt'){const x=p[lk()][+v];x.r=((x.r||0)+1)%6}
+else if(a=='ldl'){if(confirm('¿Quitar de la lista?'))p[lk()].splice(+v,1)}
 else if(a=='gs'){const R=gy(p).rs.find(x=>x.id==v);if(!R||!R.ex.length){alert('Añade ejercicios a la rutina primero.');return}W={rid:v,ei:0,si:0,ph:'w',st:Date.now(),t:0,end:0};p.tm=(p.tm||0)+1;if(R.ex[0].d)setT(R.ex[0].d)}
 else if(a=='gdone'||a=='gskip'){if(W&&W.rid){if(W.ph=='r')wgo();else wnext(p)}}
 else if(a=='gend'){if(confirm('¿Cancelar?'))W=null}
@@ -695,6 +841,7 @@ q.rkk=s.rk;save();r();
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.v)});
 document.addEventListener('submit',e=>{e.preventDefault();
+if(e.target.id=='cf'){const t=$('#ct').value.trim();if(t){const p=P();(p.films=p.films||[]).unshift({t,e:emo(t,'film'),st:cd.n?'v':'p',r:cd.n,rv:$('#cr').value.trim()});cd={t:'',r:'',n:0};chk();save();r()}return}
 if(e.target.id=='lsf'){const t=$('#lx').value.trim();if(t){const p=P(),k=nv=='film'?'films':'anime';(p[k]=p[k]||[]).unshift({t,e:emo(t,nv),st:'p',r:0});chk();save();r()}return}
 if(e.target.id=='gf'){const n=$('#gn').value.trim();if(n){const p=P(),G=gy(p);G.rs.push({id:'u'+Date.now(),n,ex:[]});if(/saitama|one punch/i.test(n))p.ee=1;ge=G.rs[G.rs.length-1].id;chk();save();r()}return}
 if(e.target.id=='nf'){const t=$('#nx').value.trim();if(t){const p=P();(p.notes=p.notes||[]).unshift(t);p.nw=(p.nw||0)+1;chk();save();r()}return}
