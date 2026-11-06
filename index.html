@@ -69,6 +69,25 @@ aside{position:fixed;top:0;bottom:0;left:0;width:min(86vw,340px);background:var(
 .pc{display:flex;gap:12px;align-items:center;background:linear-gradient(135deg,var(--card),var(--bd));border-radius:16px;padding:12px;margin-top:28px}
 .pc small{display:block;color:var(--mu);font-size:13px}
 .pu{position:fixed;z-index:10;left:50%;top:50%;translate:-50% -50%;width:min(90vw,380px);background:var(--card);border:2px solid var(--ac);border-radius:20px;padding:20px;text-align:center;display:grid;gap:10px}
+.bb{position:fixed;left:0;right:0;bottom:0;z-index:4;display:flex;background:var(--card);border-top:1px solid var(--bd);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+.bb button{flex:1;display:flex;flex-direction:column;align-items:center;color:var(--mu);padding:4px;border-radius:12px}
+.bb span{font-size:24px}.bb small{font-size:11px}.bb .on{color:var(--ac);background:var(--bg)}
+main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
+.sw2{width:min(68vw,250px);margin:8px auto;animation:fl 2.8s ease-in-out infinite;cursor:pointer}.sw2.jp{animation:jp .7s}
+.sv{width:100%;height:auto;display:block}.eye{transform-box:fill-box;transform-origin:center;animation:bl 4s infinite}
+@keyframes bl{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@keyframes jp{40%{transform:translateY(-34px) rotate(-6deg)}70%{transform:translateY(0) rotate(4deg)}}
+.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pcard{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 4px;text-align:center}
+.pcard span{font-size:26px;display:inline-block;width:44px;height:44px;line-height:44px}.pcard small{display:block;font-size:11px;color:var(--mu)}
+.pcard.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}.pcard.lk{opacity:.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.sc{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;text-align:center}
+.sc b{display:block;font-size:24px;color:var(--ac)}.sc small{color:var(--mu)}
+.at{display:flex;align-items:center;gap:10px;margin:8px 0}.at span{width:112px}.at .bar{flex:1;margin:0}
+.ch{display:flex;gap:8px;align-items:flex-end;height:130px}
+.ch>div{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+.ch i{width:100%;background:var(--ac);border-radius:6px 6px 0 0;min-height:3px}.ch small{color:var(--mu)}
 </style>
 </head>
 <body>
@@ -188,8 +207,140 @@ const AD=`✅|Primer paso|Marca tu primera tarea|t|1
 🪷|Zen total|50 tareas de Mente|cMente|50
 🎭|Alma de la fiesta|50 tareas de Social|cSocial|50
 🍱|Mil sabores|100 tareas de Comida|cComida|100
-🦸|Superhéroe|100 tareas de Ejercicio|cEjercicio|100`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
+🦸|Superhéroe|100 tareas de Ejercicio|cEjercicio|100
+🍌|Primer plátano|Da de comer a Saru|fd|1
+🍉|Cocinero|Da de comer a Saru 25 veces|fd|25
+🎾|Juguetón|Juega con Saru 20 veces|pl|20
+👗|Fashionista|Cambia de atuendo 10 veces|wc|10
+🎽|De pies a cabeza|Lleva las 6 piezas a la vez|fu|1
+🧺|Armario lleno|Consigue 75 piezas|pw|75
+🗒️|Anotador|Escribe tu primera nota|nt|1
+📓|Cuaderno lleno|Escribe 10 notas|nt|10
+🗂️|Archivista|Escribe 30 notas|nt|30`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
 
+const PC=`hat|Gorra|🧢||
+hat|Sombrero de paja|👒||
+hat|Chistera|🎩||
+hat|Casco militar|🪖||
+hat|Birrete|🎓||
+hat|Auriculares|🎧||
+hat|Gorro de fiesta|🥳||
+hat|Corona de flores|🌸||
+hat|Casco de rescate|⛑️||
+hat|Gafas de piloto|🥽||
+hat|Pelo Super Saiyan|⚡||14
+hat|Cabello plateado|❄️||83
+hat|Máscara kitsune|🎭||100
+hat|Pañuelo pirata|🏴‍☠️||23
+hat|Corona del Rey Mono|👑||49
+neck|Bufanda|🧣||
+neck|Pajarita|🎀||
+neck|Collar de cuentas|📿||
+neck|Medalla|🏅||
+neck|Cascabel|🔔||
+neck|Amuleto|🧿||
+neck|Colgante de diamante|💎||
+neck|Moneda|🪙||
+neck|Collar de hueso|🦴||
+neck|Collar hawaiano|🌺||
+neck|Cadena dorada|⛓️||5
+neck|Orbe mágico|🔮||22
+neck|Condecoración|🎖️||26
+neck|Cinta de cine|🎞️||69
+neck|Cámara de cine|📸||67
+shirt|Camiseta roja|⭐|#ef4444|
+shirt|Kimono azul|🌊|#3b82f6|
+shirt|Hoodie negro|💀|#262626|
+shirt|Camiseta de anime|🍥|#f97316|
+shirt|Chaleco ninja|🍃|#16a34a|
+shirt|Camisa hawaiana|🌴|#ec4899|
+shirt|Uniforme escolar|📘|#1e3a8a|
+shirt|Chaqueta de cuero|🏍️|#52525b|
+shirt|Camiseta retro|👾|#7c3aed|
+shirt|Pijama de luna|🌙|#4338ca|
+shirt|Capa de héroe|🦸|#dc2626|31
+shirt|Armadura|🛡️|#94a3b8|29
+shirt|Haori de llamas|🔥|#f59e0b|15
+shirt|Traje de astronauta|🚀|#e5e7eb|21
+shirt|Esmoquin de estreno|🎬|#171717|70
+pants|Vaqueros|👖|#1d4ed8|
+pants|Pantalón ninja|⚫|#111827|
+pants|Pantalón verde|🌿|#15803d|
+pants|Bermudas|🏖️|#f59e0b|
+pants|Hakama|🎋|#475569|
+pants|Chándal|⚡|#dc2626|
+pants|Pantalón cargo|🎒|#78716c|
+pants|Pijama|😴|#6366f1|
+pants|Mallas|✨|#7c3aed|
+pants|Pantalón rosa|🌸|#f472b6|
+pants|Hakama dorado|🏯|#eab308|27
+pants|Pantalón de piloto|✈️|#0ea5e9|20
+pants|Pantalón galáctico|🌌|#312e81|85
+pants|Pantalón de samurái|🗾|#7f1d1d|89
+pants|Pantalón de fuego|🔥|#ea580c|11
+shoes|Zapatillas blancas|👟|#f5f5f5|
+shoes|Botas|🥾|#78350f|
+shoes|Sandalias de madera|🪵|#a16207|
+shoes|Chanclas|🩴|#38bdf8|
+shoes|Zapatillas rojas|🔴|#ef4444|
+shoes|Botas negras|🖤|#111827|
+shoes|Zapatillas fluor|💚|#84cc16|
+shoes|Calcetines|🧦|#fde68a|
+shoes|Zapatos de claqué|🎶|#1f2937|
+shoes|Descalzo|🐾||
+shoes|Botas de rayo|⚡|#facc15|10
+shoes|Zapatillas aladas|🪽|#ffffff|12
+shoes|Botas de gravedad|🧲|#6b7280|20
+shoes|Zapatos de oro|🥇|#eab308|4
+shoes|Botas de dragón|🐲|#16a34a|84
+hand|Plátano|🍌||
+hand|Mando|🎮||
+hand|Móvil|📱||
+hand|Palomitas|🍿||
+hand|Refresco|🥤||
+hand|Manga|📖||
+hand|Guitarra|🎸||
+hand|Micrófono|🎤||
+hand|Balón|🏀||
+hand|Ramen|🍜||
+hand|Katana|🗡️||88
+hand|Pistola de portales|🔫||30
+hand|Varita mágica|🪄||18
+hand|Claqueta|🎬||66
+hand|Trofeo|🏆||6`.split('\n').map(l=>{const a=l.split('|');return{s:a[0],n:a[1],e:a[2],c:a[3],a:a[4]===''?null:+a[4]}});
+const SL=[['hat','🎩 Cabeza'],['neck','📿 Cuello'],['shirt','👕 Camisa'],['pants','👖 Pantalón'],['shoes','👟 Zapatos'],['hand','✋ Mano']],FUR=['#c08457','#8b5a2b','#6b7280','#f5c26b','#3f3f46','#ef9a9a'];
+const BG={hoy:`<path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='@'/>`,saru:`<path d='M14 30q0-14 14-14 0 14-14 14zM44 52q0-12 12-12 0 12-12 12z' fill='@'/><circle cx='48' cy='18' r='3' fill='@'/>`,notas:`<path d='M0 21h64M0 42h64' stroke='@' fill='none'/><circle cx='10' cy='10' r='2' fill='@'/>`,stats:`<path d='M32 12l16 9v19l-16 9-16-9V21z' fill='none' stroke='@' stroke-width='1.5'/>`};
+const bgi=col=>{const c=`hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)`;return`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'>${BG[scr].replace(/@/g,c)}</svg>`)}")`};
+function svg(p,s,g){const z=p.sr,f=FUR[z.fur||0],bw=[38,46,56][z.bd??1],q=k=>z.eq[k]!=null?PC[z.eq[k]]:null,sh=q('shirt'),pa=q('pants'),so=q('shoes'),nk=q('neck'),ht=q('hat'),hd=q('hand'),be='#f3d9b1';
+return`<svg viewBox="0 0 200 250" class=sv style="filter:drop-shadow(0 0 ${s.rk*3}px var(--ac))">
+<path d="M135 205q55 5 45-55 0-12-12-6" fill=none stroke="${f}" stroke-width=14 stroke-linecap=round />
+<ellipse cx=100 cy=172 rx=${bw} ry=50 fill="${f}"/><ellipse cx=100 cy=180 rx=${bw*.6} ry=34 fill="${be}"/>
+<ellipse cx=80 cy=222 rx=17 ry=12 fill="${f}"/><ellipse cx=120 cy=222 rx=17 ry=12 fill="${f}"/>
+${pa?`<rect x=${100-bw*.85} y=194 width=${bw*1.7} height=20 rx=8 fill="${pa.c}"/><rect x=63 y=208 width=34 height=16 rx=7 fill="${pa.c}"/><rect x=103 y=208 width=34 height=16 rx=7 fill="${pa.c}"/>`:''}
+${sh?`<ellipse cx=100 cy=162 rx=${bw+4} ry=36 fill="${sh.c}"/><text x=100 y=172 font-size=26 text-anchor=middle>${sh.e}</text>`:''}
+<ellipse cx=${100-bw-6} cy=170 rx=11 ry=30 fill="${f}" transform="rotate(12 ${100-bw-6} 170)"/><ellipse cx=${100+bw+6} cy=170 rx=11 ry=30 fill="${f}" transform="rotate(-12 ${100+bw+6} 170)"/>
+${so&&so.c?`<ellipse cx=80 cy=228 rx=20 ry=10 fill="${so.c}"/><ellipse cx=120 cy=228 rx=20 ry=10 fill="${so.c}"/>`:''}
+<circle cx=52 cy=96 r=18 fill="${f}"/><circle cx=148 cy=96 r=18 fill="${f}"/><circle cx=52 cy=96 r=9 fill="${be}"/><circle cx=148 cy=96 r=9 fill="${be}"/>
+<circle cx=100 cy=98 r=50 fill="${f}"/><ellipse cx=100 cy=108 rx=35 ry=30 fill="${be}"/>
+<ellipse class=eye cx=84 cy=96 rx=5 ry=7 fill=#111 /><ellipse class=eye cx=116 cy=96 rx=5 ry=7 fill=#111 />
+<path d="${g>0?'M88 124q12-9 24 0':'M88 117q12 10 24 0'}" fill=none stroke=#111 stroke-width=3 stroke-linecap=round />
+<circle cx=95 cy=108 r=2 fill=#111 /><circle cx=105 cy=108 r=2 fill=#111 />
+${nk?`<text x=100 y=150 font-size=30 text-anchor=middle>${nk.e}</text>`:''}
+${ht?`<text x=100 y=62 font-size=56 text-anchor=middle>${ht.e}</text>`:''}
+${hd?`<text x=${100+bw+14} y=190 font-size=40 text-anchor=middle>${hd.e}</text>`:''}</svg>`}
+const SC={
+saru:(p,s,g,say)=>{const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},an=anim;anim='';
+return`<main><div class="sw2 ${an}" data-a=pet>${svg(p,s,g)}</div><p class=say>${say}</p><div class=g style="margin-top:10px"><button data-a=fd>🍌 Dar de comer</button><button data-a=pl>🎾 Jugar</button></div>
+<h3>🧬 Cuerpo</h3><div class=g>${FUR.map((c,i)=>`<button class="sw ${z.fur==i?'on':''}" style="background:${c}" data-a=fur data-v=${i} aria-label="Pelaje"></button>`).join('')}</div>
+<div class=g style="margin-top:8px">${['Delgado','Normal','Fuerte'].map((n,i)=>`<button class="${z.bd==i?'on':''}" data-a=bd data-v=${i}>${n}</button>`).join('')}</div>
+<h3>👕 Armario · ${s.pw}/${PC.length}</h3><div class=g>${SL.map(([k,n])=>`<button class="${wt==k?'on':''}" data-a=wt data-v=${k}>${n}</button>`).join('')}</div>
+<div class=wg style="margin-top:10px">${PC.map((c,i)=>{const own=c.a===null||p.ach[c.a];return c.s!=wt?'':`<button class="pcard ${z.eq[c.s]==i?'on':''} ${own?'':'lk'}" data-a=eqp data-v=${i}><span style="${c.c?`background:${c.c};border-radius:50%`:''}">${c.e}</span><small>${E(c.n)}</small>${own?'':`<small>🔒 ${E(AD[c.a].n)}</small>`}</button>`}).join('')}</div></main>`},
+notas:p=>{p.notes=p.notes||[];p.shop=p.shop||[];
+return`<main><div class=tabs style="margin:0 0 8px"><button data-a=nv data-v=idea class="${nv=='idea'?'on':''}">💡 Ideas</button><button data-a=nv data-v=compra class="${nv=='compra'?'on':''}">🛒 Compra</button></div>`+(nv=='idea'?`<form id=nf><textarea id=nx rows=3 placeholder="Escribe una idea…" required></textarea><button class=pri>Guardar nota</button></form>`+p.notes.map((n,i)=>`<div class=row><span style="white-space:pre-wrap">${E(n)}</span><button data-a=dnote data-v=${i} aria-label="Borrar">🗑</button></div>`).join(''):`<form id=sf><input id=sx placeholder="Añadir a la compra" required><button class=pri>Añadir</button></form>`+p.shop.map((x,i)=>`<div class="row s${x.d?1:0}"><button class=box data-a=sd data-v=${i}>${x.d?'✓':''}</button><span>${E(x.t)}</span><button data-a=ds data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')+(p.shop.some(x=>x.d)?`<button class=sec data-a=cs>Quitar lo comprado</button>`:''))+`</main>`},
+stats:(p,s)=>{const A=[['💪 Fuerza',s.cEjercicio||0],['🧠 Mente',(s.cMente||0)+(s.cClase||0)],['❤️ Vitalidad',(s.cSueño||0)+(s.cComida||0)+(s.cSalud||0)],['🎭 Carisma',s.cSocial||0],['🔥 Disciplina',s.b*3]],M=Math.max(1,...A.map(a=>a[1]));
+const ds=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return[d.toLocaleDateString('es-ES',{weekday:'narrow'}),Object.values(p.done[dk(d)]||{}).filter(v=>v==1).length]}),dm=Math.max(1,...ds.map(x=>x[1]));
+const T=[['Nivel',s.l],['XP',s.x],['Racha',s.cur],['Mejor racha',s.b],['Tareas hechas',s.t],['Días activos',s.dy],['Días redondos',s.p],['Logros',s.ac+'/'+AD.length],['Piezas',s.pw+'/'+PC.length],['Notas',s.nt]];
+return`<main><div class=sg>${T.map(([a,b])=>`<div class=sc><b>${b}</b><small>${a}</small></div>`).join('')}</div><h3>⚔️ Atributos</h3>${A.map(([n,v])=>`<div class=at><span>${n}</span><div class=bar><i style="width:${v/M*100}%"></i></div><b>${v}</b></div>`).join('')}<h3>📅 Últimos 7 días</h3><div class=ch>${ds.map(([n,v])=>`<div><i style="height:${v/dm*100}%"></i><small>${n}</small></div>`).join('')}</div></main>`}};
 const mk=()=>{let i=0,t=[];for(const c in DEF)DEF[c].forEach(x=>t.push({id:'d'+i++,t:x,c}));return{tasks:t,plan:{},done:{},ach:{},pen:0,pg:0,lv:1,rkk:0}};
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
 let S=ld(K);
@@ -202,7 +353,7 @@ const P=()=>S.p[S.cur];
 const cats=p=>[...new Set(p.tasks.map(t=>t.c))];
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const dn=k=>Date.parse(k)/864e5,td=()=>dk(new Date());
-let D=new Date(),tab='hoy',menu=0,PU=null;
+let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='';
 const rel=()=>{const a=new Date();a.setHours(0,0,0,0);const b=new Date(D);b.setHours(0,0,0,0);return({'-1':'Ayer','0':'Hoy','1':'Mañana'})[Math.round((b-a)/864e5)]||''};
 
 function st(p){
@@ -223,7 +374,7 @@ o.cur=o.last&&dn(td())-dn(o.last)<=1?run:0;
 return o}
 const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25;
 function fs(p){const s=st(p);s.x=Math.max(0,base(p,s)-p.pen);s.l=LV(s.x);s.rk=RL.filter(v=>s.l>=v).length-1;
-s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;s.tp=S.taps||0;s.pm=Math.max(0,...Object.values(p.plan).map(a=>a.length));s.nc=cats(p).length;s.tk=p.tasks.length;s.ac=Object.keys(p.ach).length;s.bio=p.bio?1:0;s.pic=p.pic?1:0;s.fx=p.fx?1:0;return s}
+s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;s.tp=S.taps||0;s.pm=Math.max(0,...Object.values(p.plan).map(a=>a.length));s.nc=cats(p).length;s.tk=p.tasks.length;s.ac=Object.keys(p.ach).length;s.bio=p.bio?1:0;s.pic=p.pic?1:0;s.fx=p.fx?1:0;s.fd=p.fd||0;s.wc=p.wc||0;s.pl=p.pl||0;s.nt=p.nw||0;s.pw=PC.filter(c=>c.a===null||p.ach[c.a]).length;s.fu=SL.every(([k])=>p.sr&&p.sr.eq[k]!=null)?1:0;return s}
 function dec(p,pop){const s=st(p);if(!s.last)return;const g=dn(td())-dn(s.last)-1;
 if(g<=0){p.pg=0;return}
 if(g>p.pg){const x0=Math.max(0,base(p,s)-p.pen);
@@ -272,7 +423,8 @@ h+=`<p class=mu>${Object.keys(p.ach).length} de ${AD.length} logros</p><div clas
 h+=`<form id=f><input id=nt placeholder="Nueva tarea" required><input id=nc list=cl placeholder="Categoría" required><datalist id=cl>${cats(p).map(c=>`<option value="${E(c)}">`).join('')}</datalist><button class=pri>Añadir tarea</button></form>`;
 cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3>`+p.tasks.filter(t=>t.c==c).map(t=>`<div class=row><span>${E(t.t)}</span><button data-a=ed data-v="${t.id}" aria-label="Editar">✎</button><button data-a=del data-v="${t.id}" aria-label="Borrar">🗑</button></div>`).join('')});
 }
-h+=`</main>`;
+h+=`</main>`;document.body.style.backgroundImage=bgi(col);if(scr!='hoy')h=h.slice(0,h.indexOf('<section'))+SC[scr](p,s,g,say);
+h+=`<nav class=bb>${[['hoy','🏠','Hoy'],['saru','🐒','Saru'],['notas','📝','Notas'],['stats','📊','Stats']].map(([a,i,n])=>`<button data-a=sc data-v=${a} class="${scr==a?'on':''}"><span>${i}</span><small>${n}</small></button>`).join('')}</nav>`;
 if(PU){const ra=RL.filter(v=>PU.a>=v).length-1,rb=RL.filter(v=>PU.b>=v).length-1;h+=`<div class=ov style="z-index:9"></div><div class=pu><b style="font-size:22px">⚠️ ${E(S.pet)} te ha echado de menos</b><p>Llevas ${PU.d} días y ${PU.h} horas sin completar tareas.</p><p>Has perdido ${PU.xp} XP${PU.a>PU.b?` y ${PU.a-PU.b} niveles (de ${PU.a} a ${PU.b})`:''}.</p>${ra>rb?`<p>Has bajado de <b>${E(S.rk[ra])}</b> a <b>${E(S.rk[rb])}</b>.</p>`:''}<button class=pri data-a=ok>Entendido</button></div>`}
 if(menu)h+=drawer(p,s,col);if(0)h+=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
 <h2>Perfil</h2><div class=g>${Object.keys(S.p).map(n=>`<button class="${n==S.cur?'on':''}" data-a=pf data-v="${E(n)}">${E(n)}</button>`).join('')}</div>
@@ -321,6 +473,18 @@ else if(a=='hc'){S.base='color';S.h=+v}
 else if(a=='pn'){const n=(prompt('Nombre de tu mascota',S.pet)||'').trim();if(n)S.pet=n}
 else if(a=='rr'){const n=(prompt('Nombre del rango',S.rk[v])||'').trim();if(n)S.rk[v]=n}
 else if(a=='pf')S.cur=v;
+else if(a=='sc'){scr=v;menu=0}
+else if(a=='fd'){p.fd=(p.fd||0)+1;anim='jp'}
+else if(a=='pl'){p.pl=(p.pl||0)+1;anim='jp'}
+else if(a=='fur'){(p.sr=p.sr||{fur:0,bd:1,eq:{}}).fur=+v}
+else if(a=='bd'){(p.sr=p.sr||{fur:0,bd:1,eq:{}}).bd=+v}
+else if(a=='wt')wt=v;
+else if(a=='eqp'){const c=PC[v],z=p.sr=p.sr||{fur:0,bd:1,eq:{}};if(c.a!==null&&!p.ach[c.a]){toast('🔒',c.n,'Se consigue con: '+AD[c.a].n+' ('+AD[c.a].d+')');return}if(z.eq[c.s]==v)delete z.eq[c.s];else z.eq[c.s]=+v;p.wc=(p.wc||0)+1}
+else if(a=='nv')nv=v;
+else if(a=='dnote')p.notes.splice(+v,1);
+else if(a=='sd')p.shop[+v].d=p.shop[+v].d?0:1;
+else if(a=='ds')p.shop.splice(+v,1);
+else if(a=='cs')p.shop=p.shop.filter(x=>!x.d);
 else if(a=='m1')menu=1;
 else if(a=='m2')menu=2;
 else if(a=='pic'){$('#ph').click();return}
@@ -342,7 +506,10 @@ q.rkk=s.rk;save();r();
 }
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.v)});
-document.addEventListener('submit',e=>{e.preventDefault();const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({id:'u'+Date.now(),t,c});const q=P(),s=chk();q.lv=s.l;q.rkk=s.rk;save();r()}});
+document.addEventListener('submit',e=>{e.preventDefault();
+if(e.target.id=='nf'){const t=$('#nx').value.trim();if(t){const p=P();(p.notes=p.notes||[]).unshift(t);p.nw=(p.nw||0)+1;chk();save();r()}return}
+if(e.target.id=='sf'){const t=$('#sx').value.trim();if(t){const p=P();(p.shop=p.shop||[]).push({t,d:0});save();r()}return}
+const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({id:'u'+Date.now(),t,c});const q=P(),s=chk();q.lv=s.l;q.rkk=s.rk;save();r()}});
 document.addEventListener('change',e=>{if(e.target.id!='ph'||!e.target.files[0])return;const f=new FileReader();f.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=128;const m=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,128,128);P().pic=c.toDataURL('image/jpeg',.75);chk();save();r()};im.src=f.result};f.readAsDataURL(e.target.files[0])});
 Object.values(S.p).forEach(p=>dec(p,p===P()));
 {const s=chk(1),q=P();q.lv=s.l;q.rkk=s.rk}
