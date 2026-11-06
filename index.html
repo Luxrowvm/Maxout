@@ -88,6 +88,8 @@ main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
 .ch{display:flex;gap:8px;align-items:flex-end;height:130px}
 .ch>div{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
 .ch i{width:100%;background:var(--ac);border-radius:6px 6px 0 0;min-height:3px}.ch small{color:var(--mu)}
+.run{text-align:center;padding:20px 8px}.run small{color:var(--mu)}.big{display:block;font-size:28px;margin:8px 0}
+.tm{font-size:64px;font-weight:700;color:var(--ac);font-variant-numeric:tabular-nums;margin:10px 0}
 </style>
 </head>
 <body>
@@ -216,7 +218,22 @@ const AD=`✅|Primer paso|Marca tu primera tarea|t|1
 🧺|Armario lleno|Consigue 75 piezas|pw|75
 🗒️|Anotador|Escribe tu primera nota|nt|1
 📓|Cuaderno lleno|Escribe 10 notas|nt|10
-🗂️|Archivista|Escribe 30 notas|nt|30`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
+🗂️|Archivista|Escribe 30 notas|nt|30
+🏋️|Primera sesión|Completa tu primer entrenamiento|gw|1
+💦|Sudor frío|Completa 5 entrenamientos|gw|5
+🔩|Hierro puro|Completa 10 entrenamientos|gw|10
+🦍|Espalda de gorila|Completa 25 entrenamientos|gw|25
+🏟️|Rutina de campeón|Completa 50 entrenamientos|gw|50
+🥇|Cien sesiones|Completa 100 entrenamientos|gw|100
+📋|Planificador|Crea tu primera rutina|gr|1
+🧰|Entrenador personal|Crea 5 rutinas propias|gr|5
+⏱️|Reloj en mano|Usa el temporizador 10 veces|tm|10
+🕐|Una hora de sudor|Entrena 60 minutos en total|gm|60
+⌛|Diez horas|Entrena 600 minutos en total|gm|600
+🔟|Sesión larga|Completa un entrenamiento de 8 ejercicios o más|gx|8
+🥊|One Punch|?Ponle a una rutina el nombre del héroe calvo de One Punch Man|ee|1
+🌅|Madrugador|Termina un entrenamiento antes de las 8:00|eb|1
+🌙|Búho|Termina un entrenamiento después de las 21:00|en|1`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
 
 const PC=`hat|Gorra|🧢||
 hat|Sombrero de paja|👒||
@@ -307,9 +324,13 @@ hand|Katana|🗡️||88
 hand|Pistola de portales|🔫||30
 hand|Varita mágica|🪄||18
 hand|Claqueta|🎬||66
-hand|Trofeo|🏆||6`.split('\n').map(l=>{const a=l.split('|');return{s:a[0],n:a[1],e:a[2],c:a[3],a:a[4]===''?null:+a[4]}});
+hand|Trofeo|🏆||6
+hand|Pesas|🏋️||112
+hand|Guantes de boxeo|🥊||114
+hand|Batido de proteínas|🥛||118
+neck|Toalla de gimnasio|🧻||113`.split('\n').map(l=>{const a=l.split('|');return{s:a[0],n:a[1],e:a[2],c:a[3],a:a[4]===''?null:+a[4]}});
 const SL=[['hat','🎩 Cabeza'],['neck','📿 Cuello'],['shirt','👕 Camisa'],['pants','👖 Pantalón'],['shoes','👟 Zapatos'],['hand','✋ Mano']],FUR=['#c08457','#8b5a2b','#6b7280','#f5c26b','#3f3f46','#ef9a9a'];
-const BG={hoy:`<path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='@'/>`,saru:`<path d='M14 30q0-14 14-14 0 14-14 14zM44 52q0-12 12-12 0 12-12 12z' fill='@'/><circle cx='48' cy='18' r='3' fill='@'/>`,notas:`<path d='M0 21h64M0 42h64' stroke='@' fill='none'/><circle cx='10' cy='10' r='2' fill='@'/>`,stats:`<path d='M32 12l16 9v19l-16 9-16-9V21z' fill='none' stroke='@' stroke-width='1.5'/>`};
+const BG={gym:`<path d='M14 28v8M20 24v16M20 32h24M44 24v16M50 28v8' stroke='@' stroke-width='3' fill='none' stroke-linecap='round'/>`,hoy:`<path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='@'/>`,saru:`<path d='M14 30q0-14 14-14 0 14-14 14zM44 52q0-12 12-12 0 12-12 12z' fill='@'/><circle cx='48' cy='18' r='3' fill='@'/>`,notas:`<path d='M0 21h64M0 42h64' stroke='@' fill='none'/><circle cx='10' cy='10' r='2' fill='@'/>`,stats:`<path d='M32 12l16 9v19l-16 9-16-9V21z' fill='none' stroke='@' stroke-width='1.5'/>`};
 const bgi=col=>{const c=`hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)`;return`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'>${BG[scr].replace(/@/g,c)}</svg>`)}")`};
 function svg(p,s,g){const z=p.sr,f=FUR[z.fur||0],bw=[38,46,56][z.bd??1],q=k=>z.eq[k]!=null?PC[z.eq[k]]:null,sh=q('shirt'),pa=q('pants'),so=q('shoes'),nk=q('neck'),ht=q('hat'),hd=q('hand'),be='#f3d9b1';
 return`<svg viewBox="0 0 200 250" class=sv style="filter:drop-shadow(0 0 ${s.rk*3}px var(--ac))">
@@ -328,7 +349,21 @@ ${so&&so.c?`<ellipse cx=80 cy=228 rx=20 ry=10 fill="${so.c}"/><ellipse cx=120 cy
 ${nk?`<text x=100 y=150 font-size=30 text-anchor=middle>${nk.e}</text>`:''}
 ${ht?`<text x=100 y=62 font-size=56 text-anchor=middle>${ht.e}</text>`:''}
 ${hd?`<text x=${100+bw+14} y=190 font-size=40 text-anchor=middle>${hd.e}</text>`:''}</svg>`}
+const HS=(a,j,p)=>a.d[0]=='?'&&!p.ach[j];
+const gy=p=>p.gym=p.gym||{rs:[
+{id:'r0',n:'Empuje',ex:[{n:'Flexiones',s:3,r:12,d:0,p:60},{n:'Fondos en silla',s:3,r:10,d:0,p:60},{n:'Pike push-ups',s:3,r:8,d:0,p:60},{n:'Plancha',s:3,r:0,d:40,p:45}]},
+{id:'r1',n:'Piernas',ex:[{n:'Sentadillas',s:4,r:15,d:0,p:60},{n:'Zancadas',s:3,r:12,d:0,p:60},{n:'Puente de glúteos',s:3,r:15,d:0,p:45},{n:'Elevación de talones',s:3,r:20,d:0,p:45}]},
+{id:'r2',n:'Core y cardio',ex:[{n:'Plancha',s:3,r:0,d:40,p:30},{n:'Mountain climbers',s:3,r:0,d:30,p:30},{n:'Burpees',s:3,r:10,d:0,p:60},{n:'Abdominales',s:3,r:20,d:0,p:45}]}]};
 const SC={
+gym:(p,s)=>{const G=gy(p),fm=t=>Math.floor(t/60)+':'+String(t%60).padStart(2,'0');
+if(W&&W.q)return`<main><div class=run><small>Temporizador</small><div class=tm id=tm>${fm(W.t)}</div><div class=g style="justify-content:center"><button data-a=gend>Cancelar</button></div></div></main>`;
+if(W){const R=G.rs.find(x=>x.id==W.rid),e=R.ex[W.ei],rs=W.ph=='r',nx=W.si+1<e.s?e:R.ex[W.ei+1];
+return`<main><h3>${E(R.n)} · ejercicio ${W.ei+1}/${R.ex.length}</h3><div class=run><small>${rs?'Descanso':'Serie '+(W.si+1)+' de '+e.s}</small><b class=big>${E(rs?'Siguiente: '+nx.n:e.n)}</b><div class=tm id=tm>${rs||e.d?fm(W.t):'💪'}</div><p class=mu>${rs?'Respira y prepárate':e.d?e.d+' segundos':e.r+' repeticiones'}</p><div class=g style="justify-content:center">${!rs&&!e.d?'<button class=pri data-a=gdone>✓ Serie hecha</button>':''}<button data-a=gskip>${rs?'Saltar descanso':'Saltar'}</button><button data-a=gend>Cancelar</button></div></div></main>`}
+if(ge){const R=G.rs.find(x=>x.id==ge);if(R)return`<main><h3>✎ ${E(R.n)}</h3>${R.ex.map((e,i)=>`<div class=row><div style="flex:1"><b>${E(e.n)}</b><small style="display:block">${e.s} × ${e.d?e.d+' s':e.r+' reps'} · descanso ${e.p} s</small></div><button data-a=gxd data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')||'<p class=empty>Aún no hay ejercicios.</p>'}<div class=g style="margin-top:10px"><button class=pri data-a=gadd>＋ Añadir ejercicio</button><button data-a=grn>Renombrar</button><button data-a=gok>Listo</button></div></main>`;ge=null}
+return`<main><div class=sg><div class=sc><b>${s.gw}</b><small>Entrenos</small></div><div class=sc><b>${s.gm}</b><small>Minutos</small></div></div>
+<h3>⏱️ Temporizador rápido</h3><div class=g>${[30,60,90,180].map(x=>`<button data-a=gq data-v=${x}>${x<60?x+' s':x/60+' min'}</button>`).join('')}<button data-a=gqc>Otro…</button></div>
+<h3>📋 Rutinas</h3>${G.rs.map(t=>`<div class=row><div style="flex:1"><b>${E(t.n)}</b><small style="display:block">${t.ex.length} ejercicios · ~${Math.max(1,Math.round(t.ex.reduce((a,e)=>a+e.s*((e.d||e.r*3)+e.p),0)/60))} min</small></div><button data-a=gs data-v=${t.id} aria-label="Empezar">▶</button><button data-a=ged data-v=${t.id} aria-label="Editar">✎</button><button data-a=gdl data-v=${t.id} aria-label="Borrar">🗑</button></div>`).join('')}
+<form id=gf><input id=gn placeholder="Nueva rutina" required><button class=pri>Crear rutina</button></form></main>`},
 saru:(p,s,g,say)=>{const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},an=anim;anim='';
 return`<main><div class="sw2 ${an}" data-a=pet>${svg(p,s,g)}</div><p class=say>${say}</p><div class=g style="margin-top:10px"><button data-a=fd>🍌 Dar de comer</button><button data-a=pl>🎾 Jugar</button></div>
 <h3>🧬 Cuerpo</h3><div class=g>${FUR.map((c,i)=>`<button class="sw ${z.fur==i?'on':''}" style="background:${c}" data-a=fur data-v=${i} aria-label="Pelaje"></button>`).join('')}</div>
@@ -337,9 +372,9 @@ return`<main><div class="sw2 ${an}" data-a=pet>${svg(p,s,g)}</div><p class=say>$
 <div class=wg style="margin-top:10px">${PC.map((c,i)=>{const own=c.a===null||p.ach[c.a];return c.s!=wt?'':`<button class="pcard ${z.eq[c.s]==i?'on':''} ${own?'':'lk'}" data-a=eqp data-v=${i}><span style="${c.c?`background:${c.c};border-radius:50%`:''}">${c.e}</span><small>${E(c.n)}</small>${own?'':`<small>🔒 ${E(AD[c.a].n)}</small>`}</button>`}).join('')}</div></main>`},
 notas:p=>{p.notes=p.notes||[];p.shop=p.shop||[];
 return`<main><div class=tabs style="margin:0 0 8px"><button data-a=nv data-v=idea class="${nv=='idea'?'on':''}">💡 Ideas</button><button data-a=nv data-v=compra class="${nv=='compra'?'on':''}">🛒 Compra</button></div>`+(nv=='idea'?`<form id=nf><textarea id=nx rows=3 placeholder="Escribe una idea…" required></textarea><button class=pri>Guardar nota</button></form>`+p.notes.map((n,i)=>`<div class=row><span style="white-space:pre-wrap">${E(n)}</span><button data-a=dnote data-v=${i} aria-label="Borrar">🗑</button></div>`).join(''):`<form id=sf><input id=sx placeholder="Añadir a la compra" required><button class=pri>Añadir</button></form>`+p.shop.map((x,i)=>`<div class="row s${x.d?1:0}"><button class=box data-a=sd data-v=${i}>${x.d?'✓':''}</button><span>${E(x.t)}</span><button data-a=ds data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')+(p.shop.some(x=>x.d)?`<button class=sec data-a=cs>Quitar lo comprado</button>`:''))+`</main>`},
-stats:(p,s)=>{const A=[['💪 Fuerza',s.cEjercicio||0],['🧠 Mente',(s.cMente||0)+(s.cClase||0)],['❤️ Vitalidad',(s.cSueño||0)+(s.cComida||0)+(s.cSalud||0)],['🎭 Carisma',s.cSocial||0],['🔥 Disciplina',s.b*3]],M=Math.max(1,...A.map(a=>a[1]));
+stats:(p,s)=>{const A=[['💪 Fuerza',(s.cEjercicio||0)+s.gw*2],['🧠 Mente',(s.cMente||0)+(s.cClase||0)],['❤️ Vitalidad',(s.cSueño||0)+(s.cComida||0)+(s.cSalud||0)],['🎭 Carisma',s.cSocial||0],['🔥 Disciplina',s.b*3]],M=Math.max(1,...A.map(a=>a[1]));
 const ds=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return[d.toLocaleDateString('es-ES',{weekday:'narrow'}),Object.values(p.done[dk(d)]||{}).filter(v=>v==1).length]}),dm=Math.max(1,...ds.map(x=>x[1]));
-const T=[['Nivel',s.l],['XP',s.x],['Racha',s.cur],['Mejor racha',s.b],['Tareas hechas',s.t],['Días activos',s.dy],['Días redondos',s.p],['Logros',s.ac+'/'+AD.length],['Piezas',s.pw+'/'+PC.length],['Notas',s.nt]];
+const T=[['Nivel',s.l],['XP',s.x],['Racha',s.cur],['Mejor racha',s.b],['Tareas hechas',s.t],['Días activos',s.dy],['Días redondos',s.p],['Logros',s.ac+'/'+AD.length],['Piezas',s.pw+'/'+PC.length],['Notas',s.nt],['Entrenos',s.gw]];
 return`<main><div class=sg>${T.map(([a,b])=>`<div class=sc><b>${b}</b><small>${a}</small></div>`).join('')}</div><h3>⚔️ Atributos</h3>${A.map(([n,v])=>`<div class=at><span>${n}</span><div class=bar><i style="width:${v/M*100}%"></i></div><b>${v}</b></div>`).join('')}<h3>📅 Últimos 7 días</h3><div class=ch>${ds.map(([n,v])=>`<div><i style="height:${v/dm*100}%"></i><small>${n}</small></div>`).join('')}</div></main>`}};
 const mk=()=>{let i=0,t=[];for(const c in DEF)DEF[c].forEach(x=>t.push({id:'d'+i++,t:x,c}));return{tasks:t,plan:{},done:{},ach:{},pen:0,pg:0,lv:1,rkk:0}};
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
@@ -353,7 +388,7 @@ const P=()=>S.p[S.cur];
 const cats=p=>[...new Set(p.tasks.map(t=>t.c))];
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const dn=k=>Date.parse(k)/864e5,td=()=>dk(new Date());
-let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='';
+let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='',gv='list',ge=null,W=null,tmr=0;
 const rel=()=>{const a=new Date();a.setHours(0,0,0,0);const b=new Date(D);b.setHours(0,0,0,0);return({'-1':'Ayer','0':'Hoy','1':'Mañana'})[Math.round((b-a)/864e5)]||''};
 
 function st(p){
@@ -372,9 +407,9 @@ let run=0;ds.forEach((k,i)=>{run=i&&dn(k)-dn(ds[i-1])==1?run+1:1;o.b=Math.max(o.
 o.run=run;o.dy=ds.length;o.last=ds[ds.length-1]||null;
 o.cur=o.last&&dn(td())-dn(o.last)<=1?run:0;
 return o}
-const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25;
+const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25+(p.gw||0)*20;
 function fs(p){const s=st(p);s.x=Math.max(0,base(p,s)-p.pen);s.l=LV(s.x);s.rk=RL.filter(v=>s.l>=v).length-1;
-s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;s.tp=S.taps||0;s.pm=Math.max(0,...Object.values(p.plan).map(a=>a.length));s.nc=cats(p).length;s.tk=p.tasks.length;s.ac=Object.keys(p.ach).length;s.bio=p.bio?1:0;s.pic=p.pic?1:0;s.fx=p.fx?1:0;s.fd=p.fd||0;s.wc=p.wc||0;s.pl=p.pl||0;s.nt=p.nw||0;s.pw=PC.filter(c=>c.a===null||p.ach[c.a]).length;s.fu=SL.every(([k])=>p.sr&&p.sr.eq[k]!=null)?1:0;return s}
+s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;s.tp=S.taps||0;s.pm=Math.max(0,...Object.values(p.plan).map(a=>a.length));s.nc=cats(p).length;s.tk=p.tasks.length;s.ac=Object.keys(p.ach).length;s.bio=p.bio?1:0;s.pic=p.pic?1:0;s.fx=p.fx?1:0;s.fd=p.fd||0;s.wc=p.wc||0;s.pl=p.pl||0;s.nt=p.nw||0;s.pw=PC.filter(c=>c.a===null||p.ach[c.a]).length;s.gw=p.gw||0;s.gm=p.gm||0;s.gx=p.gx||0;s.tm=p.tm||0;s.eb=p.eb||0;s.en=p.en||0;s.ee=p.ee||0;s.gr=p.gym?p.gym.rs.filter(x=>x.id[0]=='u').length:0;s.fu=SL.every(([k])=>p.sr&&p.sr.eq[k]!=null)?1:0;return s}
 function dec(p,pop){const s=st(p);if(!s.last)return;const g=dn(td())-dn(s.last)-1;
 if(g<=0){p.pg=0;return}
 if(g>p.pg){const x0=Math.max(0,base(p,s)-p.pen);
@@ -418,13 +453,13 @@ h+=ts.length?ts.map(t=>`<div class="row s${dd[t.id]||0}"><button class=box data-
 h+=`<p class=mu>Toca las tareas que quieres hacer este día.</p><button class=sec data-a=copy>Copiar el plan del día anterior</button>`;
 cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3><div class=chips>`+p.tasks.filter(t=>t.c==c).map(t=>`<button class="chip ${pl.includes(t.id)?'on':''}" data-a=sel data-v="${t.id}">${E(t.t)}</button>`).join('')+`</div>`});
 }else if(tab=='logros'){
-h+=`<p class=mu>${Object.keys(p.ach).length} de ${AD.length} logros</p><div class=ag>${AD.map((a,j)=>`<div class="ac ${p.ach[j]?'':'lk'}"><span>${a.i}</span><b>${E(a.n)}</b><small>${E(a.d)}</small></div>`).join('')}</div>`;
+h+=`<p class=mu>${Object.keys(p.ach).length} de ${AD.length} logros</p><div class=ag>${AD.map((a,j)=>`<div class="ac ${p.ach[j]?'':'lk'}"><span>${HS(a,j,p)?'❔':a.i}</span><b>${HS(a,j,p)?'???':E(a.n)}</b><small>${HS(a,j,p)?'Logro secreto':E(a.d.replace(/^\?/,''))}</small></div>`).join('')}</div>`;
 }else{
 h+=`<form id=f><input id=nt placeholder="Nueva tarea" required><input id=nc list=cl placeholder="Categoría" required><datalist id=cl>${cats(p).map(c=>`<option value="${E(c)}">`).join('')}</datalist><button class=pri>Añadir tarea</button></form>`;
 cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3>`+p.tasks.filter(t=>t.c==c).map(t=>`<div class=row><span>${E(t.t)}</span><button data-a=ed data-v="${t.id}" aria-label="Editar">✎</button><button data-a=del data-v="${t.id}" aria-label="Borrar">🗑</button></div>`).join('')});
 }
 h+=`</main>`;document.body.style.backgroundImage=bgi(col);if(scr!='hoy')h=h.slice(0,h.indexOf('<section'))+SC[scr](p,s,g,say);
-h+=`<nav class=bb>${[['hoy','🏠','Hoy'],['saru','🐒','Saru'],['notas','📝','Notas'],['stats','📊','Stats']].map(([a,i,n])=>`<button data-a=sc data-v=${a} class="${scr==a?'on':''}"><span>${i}</span><small>${n}</small></button>`).join('')}</nav>`;
+h+=`<nav class=bb>${[['hoy','🏠','Hoy'],['gym','🏋️','Gym'],['saru','🐒','Saru'],['notas','📝','Notas'],['stats','📊','Stats']].map(([a,i,n])=>`<button data-a=sc data-v=${a} class="${scr==a?'on':''}"><span>${i}</span><small>${n}</small></button>`).join('')}</nav>`;
 if(PU){const ra=RL.filter(v=>PU.a>=v).length-1,rb=RL.filter(v=>PU.b>=v).length-1;h+=`<div class=ov style="z-index:9"></div><div class=pu><b style="font-size:22px">⚠️ ${E(S.pet)} te ha echado de menos</b><p>Llevas ${PU.d} días y ${PU.h} horas sin completar tareas.</p><p>Has perdido ${PU.xp} XP${PU.a>PU.b?` y ${PU.a-PU.b} niveles (de ${PU.a} a ${PU.b})`:''}.</p>${ra>rb?`<p>Has bajado de <b>${E(S.rk[ra])}</b> a <b>${E(S.rk[rb])}</b>.</p>`:''}<button class=pri data-a=ok>Entendido</button></div>`}
 if(menu)h+=drawer(p,s,col);if(0)h+=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
 <h2>Perfil</h2><div class=g>${Object.keys(S.p).map(n=>`<button class="${n==S.cur?'on':''}" data-a=pf data-v="${E(n)}">${E(n)}</button>`).join('')}</div>
@@ -438,6 +473,23 @@ if(menu)h+=drawer(p,s,col);if(0)h+=`<div class=ov data-a=close></div><aside><but
 $('#app').innerHTML=h;scrollTo(0,y);
 }
 
+const fm2=t=>Math.floor(t/60)+':'+String(t%60).padStart(2,'0');
+function setT(n){W.t=n;W.end=Date.now()+n*1000;if(!tmr)tmr=setInterval(tick,400)}
+function beep(){try{const a=new(window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator();o.connect(a.destination);o.frequency.value=880;o.start();setTimeout(()=>o.stop(),350)}catch(e){}try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}}
+function tick(){if(!W||!W.end){clearInterval(tmr);tmr=0;return}
+const t=Math.max(0,Math.ceil((W.end-Date.now())/1000));
+if(t!=W.t){W.t=t;const el=$('#tm');if(el)el.textContent=fm2(t)}
+if(t<=0){W.end=0;beep();adv()}}
+function adv(){if(W.q){W=null;toast('⏱️','¡Tiempo!','Temporizador terminado');r()}else if(W.ph=='r')wgo();else{wnext(P());r()}}
+function wnext(p){const R=gy(p).rs.find(x=>x.id==W.rid),e=R.ex[W.ei];
+if(W.si+1<e.s||W.ei+1<R.ex.length){W.ph='r';setT(e.p)}else wfin(p,R)}
+function wgo(){const R=gy(P()).rs.find(x=>x.id==W.rid),e=R.ex[W.ei];
+if(W.si+1<e.s)W.si++;else{W.ei++;W.si=0}
+W.ph='w';W.end=0;const n=R.ex[W.ei];if(n.d)setT(n.d);r()}
+function wfin(p,R){const m=Math.max(1,Math.round((Date.now()-W.st)/6e4)),h=new Date().getHours();
+p.gw=(p.gw||0)+1;p.gm=(p.gm||0)+m;p.gx=Math.max(p.gx||0,R.ex.length);if(h<8)p.eb=1;if(h>=21)p.en=1;
+W=null;toast('🏋️','¡Entreno completado!','+20 XP · '+m+' min');fin2()}
+function fin2(){const q=P();dec(q);const s=chk();if(s.l>q.lv)toast('⬆️','¡Nivel '+s.l+'!','Ahora eres '+S.rk[s.rk]);q.lv=s.l;if(s.rk>q.rkk)toast(AX[s.rk],S.pet+' evoluciona','Nuevo rango: '+S.rk[s.rk]);q.rkk=s.rk;save();r()}
 function drawer(p,s,col){
 const pf=p.pic?`<img class=av src="${p.pic}" alt="">`:`<span class=av>${AX[s.rk]}</span>`;
 let h=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
@@ -473,6 +525,17 @@ else if(a=='hc'){S.base='color';S.h=+v}
 else if(a=='pn'){const n=(prompt('Nombre de tu mascota',S.pet)||'').trim();if(n)S.pet=n}
 else if(a=='rr'){const n=(prompt('Nombre del rango',S.rk[v])||'').trim();if(n)S.rk[v]=n}
 else if(a=='pf')S.cur=v;
+else if(a=='gs'){const R=gy(p).rs.find(x=>x.id==v);if(!R||!R.ex.length){alert('Añade ejercicios a la rutina primero.');return}W={rid:v,ei:0,si:0,ph:'w',st:Date.now(),t:0,end:0};p.tm=(p.tm||0)+1;if(R.ex[0].d)setT(R.ex[0].d)}
+else if(a=='gdone'||a=='gskip'){if(W&&W.rid){if(W.ph=='r')wgo();else wnext(p)}}
+else if(a=='gend'){if(confirm('¿Cancelar?'))W=null}
+else if(a=='gq'){W={q:1};setT(+v);p.tm=(p.tm||0)+1}
+else if(a=='gqc'){const n=parseInt(prompt('Segundos','45'));if(n>0){W={q:1};setT(n);p.tm=(p.tm||0)+1}}
+else if(a=='ged')ge=v;
+else if(a=='gok')ge=null;
+else if(a=='gdl'){if(confirm('¿Borrar esta rutina?'))gy(p).rs=gy(p).rs.filter(x=>x.id!=v)}
+else if(a=='grn'){const R=gy(p).rs.find(x=>x.id==ge),n=(prompt('Nombre de la rutina',R.n)||'').trim();if(n){R.n=n;if(/saitama|one punch/i.test(n))p.ee=1}}
+else if(a=='gxd')gy(p).rs.find(x=>x.id==ge).ex.splice(+v,1);
+else if(a=='gadd'){const n=(prompt('Nombre del ejercicio')||'').trim();if(n){const se=parseInt(prompt('Series','3'))||3,rr=(prompt('Repeticiones, o segundos si termina en s (ej. 40s)','12')||'12').trim(),d=/s$/i.test(rr)?parseInt(rr)||30:0,pr=parseInt(prompt('Descanso en segundos','60'))||60;gy(p).rs.find(x=>x.id==ge).ex.push({n,s:se,r:d?0:parseInt(rr)||12,d,p:pr})}}
 else if(a=='sc'){scr=v;menu=0}
 else if(a=='fd'){p.fd=(p.fd||0)+1;anim='jp'}
 else if(a=='pl'){p.pl=(p.pl||0)+1;anim='jp'}
@@ -507,6 +570,7 @@ q.rkk=s.rk;save();r();
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.v)});
 document.addEventListener('submit',e=>{e.preventDefault();
+if(e.target.id=='gf'){const n=$('#gn').value.trim();if(n){const p=P(),G=gy(p);G.rs.push({id:'u'+Date.now(),n,ex:[]});if(/saitama|one punch/i.test(n))p.ee=1;ge=G.rs[G.rs.length-1].id;chk();save();r()}return}
 if(e.target.id=='nf'){const t=$('#nx').value.trim();if(t){const p=P();(p.notes=p.notes||[]).unshift(t);p.nw=(p.nw||0)+1;chk();save();r()}return}
 if(e.target.id=='sf'){const t=$('#sx').value.trim();if(t){const p=P();(p.shop=p.shop||[]).push({t,d:0});save();r()}return}
 const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({id:'u'+Date.now(),t,c});const q=P(),s=chk();q.lv=s.l;q.rkk=s.rk;save();r()}});
