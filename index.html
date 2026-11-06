@@ -3,49 +3,68 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0f0f14">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Mi rutina</title>
 <style>
-:root{--bg:#0f0f14;--card:#1a1a23;--tx:#f2f2f7;--mu:#9090a0;--bd:#2c2c3a;--ac:#a855f7;color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-[data-theme=light]{--bg:#f6f5fa;--card:#fff;--tx:#1b1b22;--mu:#6b6b7a;--bd:#dedde8;color-scheme:light}
+:root{--h:270;--bg:#000;--card:#141414;--tx:#fff;--mu:#a0a0a0;--bd:#2a2a2a;--ac:#fff;--on:#000;color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[data-b=light]{--bg:#fff;--card:#f2f2f2;--tx:#000;--mu:#666;--bd:#d8d8d8;--ac:#000;--on:#fff;color-scheme:light}
+[data-b=color]{--bg:hsl(var(--h) 45% 11%);--card:hsl(var(--h) 38% 18%);--tx:#fff;--mu:hsl(var(--h) 25% 74%);--bd:hsl(var(--h) 35% 30%);--ac:hsl(var(--h) 85% 62%);--on:hsl(var(--h) 60% 8%)}
 *{box-sizing:border-box;margin:0}
-body{font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+body{font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg) fixed;color:var(--tx);min-height:100vh}
 button,input,textarea{font:inherit;color:inherit}
 button{background:none;border:0;cursor:pointer}
 header{display:flex;align-items:center;gap:12px;padding:14px 16px}
 header>button{font-size:24px;width:44px;height:44px;border-radius:12px;background:var(--card)}
 header b{font-size:20px}header small{display:block;color:var(--mu);font-size:13px}
-.dn{display:flex;align-items:center;justify-content:space-between;padding:0 16px;text-transform:capitalize}
+.hero{display:flex;align-items:center;gap:14px;margin:4px 16px;padding:14px;border-radius:20px;background:linear-gradient(135deg,var(--card),var(--bd));border:1px solid var(--bd)}
+.pw{position:relative;min-width:76px;text-align:center;animation:fl 2.6s ease-in-out infinite;cursor:pointer}
+.pet{display:inline-block;filter:drop-shadow(0 0 calc(3px*var(--st)) var(--ac))}
+.pet.bn{animation:bn .5s}
+.ax{position:absolute;right:-4px;bottom:-6px;font-size:22px}
+.hi{flex:1}.hi small{display:block;color:var(--mu)}
+.fire{text-align:center;font-size:22px}.fire b{display:block;font-size:20px}.fire small{display:block;font-size:11px;color:var(--mu)}
+.say{margin:10px 16px 0;padding:10px 14px;border-radius:14px;background:var(--card);border:1px solid var(--bd);font-size:15px}
+@keyframes fl{50%{transform:translateY(-5px)}}
+@keyframes bn{40%{transform:scale(1.35) rotate(-8deg)}}
+.dn{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 0;text-transform:capitalize}
 .dn button{font-size:30px;width:44px;height:44px;color:var(--ac)}
-.tabs{display:flex;gap:6px;margin:8px 16px;background:var(--card);padding:4px;border-radius:14px}
-.tabs button{flex:1;padding:10px;border-radius:10px;color:var(--mu)}
-.tabs .on{background:var(--ac);color:#fff}
+.tabs{display:flex;gap:4px;margin:8px 16px;background:var(--card);padding:4px;border-radius:14px}
+.tabs button{flex:1;padding:10px 2px;border-radius:10px;color:var(--mu);font-size:15px}
+.tabs .on,.chip.on,.g .on,.pri{background:var(--ac);color:var(--on)}
 main{padding:8px 16px 40px;max-width:640px;margin:auto}
-.bar{height:8px;background:var(--card);border-radius:8px;overflow:hidden;margin-top:8px}
-.bar i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.bar{height:8px;background:var(--bd);border-radius:8px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--ac);transition:width .4s}
 .mu,.empty{color:var(--mu);margin:8px 0}
 h2{margin:20px 0 8px}
 h3{margin:18px 0 8px;color:var(--ac);font-size:15px}
 .row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;margin:8px 0}
 .row span{flex:1}.row small{color:var(--mu);font-size:12px}
 .row>button{font-size:18px;padding:6px}
-.box{width:42px;height:42px;border-radius:10px;border:2px solid var(--bd);font-size:22px;font-weight:700;color:#fff}
+.box{width:42px;height:42px;border-radius:10px;border:2px solid var(--mu);font-size:22px;font-weight:700;color:#fff}
 .s1 .box{background:#22c55e;border-color:#22c55e}
 .s2 .box{background:#ef4444;border-color:#ef4444}
 .s1 span,.s2 span{opacity:.6}.s1 span{text-decoration:line-through}
 .chips,.g{display:flex;flex-wrap:wrap;gap:8px}
 .chip,.g button{padding:9px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--card)}
-.chip.on,.g .on{background:var(--ac);border-color:var(--ac);color:#fff}
-.pri{background:var(--ac);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600}
+.pri{padding:12px 18px;border-radius:12px;font-weight:600}
 .sec{border:1px solid var(--ac);color:var(--ac);padding:10px 14px;border-radius:12px;width:100%}
 form{display:grid;gap:8px;margin:8px 0}
 input,textarea{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;width:100%}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:8px}
+.ac{background:var(--card);border:1px solid var(--ac);border-radius:14px;padding:10px 6px;text-align:center}
+.ac span{font-size:30px;display:block}.ac b{font-size:13px;display:block}.ac small{font-size:11px;color:var(--mu);display:block}
+.ac.lk{border-color:var(--bd);opacity:.45;filter:grayscale(1)}
 .ov{position:fixed;inset:0;background:#0009}
 aside{position:fixed;top:0;bottom:0;left:0;width:min(86vw,340px);background:var(--bg);border-right:1px solid var(--bd);padding:calc(16px + env(safe-area-inset-top,0px)) 16px 24px;overflow:auto}
 .x{position:absolute;right:8px;top:calc(8px + env(safe-area-inset-top,0px));font-size:22px;color:var(--mu)}
 .sw{display:inline-block;width:38px;height:38px;border-radius:50%;margin:4px;border:3px solid transparent}
 .sw.on{border-color:var(--tx)}
+.toast{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;translate:-50% 0;z-index:9;display:flex;gap:12px;align-items:center;background:var(--card);border:2px solid var(--ac);border-radius:16px;padding:10px 18px;animation:pop .4s;max-width:92vw}
+.toast span{font-size:34px}
+@keyframes pop{from{scale:.6;opacity:0}}
+.cf{position:fixed;top:-14px;width:8px;height:12px;z-index:8;animation:fall 2.4s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
@@ -53,7 +72,8 @@ aside{position:fixed;top:0;bottom:0;left:0;width:min(86vw,340px);background:var(
 <script>
 const $=s=>document.querySelector(s);
 const E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const K='mi-rutina-v1',AC=['#a855f7','#ef4444','#3b82f6','#22c55e','#f97316','#ec4899'];
+const K='mi-rutina-v2',HU=[270,355,215,145,25,320];
+const ST=['🐵','🐵','🐒','🐒','🦧','🦍'],AX=['📖','🥷','🏹','⚔️','✨','👑'],RL=[1,4,8,13,19,26];
 const DEF={
 Sueño:['Acostarme a las 21:00','Dormir 8 horas','Sin pantallas 1 hora antes de dormir','Levantarme a mi hora'],
 Comida:['Desayuno saludable','Comer verdura','Comer fruta','Sin comida basura','Sin refrescos','Cena ligera','Beber 2 litros de agua'],
@@ -62,33 +82,133 @@ Salud:['Descansar un rato','Ducharme','Lavarme los dientes','Tomar el sol','Resp
 Mente:['Meditar','Escribir un diario','Leer 20 minutos','Ver una película','Practicar un hobby'],
 Clase:['Hacer deberes','Estudiar','Repasar apuntes','Preparar la mochila','Entregar un trabajo'],
 Social:['Salir con amigos','Llamar a la familia','Planear algo','Ayudar en casa']};
-const mk=()=>{let i=0,t=[];for(const c in DEF)DEF[c].forEach(x=>t.push({id:'d'+i++,t:x,c}));return{tasks:t,plan:{},done:{}}};
-let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
-if(!S||!S.p)S={p:{Yo:mk()},cur:'Yo',theme:'dark',ac:AC[0]};
+const AD=`✅|Primer paso|Marca tu primera tarea|t|1
+🔟|Calentando|10 tareas hechas|t|10
+🥉|Constante|25 tareas hechas|t|25
+🥈|Imparable|50 tareas hechas|t|50
+🥇|Centenario|100 tareas hechas|t|100
+💎|Diamante|250 tareas hechas|t|250
+🏆|Medio millar|500 tareas hechas|t|500
+👑|Leyenda|1000 tareas hechas|t|1000
+🔥|Chispa|2 días seguidos|b|2
+🕯️|Llama|3 días seguidos|b|3
+⚡|Rayo|5 días seguidos|b|5
+🌟|Una semana|7 días seguidos|b|7
+🌛|Dos semanas|14 días seguidos|b|14
+🧠|Hábito formado|21 días seguidos|b|21
+🗓️|Un mes|30 días seguidos|b|30
+🌋|Volcán|60 días seguidos|b|60
+☄️|Cien días|100 días seguidos|b|100
+🌱|Brote|Llega al nivel 2|l|2
+🌿|Planta|Llega al nivel 5|l|5
+🌳|Árbol|Llega al nivel 10|l|10
+🏔️|Montaña|Llega al nivel 15|l|15
+🚀|Cohete|Llega al nivel 20|l|20
+🌌|Galaxia|Llega al nivel 30|l|30
+🎯|Día redondo|Completa un día con 3 tareas o más|p|1
+🎳|Pleno|3 días redondos|p|3
+🏅|Medalla|7 días redondos|p|7
+🎖️|Condecorado|15 días redondos|p|15
+🏰|Fortaleza|30 días redondos|p|30
+💪|Triplete|3 tareas en un día|m|3
+🖐️|Mano llena|5 tareas en un día|m|5
+🦾|Máquina|8 tareas en un día|m|8
+🤖|Modo bestia|12 tareas en un día|m|12
+😴|Dormilón sano|10 tareas de Sueño|cSueño|10
+🥗|Plato ganador|10 tareas de Comida|cComida|10
+🏃|Corredor|10 tareas de Ejercicio|cEjercicio|10
+🧘|Mente clara|10 tareas de Mente|cMente|10
+📚|Empollón|10 tareas de Clase|cClase|10
+🤝|Alma social|10 tareas de Social|cSocial|10
+🛏️|Maestro del sueño|50 tareas de Sueño|cSueño|50
+🍎|Chef del bienestar|50 tareas de Comida|cComida|50
+🏋️|Atleta|50 tareas de Ejercicio|cEjercicio|50
+🎓|Sabio|50 tareas de Clase|cClase|50
+✏️|Creador|Crea tu propia tarea|ct|1
+🛠️|Arquitecto|Crea 5 tareas propias|ct|5
+👥|Doble vida|Crea un segundo perfil|pr|2
+🎨|Estilista|Elige un tema de color|th|1
+🏷️|Bautizo|Cambia el nombre de tu mono|pn|1
+📤|Compartir|Exporta o importa una rutina|ex|1
+⚖️|Equilibrio|4 categorías distintas en un día|mc|4
+🐒|Rey Mono|Alcanza el rango máximo|rk|5`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
+
+const mk=()=>{let i=0,t=[];for(const c in DEF)DEF[c].forEach(x=>t.push({id:'d'+i++,t:x,c}));return{tasks:t,plan:{},done:{},ach:{},pen:0,pg:0,lv:1,rkk:0}};
+const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+let S=ld(K);
+if(!S||!S.p){const o=ld('mi-rutina-v1');S=o&&o.p?o:{p:{Yo:mk()},cur:'Yo'}}
+S.base=S.base||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+S.h=S.h||270;S.pet=S.pet||'Saru';S.rk=S.rk||['Aprendiz','Genin','Cazador','Espadachín','Ascendido','Rey Mono'];
+Object.values(S.p).forEach(p=>Object.assign(p,{ach:p.ach||{},pen:p.pen||0,pg:p.pg||0,lv:p.lv||1,rkk:p.rkk||0}));
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
 const P=()=>S.p[S.cur];
 const cats=p=>[...new Set(p.tasks.map(t=>t.c))];
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const dn=k=>Date.parse(k)/864e5,td=()=>dk(new Date());
 let D=new Date(),tab='hoy',menu=0;
 const rel=()=>{const a=new Date();a.setHours(0,0,0,0);const b=new Date(D);b.setHours(0,0,0,0);return({'-1':'Ayer','0':'Hoy','1':'Mañana'})[Math.round((b-a)/864e5)]||''};
 
+function st(p){
+const cm={};p.tasks.forEach(t=>cm[t.id]=t.c);
+const o={t:0,b:0,m:0,mc:0,p:0,run:0,cur:0,last:null},ds=[];
+for(const k of Object.keys(p.done).sort()){
+const d=p.done[k],ids=Object.keys(d).filter(i=>d[i]==1&&cm[i]);
+if(!ids.length)continue;
+ds.push(k);o.t+=ids.length;o.m=Math.max(o.m,ids.length);
+o.mc=Math.max(o.mc,new Set(ids.map(i=>cm[i])).size);
+ids.forEach(i=>{o['c'+cm[i]]=(o['c'+cm[i]]||0)+1});
+const pl=(p.plan[k]||[]).filter(i=>cm[i]);
+if(pl.length>=3&&pl.every(i=>d[i]==1))o.p++;
+}
+let run=0;ds.forEach((k,i)=>{run=i&&dn(k)-dn(ds[i-1])==1?run+1:1;o.b=Math.max(o.b,run)});
+o.run=run;o.last=ds[ds.length-1]||null;
+o.cur=o.last&&dn(td())-dn(o.last)<=1?run:0;
+return o}
+const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25;
+function fs(p){const s=st(p);s.x=Math.max(0,base(p,s)-p.pen);s.l=Math.floor(Math.sqrt(s.x/40))+1;s.rk=RL.filter(v=>s.l>=v).length-1;
+s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;return s}
+function dec(p){const s=st(p);if(!s.last)return;const g=dn(td())-dn(s.last)-1;
+if(g<=0){p.pg=0;return}
+if(g>p.pg){p.pen+=(g-p.pg)*15;if(!p.pg&&s.run>=3)p.pen+=40;p.pg=g}
+p.pen=Math.min(p.pen,base(p,s))}
+function chk(q){const p=P();let s=fs(p);
+for(let r=0;r<4;r++){let g=0;
+AD.forEach((a,j)=>{if(!p.ach[j]&&(s[a.k]||0)>=a.v){p.ach[j]=1;g=1;if(!q)toast(a.i,'¡Logro desbloqueado!',a.n)}});
+if(!g)break;s=fs(p)}
+return s}
+
+const Q=[];let busy=0;
+function toast(i,a,b){Q.push([i,a,b]);nx()}
+function nx(){if(busy||!Q.length)return;busy=1;const[i,a,b]=Q.shift(),d=document.createElement('div');
+d.className='toast';d.innerHTML=`<span>${i}</span><div><b>${E(a)}</b><br>${E(b)}</div>`;document.body.appendChild(d);confetti();
+setTimeout(()=>{d.remove();busy=0;nx()},2600)}
+function confetti(){for(let i=0;i<36;i++){const c=document.createElement('i');c.className='cf';
+c.style.cssText=`left:${Math.random()*100}vw;background:hsl(${Math.random()*360} 90% 60%);animation-delay:${Math.random()*.5}s;animation-duration:${1.8+Math.random()*1.5}s`;
+document.body.appendChild(c);setTimeout(()=>c.remove(),3800)}}
+
 function r(){
-const y=scrollY;
-document.documentElement.dataset.theme=S.theme;
-document.documentElement.style.setProperty('--ac',S.ac);
-const k=dk(D),p=P(),pl=p.plan[k]||[],dn=p.done[k]||{};
-const ts=pl.map(i=>p.tasks.find(t=>t.id===i)).filter(Boolean);
-const ok=ts.filter(t=>dn[t.id]===1).length;
+const y=scrollY,p=P(),k=dk(D),pl=p.plan[k]||[],dd=p.done[k]||{};
+const s=fs(p),ts=pl.map(i=>p.tasks.find(t=>t.id===i)).filter(Boolean),ok=ts.filter(t=>dd[t.id]===1).length;
+const g=s.last?dn(td())-dn(s.last)-1:0,l0=40*(s.l-1)**2,l1=40*s.l**2;
 const tit=D.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
+const say=g>0?'Te he echado de menos… cada día sin entrar me quita fuerza.':ts.length&&ok==ts.length?'¡Día perfecto! Estoy muy orgulloso de ti.':s.cur?`Llevamos ${s.cur} ${s.cur>1?'días':'día'} seguidos. ¡No la rompas!`:'¿Empezamos? Elige las tareas de hoy.';
+const R=document.documentElement,col=S.base=='color';
+R.dataset.b=S.base;R.style.setProperty('--h',S.h);
+document.body.style.backgroundImage=`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)'/></svg>`)}")`;
 let h=`<header><button data-a=menu aria-label="Menú">☰</button><div><b>${E(S.cur)}</b><small>${rel()}</small></div></header>
+<section class=hero><div class=pw data-a=pet><span class=pet style="font-size:${44+6*s.rk}px;--st:${s.rk+1}">${g>0?'🙈':ST[s.rk]}</span><small class=ax>${AX[s.rk]}</small></div>
+<div class=hi><b>${E(S.pet)}</b> · ${E(S.rk[s.rk])}<small>Nivel ${s.l} · ${s.x} XP</small><div class=bar><i style="width:${(s.x-l0)/(l1-l0)*100}%"></i></div></div>
+<div class=fire>🔥<b>${s.cur}</b><small>racha</small></div></section><p class=say>${say}</p>
 <nav class=dn><button data-a=d data-v=-1 aria-label="Día anterior">‹</button><span>${tit}</span><button data-a=d data-v=1 aria-label="Día siguiente">›</button></nav>
-<nav class=tabs>${[['hoy','Hoy'],['elegir','Elegir'],['tareas','Tareas']].map(([a,b])=>`<button data-a=tab data-v=${a} class="${tab==a?'on':''}">${b}</button>`).join('')}</nav><main>`;
+<nav class=tabs>${[['hoy','Hoy'],['elegir','Elegir'],['tareas','Tareas'],['logros','Logros']].map(([a,b])=>`<button data-a=tab data-v=${a} class="${tab==a?'on':''}">${b}</button>`).join('')}</nav><main>`;
 if(tab=='hoy'){
-h+=`<div class=bar><i style="width:${ts.length?ok/ts.length*100:0}%"></i></div><p class=mu>${ok} de ${ts.length} hechas</p>`;
-h+=ts.length?ts.map(t=>`<div class="row s${dn[t.id]||0}"><button class=box data-a=chk data-v="${t.id}">${['','✓','✗'][dn[t.id]||0]}</button><span>${E(t.t)}</span><small>${E(t.c)}</small></div>`).join(''):`<p class=empty>No has elegido tareas para este día.</p><button class=pri data-a=tab data-v=elegir>Elegir tareas</button>`;
+h+=`<div class=bar><i style="width:${ts.length?ok/ts.length*100:0}%"></i></div><p class=mu>${ok} de ${ts.length} hechas · cada tarea suma 10 XP</p>`;
+h+=ts.length?ts.map(t=>`<div class="row s${dd[t.id]||0}"><button class=box data-a=chk data-v="${t.id}">${['','✓','✗'][dd[t.id]||0]}</button><span>${E(t.t)}</span><small>${E(t.c)}</small></div>`).join(''):`<p class=empty>No has elegido tareas para este día.</p><button class=pri data-a=tab data-v=elegir>Elegir tareas</button>`;
 }else if(tab=='elegir'){
 h+=`<p class=mu>Toca las tareas que quieres hacer este día.</p><button class=sec data-a=copy>Copiar el plan del día anterior</button>`;
 cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3><div class=chips>`+p.tasks.filter(t=>t.c==c).map(t=>`<button class="chip ${pl.includes(t.id)?'on':''}" data-a=sel data-v="${t.id}">${E(t.t)}</button>`).join('')+`</div>`});
+}else if(tab=='logros'){
+h+=`<p class=mu>${Object.keys(p.ach).length} de ${AD.length} logros</p><div class=ag>${AD.map((a,j)=>`<div class="ac ${p.ach[j]?'':'lk'}"><span>${a.i}</span><b>${E(a.n)}</b><small>${E(a.d)}</small></div>`).join('')}</div>`;
 }else{
 h+=`<form id=f><input id=nt placeholder="Nueva tarea" required><input id=nc list=cl placeholder="Categoría" required><datalist id=cl>${cats(p).map(c=>`<option value="${E(c)}">`).join('')}</datalist><button class=pri>Añadir tarea</button></form>`;
 cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3>`+p.tasks.filter(t=>t.c==c).map(t=>`<div class=row><span>${E(t.t)}</span><button data-a=ed data-v="${t.id}" aria-label="Editar">✎</button><button data-a=del data-v="${t.id}" aria-label="Borrar">🗑</button></div>`).join('')});
@@ -97,8 +217,9 @@ h+=`</main>`;
 if(menu)h+=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
 <h2>Perfil</h2><div class=g>${Object.keys(S.p).map(n=>`<button class="${n==S.cur?'on':''}" data-a=pf data-v="${E(n)}">${E(n)}</button>`).join('')}</div>
 <div class=g style="margin-top:8px"><button data-a=np>Nuevo</button><button data-a=rn>Renombrar</button><button data-a=dp>Eliminar</button></div>
-<h2>Ajustes</h2><h3>Tema</h3><div class=g><button class="${S.theme=='dark'?'on':''}" data-a=th data-v=dark>Oscuro</button><button class="${S.theme=='light'?'on':''}" data-a=th data-v=light>Claro</button></div>
-<h3>Color</h3>${AC.map(c=>`<button class="sw ${S.ac==c?'on':''}" style="background:${c}" data-a=ac data-v="${c}" aria-label="Color"></button>`).join('')}
+<h2>Ajustes</h2><h3>Tema</h3><div class=g><button class="${S.base=='light'?'on':''}" data-a=ba data-v=light>Claro</button><button class="${S.base=='dark'?'on':''}" data-a=ba data-v=dark>Oscuro</button></div>
+<h3>Colores</h3>${HU.map(c=>`<button class="sw ${col&&S.h==c?'on':''}" style="background:hsl(${c} 85% 60%)" data-a=hc data-v="${c}" aria-label="Color"></button>`).join('')}
+<h3>Mascota y rangos</h3><div class=g><button data-a=pn>🐒 ${E(S.pet)}</button>${S.rk.map((n,i)=>`<button data-a=rr data-v="${i}">${AX[i]} ${E(n)}</button>`).join('')}</div>
 <h3>Compartir rutina</h3><div class=g><button data-a=exp>Copiar mi código</button></div>
 <textarea id=imp rows=3 placeholder="Pega aquí un código" style="margin:8px 0"></textarea><button class=pri data-a=imp>Importar</button>
 <h3>Datos</h3><button class=sec data-a=rst>Borrar todo</button></aside>`;
@@ -107,6 +228,7 @@ $('#app').innerHTML=h;scrollTo(0,y);
 
 function act(a,v){
 const p=P(),k=dk(D);
+if(a=='pet'){const e=$('.pet');e.classList.remove('bn');void e.offsetWidth;e.classList.add('bn');return}
 if(a=='menu')menu=1;
 else if(a=='close')menu=0;
 else if(a=='d')D.setDate(D.getDate()+ +v);
@@ -116,22 +238,30 @@ else if(a=='sel'){const l=p.plan[k]=p.plan[k]||[];const i=l.indexOf(v);i<0?l.pus
 else if(a=='copy'){const o=new Date(D);o.setDate(o.getDate()-1);p.plan[k]=[...(p.plan[dk(o)]||[])]}
 else if(a=='ed'){const t=p.tasks.find(x=>x.id==v),n=prompt('Editar tarea',t.t);if(n&&n.trim())t.t=n.trim();const c=prompt('Categoría',t.c);if(c&&c.trim())t.c=c.trim()}
 else if(a=='del'){if(confirm('¿Borrar esta tarea?'))p.tasks=p.tasks.filter(x=>x.id!=v)}
-else if(a=='th')S.theme=v;
-else if(a=='ac')S.ac=v;
+else if(a=='ba')S.base=v;
+else if(a=='hc'){S.base='color';S.h=+v}
+else if(a=='pn'){const n=(prompt('Nombre de tu mascota',S.pet)||'').trim();if(n)S.pet=n}
+else if(a=='rr'){const n=(prompt('Nombre del rango',S.rk[v])||'').trim();if(n)S.rk[v]=n}
 else if(a=='pf')S.cur=v;
 else if(a=='np'){const n=(prompt('Nombre del perfil')||'').trim();if(n&&!S.p[n]){S.p[n]=mk();S.cur=n}}
 else if(a=='rn'){const n=(prompt('Nuevo nombre',S.cur)||'').trim();if(n&&!S.p[n]){S.p[n]=S.p[S.cur];delete S.p[S.cur];S.cur=n}}
-else if(a=='dp'){if(Object.keys(S.p).length>1&&confirm('¿Eliminar el perfil '+S.cur+'?')){delete S.p[S.cur];S.cur=Object.keys(S.p)[0]}else if(Object.keys(S.p).length<2)alert('Necesitas al menos un perfil.')}
-else if(a=='exp'){const c=btoa(unescape(encodeURIComponent(JSON.stringify({n:S.cur,t:p.tasks.map(t=>[t.c,t.t])}))));
+else if(a=='dp'){if(Object.keys(S.p).length<2)alert('Necesitas al menos un perfil.');else if(confirm('¿Eliminar el perfil '+S.cur+'?')){delete S.p[S.cur];S.cur=Object.keys(S.p)[0]}}
+else if(a=='exp'){S.ex=1;const c=btoa(unescape(encodeURIComponent(JSON.stringify({n:S.cur,t:p.tasks.map(t=>[t.c,t.t])}))));
 if(navigator.clipboard)navigator.clipboard.writeText(c).then(()=>alert('Código copiado'),()=>prompt('Copia tu código',c));else prompt('Copia tu código',c)}
-else if(a=='imp'){try{const o=JSON.parse(decodeURIComponent(escape(atob($('#imp').value.trim()))));let n=o.n,i=2;while(S.p[n])n=o.n+' '+i++;const q=mk();q.tasks=o.t.map((x,j)=>({id:'i'+j,t:String(x[1]),c:String(x[0])}));S.p[n]=q;S.cur=n;alert('Perfil importado: '+n)}catch(e){alert('Ese código no es válido.')}}
+else if(a=='imp'){try{const o=JSON.parse(decodeURIComponent(escape(atob($('#imp').value.trim()))));let n=o.n,i=2;while(S.p[n])n=o.n+' '+i++;const q=mk();q.tasks=o.t.map((x,j)=>({id:'i'+j,t:String(x[1]),c:String(x[0])}));S.p[n]=q;S.cur=n;S.ex=1;alert('Perfil importado: '+n)}catch(e){alert('Ese código no es válido.')}}
 else if(a=='rst'){if(confirm('¿Borrar todos tus datos?')){try{localStorage.removeItem(K)}catch(e){}location.reload();return}}
-save();r();
+const q=P();dec(q);const s=chk();
+if(s.l>q.lv)toast('⬆️','¡Nivel '+s.l+'!','Ahora eres '+S.rk[s.rk]);
+q.lv=s.l;
+if(s.rk>q.rkk)toast(AX[s.rk],S.pet+' evoluciona','Nuevo rango: '+S.rk[s.rk]);
+q.rkk=s.rk;save();r();
 }
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.v)});
-document.addEventListener('submit',e=>{e.preventDefault();const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({id:'u'+Date.now(),t,c});save();r()}});
-r();
+document.addEventListener('submit',e=>{e.preventDefault();const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({id:'u'+Date.now(),t,c});const q=P(),s=chk();q.lv=s.l;q.rkk=s.rk;save();r()}});
+Object.values(S.p).forEach(dec);
+{const s=chk(1),q=P();q.lv=s.l;q.rkk=s.rk}
+save();r();
 </script>
 </body>
 </html>
