@@ -65,6 +65,10 @@ aside{position:fixed;top:0;bottom:0;left:0;width:min(86vw,340px);background:var(
 .cf{position:fixed;top:-14px;width:8px;height:12px;z-index:8;animation:fall 2.4s linear forwards;pointer-events:none}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.av{width:46px;height:46px;border-radius:50%;object-fit:cover;background:var(--card);display:inline-flex;align-items:center;justify-content:center;font-size:24px;border:2px solid var(--ac);flex:none}
+.pc{display:flex;gap:12px;align-items:center;background:linear-gradient(135deg,var(--card),var(--bd));border-radius:16px;padding:12px;margin-top:28px}
+.pc small{display:block;color:var(--mu);font-size:13px}
+.pu{position:fixed;z-index:10;left:50%;top:50%;translate:-50% -50%;width:min(90vw,380px);background:var(--card);border:2px solid var(--ac);border-radius:20px;padding:20px;text-align:center;display:grid;gap:10px}
 </style>
 </head>
 <body>
@@ -73,7 +77,7 @@ aside{position:fixed;top:0;bottom:0;left:0;width:min(86vw,340px);background:var(
 const $=s=>document.querySelector(s);
 const E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const K='mi-rutina-v2',HU=[270,355,215,145,25,320];
-const ST=['🐵','🐵','🐒','🐒','🦧','🦍'],AX=['📖','🥷','🏹','⚔️','✨','👑'],RL=[1,4,8,13,19,26];
+const ST=['🐵','🐵','🐒','🐒','🦧','🦍'],AX=['📖','🥷','🏹','⚔️','✨','👑'],RL=[1,10,25,45,70,100],C=n=>n<2?0:40+60*(n-2)+6*(n-2)**2,LV=x=>x<40?1:Math.min(100,Math.floor((-60+Math.sqrt(2640+24*x))/12+1e-9)+2);
 const DEF={
 Sueño:['Acostarme a las 21:00','Dormir 8 horas','Sin pantallas 1 hora antes de dormir','Levantarme a mi hora'],
 Comida:['Desayuno saludable','Comer verdura','Comer fruta','Sin comida basura','Sin refrescos','Cena ligera','Beber 2 litros de agua'],
@@ -131,46 +135,101 @@ const AD=`✅|Primer paso|Marca tu primera tarea|t|1
 🏷️|Bautizo|Cambia el nombre de tu mono|pn|1
 📤|Compartir|Exporta o importa una rutina|ex|1
 ⚖️|Equilibrio|4 categorías distintas en un día|mc|4
-🐒|Rey Mono|Alcanza el rango máximo|rk|5`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
+🐒|Rey Mono|Alcanza el rango máximo|rk|5
+🛋️|Domingo productivo|10 tareas en domingos|w0|10
+😤|Lunes de hierro|10 tareas en lunes|w1|10
+🌮|Martes con garra|10 tareas en martes|w2|10
+🐪|Miércoles de joroba|10 tareas en miércoles|w3|10
+🎣|Jueves de pesca|10 tareas en jueves|w4|10
+🎉|Viernes sin excusas|10 tareas en viernes|w5|10
+🛹|Sábado en acción|10 tareas en sábados|w6|10
+🫣|Honestidad|Marca tu primera ✗|xx|1
+🙏|Sin trampas|Marca 10 ✗ sinceras|xx|10
+🧱|Ladrillo a ladrillo|14 días con tareas|dy|14
+🏗️|En obras|30 días con tareas|dy|30
+🏠|Casa construida|60 días con tareas|dy|60
+🏙️|Ciudad entera|100 días con tareas|dy|100
+🌆|Metrópolis|200 días con tareas|dy|200
+🎆|Un año entero|365 días con tareas|dy|365
+📝|Ambicioso|Planea 10 tareas en un día|pm|10
+📜|Lista interminable|Planea 20 tareas en un día|pm|20
+🐘|Elefante|Día redondo con 8 tareas o más|pb|1
+🦣|Mamut|3 días redondos con 8 tareas o más|pb|3
+📕|Biblioteca de hábitos|Ten 50 tareas en el catálogo|tk|50
+🗃️|Archivador|Ten 80 tareas en el catálogo|tk|80
+🧩|Mil caras|Ten 8 categorías|nc|8
+🎒|Coleccionista|Consigue 10 logros|ac|10
+🧳|Gran coleccionista|Consigue 25 logros|ac|25
+🗝️|Cazalogros|Consigue 50 logros|ac|50
+🏛️|Museo|Consigue 75 logros|ac|75
+🛸|Casi todo|Consigue 100 logros|ac|100
+💯|Cien de XP|Llega a 100 XP|x|100
+💰|Mil de XP|Llega a 1000 XP|x|1000
+🏦|Cinco mil|Llega a 5000 XP|x|5000
+🪙|Diez mil|Llega a 10000 XP|x|10000
+🤑|Veinticinco mil|Llega a 25000 XP|x|25000
+🛡️|Nivel 40|Llega al nivel 40|l|40
+🗡️|Nivel 50|Llega al nivel 50|l|50
+🐲|Nivel 70|Llega al nivel 70|l|70
+🌠|Nivel 90|Llega al nivel 90|l|90
+🔱|Casi un rey|Llega al nivel 99|l|99
+🥋|Genin de verdad|Alcanza el rango Genin|rk|1
+🏹|Mira certera|Alcanza el rango Cazador|rk|2
+⚔️|Filo afilado|Alcanza el rango Espadachín|rk|3
+✨|Ascensión|Alcanza el rango Ascendido|rk|4
+🪪|Con nombre propio|Escribe tu descripción de perfil|bio|1
+📸|Cara conocida|Pon una foto de perfil|pic|1
+🦅|Fénix|Pierde XP por ausencia y vuelve|fx|1
+👆|Cosquillas|Toca a Saru 10 veces|tp|10
+🥁|Bongó|Toca a Saru 50 veces|tp|50
+🤪|Pesadilla de mono|Toca a Saru 200 veces|tp|200
+🚿|Limpio y fresco|10 tareas de Salud|cSalud|10
+🧴|Cuidado total|50 tareas de Salud|cSalud|50
+🪷|Zen total|50 tareas de Mente|cMente|50
+🎭|Alma de la fiesta|50 tareas de Social|cSocial|50
+🍱|Mil sabores|100 tareas de Comida|cComida|100
+🦸|Superhéroe|100 tareas de Ejercicio|cEjercicio|100`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
 
 const mk=()=>{let i=0,t=[];for(const c in DEF)DEF[c].forEach(x=>t.push({id:'d'+i++,t:x,c}));return{tasks:t,plan:{},done:{},ach:{},pen:0,pg:0,lv:1,rkk:0}};
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
 let S=ld(K);
 if(!S||!S.p){const o=ld('mi-rutina-v1');S=o&&o.p?o:{p:{Yo:mk()},cur:'Yo'}}
 S.base=S.base||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-S.h=S.h||270;S.pet=S.pet||'Saru';S.rk=S.rk||['Aprendiz','Genin','Cazador','Espadachín','Ascendido','Rey Mono'];
+S.h=S.h||270;S.pet=S.pet||'Saru';S.rk=['Aprendiz','Genin','Cazador','Espadachín','Ascendido','Rey Mono'];
 Object.values(S.p).forEach(p=>Object.assign(p,{ach:p.ach||{},pen:p.pen||0,pg:p.pg||0,lv:p.lv||1,rkk:p.rkk||0}));
 const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
 const P=()=>S.p[S.cur];
 const cats=p=>[...new Set(p.tasks.map(t=>t.c))];
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const dn=k=>Date.parse(k)/864e5,td=()=>dk(new Date());
-let D=new Date(),tab='hoy',menu=0;
+let D=new Date(),tab='hoy',menu=0,PU=null;
 const rel=()=>{const a=new Date();a.setHours(0,0,0,0);const b=new Date(D);b.setHours(0,0,0,0);return({'-1':'Ayer','0':'Hoy','1':'Mañana'})[Math.round((b-a)/864e5)]||''};
 
 function st(p){
 const cm={};p.tasks.forEach(t=>cm[t.id]=t.c);
-const o={t:0,b:0,m:0,mc:0,p:0,run:0,cur:0,last:null},ds=[];
+const o={xx:0,t:0,b:0,m:0,mc:0,p:0,run:0,cur:0,last:null},ds=[];
 for(const k of Object.keys(p.done).sort()){
 const d=p.done[k],ids=Object.keys(d).filter(i=>d[i]==1&&cm[i]);
 if(!ids.length)continue;
-ds.push(k);o.t+=ids.length;o.m=Math.max(o.m,ids.length);
+ds.push(k);o.t+=ids.length;const wd=new Date(k+'T12:00').getDay();o['w'+wd]=(o['w'+wd]||0)+ids.length;o.xx+=Object.keys(d).filter(i=>d[i]==2).length;o.m=Math.max(o.m,ids.length);
 o.mc=Math.max(o.mc,new Set(ids.map(i=>cm[i])).size);
 ids.forEach(i=>{o['c'+cm[i]]=(o['c'+cm[i]]||0)+1});
 const pl=(p.plan[k]||[]).filter(i=>cm[i]);
-if(pl.length>=3&&pl.every(i=>d[i]==1))o.p++;
+if(pl.length>=3&&pl.every(i=>d[i]==1)){o.p++;if(pl.length>=8)o.pb=(o.pb||0)+1}
 }
 let run=0;ds.forEach((k,i)=>{run=i&&dn(k)-dn(ds[i-1])==1?run+1:1;o.b=Math.max(o.b,run)});
-o.run=run;o.last=ds[ds.length-1]||null;
+o.run=run;o.dy=ds.length;o.last=ds[ds.length-1]||null;
 o.cur=o.last&&dn(td())-dn(o.last)<=1?run:0;
 return o}
 const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25;
-function fs(p){const s=st(p);s.x=Math.max(0,base(p,s)-p.pen);s.l=Math.floor(Math.sqrt(s.x/40))+1;s.rk=RL.filter(v=>s.l>=v).length-1;
-s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;return s}
-function dec(p){const s=st(p);if(!s.last)return;const g=dn(td())-dn(s.last)-1;
+function fs(p){const s=st(p);s.x=Math.max(0,base(p,s)-p.pen);s.l=LV(s.x);s.rk=RL.filter(v=>s.l>=v).length-1;
+s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;s.tp=S.taps||0;s.pm=Math.max(0,...Object.values(p.plan).map(a=>a.length));s.nc=cats(p).length;s.tk=p.tasks.length;s.ac=Object.keys(p.ach).length;s.bio=p.bio?1:0;s.pic=p.pic?1:0;s.fx=p.fx?1:0;return s}
+function dec(p,pop){const s=st(p);if(!s.last)return;const g=dn(td())-dn(s.last)-1;
 if(g<=0){p.pg=0;return}
-if(g>p.pg){p.pen+=(g-p.pg)*15;if(!p.pg&&s.run>=3)p.pen+=40;p.pg=g}
-p.pen=Math.min(p.pen,base(p,s))}
+if(g>p.pg){const x0=Math.max(0,base(p,s)-p.pen);
+for(let i=p.pg+1;i<=g;i++){const x=Math.max(0,base(p,s)-p.pen);let L=Math.min(x,Math.max(5,Math.floor(x*Math.min(.35,.03+.012*i))));if(i==1&&s.run>=3)L=Math.min(x,L+Math.floor(x*.05));p.pen+=L}
+p.pg=g;const x1=Math.max(0,base(p,s)-p.pen);
+if(pop&&x1<x0){p.fx=1;const m=Math.max(0,Math.floor((Date.now()-(p.act||dn(s.last)*864e5+864e5))/6e4));PU={d:Math.floor(m/1440),h:Math.floor(m%1440/60),xp:x0-x1,a:LV(x0),b:LV(x1)}}}}
 function chk(q){const p=P();let s=fs(p);
 for(let r=0;r<4;r++){let g=0;
 AD.forEach((a,j)=>{if(!p.ach[j]&&(s[a.k]||0)>=a.v){p.ach[j]=1;g=1;if(!q)toast(a.i,'¡Logro desbloqueado!',a.n)}});
@@ -189,15 +248,15 @@ document.body.appendChild(c);setTimeout(()=>c.remove(),3800)}}
 function r(){
 const y=scrollY,p=P(),k=dk(D),pl=p.plan[k]||[],dd=p.done[k]||{};
 const s=fs(p),ts=pl.map(i=>p.tasks.find(t=>t.id===i)).filter(Boolean),ok=ts.filter(t=>dd[t.id]===1).length;
-const g=s.last?dn(td())-dn(s.last)-1:0,l0=40*(s.l-1)**2,l1=40*s.l**2;
+const g=s.last?dn(td())-dn(s.last)-1:0,l0=C(s.l),l1=C(s.l+1);
 const tit=D.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
 const say=g>0?'Te he echado de menos… cada día sin entrar me quita fuerza.':ts.length&&ok==ts.length?'¡Día perfecto! Estoy muy orgulloso de ti.':s.cur?`Llevamos ${s.cur} ${s.cur>1?'días':'día'} seguidos. ¡No la rompas!`:'¿Empezamos? Elige las tareas de hoy.';
 const R=document.documentElement,col=S.base=='color';
 R.dataset.b=S.base;R.style.setProperty('--h',S.h);
 document.body.style.backgroundImage=`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)'/></svg>`)}")`;
-let h=`<header><button data-a=menu aria-label="Menú">☰</button><div><b>${E(S.cur)}</b><small>${rel()}</small></div></header>
+let h=`<header><button data-a=menu aria-label="Menú">☰</button>${p.pic?`<img class=av src="${p.pic}" alt="">`:''}<div><b>${E(S.cur)}</b><small>${rel()}</small></div></header>
 <section class=hero><div class=pw data-a=pet><span class=pet style="font-size:${44+6*s.rk}px;--st:${s.rk+1}">${g>0?'🙈':ST[s.rk]}</span><small class=ax>${AX[s.rk]}</small></div>
-<div class=hi><b>${E(S.pet)}</b> · ${E(S.rk[s.rk])}<small>Nivel ${s.l} · ${s.x} XP</small><div class=bar><i style="width:${(s.x-l0)/(l1-l0)*100}%"></i></div></div>
+<div class=hi><b>${E(S.pet)}</b> · ${E(S.rk[s.rk])}<small>Nivel ${s.l}${s.l>99?' (MAX)':''} · ${s.x} XP</small><div class=bar><i style="width:${s.l>99?100:(s.x-l0)/(l1-l0)*100}%"></i></div></div>
 <div class=fire>🔥<b>${s.cur}</b><small>racha</small></div></section><p class=say>${say}</p>
 <nav class=dn><button data-a=d data-v=-1 aria-label="Día anterior">‹</button><span>${tit}</span><button data-a=d data-v=1 aria-label="Día siguiente">›</button></nav>
 <nav class=tabs>${[['hoy','Hoy'],['elegir','Elegir'],['tareas','Tareas'],['logros','Logros']].map(([a,b])=>`<button data-a=tab data-v=${a} class="${tab==a?'on':''}">${b}</button>`).join('')}</nav><main>`;
@@ -214,7 +273,8 @@ h+=`<form id=f><input id=nt placeholder="Nueva tarea" required><input id=nc list
 cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3>`+p.tasks.filter(t=>t.c==c).map(t=>`<div class=row><span>${E(t.t)}</span><button data-a=ed data-v="${t.id}" aria-label="Editar">✎</button><button data-a=del data-v="${t.id}" aria-label="Borrar">🗑</button></div>`).join('')});
 }
 h+=`</main>`;
-if(menu)h+=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
+if(PU){const ra=RL.filter(v=>PU.a>=v).length-1,rb=RL.filter(v=>PU.b>=v).length-1;h+=`<div class=ov style="z-index:9"></div><div class=pu><b style="font-size:22px">⚠️ ${E(S.pet)} te ha echado de menos</b><p>Llevas ${PU.d} días y ${PU.h} horas sin completar tareas.</p><p>Has perdido ${PU.xp} XP${PU.a>PU.b?` y ${PU.a-PU.b} niveles (de ${PU.a} a ${PU.b})`:''}.</p>${ra>rb?`<p>Has bajado de <b>${E(S.rk[ra])}</b> a <b>${E(S.rk[rb])}</b>.</p>`:''}<button class=pri data-a=ok>Entendido</button></div>`}
+if(menu)h+=drawer(p,s,col);if(0)h+=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
 <h2>Perfil</h2><div class=g>${Object.keys(S.p).map(n=>`<button class="${n==S.cur?'on':''}" data-a=pf data-v="${E(n)}">${E(n)}</button>`).join('')}</div>
 <div class=g style="margin-top:8px"><button data-a=np>Nuevo</button><button data-a=rn>Renombrar</button><button data-a=dp>Eliminar</button></div>
 <h2>Ajustes</h2><h3>Tema</h3><div class=g><button class="${S.base=='light'?'on':''}" data-a=ba data-v=light>Claro</button><button class="${S.base=='dark'?'on':''}" data-a=ba data-v=dark>Oscuro</button></div>
@@ -226,14 +286,32 @@ if(menu)h+=`<div class=ov data-a=close></div><aside><button class=x data-a=close
 $('#app').innerHTML=h;scrollTo(0,y);
 }
 
+function drawer(p,s,col){
+const pf=p.pic?`<img class=av src="${p.pic}" alt="">`:`<span class=av>${AX[s.rk]}</span>`;
+let h=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
+<div class=pc>${pf}<div><b>${E(S.cur)}</b><small>${E(S.rk[s.rk])} · Nivel ${s.l}</small><small>${E(p.bio||'Sin descripción')}</small></div></div>`;
+if(menu==2)return h+`<h2>Editar perfil</h2><div class=g><button data-a=pic>📷 Cambiar foto</button>${p.pic?'<button data-a=npic>Quitar foto</button>':''}</div><input id=ph type=file accept="image/*" hidden>
+<h3>Nombre</h3><input id=pn2 value="${E(S.cur)}" maxlength=24><h3>Descripción</h3><textarea id=bio rows=3 maxlength=140>${E(p.bio||'')}</textarea>
+<div class=g style="margin-top:12px"><button class=pri data-a=psv>Guardar</button><button data-a=m1>Volver</button></div>
+<h3>Tarjeta</h3><button class=sec data-a=card>Copiar mi tarjeta de perfil</button><p class=mu>Seguir a otras personas necesita un servidor, así que por ahora se comparte la tarjeta.</p></aside>`;
+return h+`<div class=g style="margin:10px 0"><button data-a=m2>✏️ Editar perfil</button></div>
+<h3>👤 Perfiles</h3><div class=g>${Object.keys(S.p).map(n=>`<button class="${n==S.cur?'on':''}" data-a=pf data-v="${E(n)}">${E(n)}</button>`).join('')}</div>
+<div class=g style="margin-top:8px"><button data-a=np>Nuevo</button><button data-a=rn>Renombrar</button><button data-a=dp>Eliminar</button></div>
+<h3>🎨 Apariencia</h3><div class=g><button class="${S.base=='light'?'on':''}" data-a=ba data-v=light>Claro</button><button class="${S.base=='dark'?'on':''}" data-a=ba data-v=dark>Oscuro</button></div>
+${HU.map(c=>`<button class="sw ${col&&S.h==c?'on':''}" style="background:hsl(${c} 85% 60%)" data-a=hc data-v="${c}" aria-label="Color"></button>`).join('')}
+<h3>🐒 Mascota</h3><div class=g><button data-a=pn>${E(S.pet)} ✎</button></div><p class=mu>Rangos: ${S.rk.map((n,i)=>`${AX[i]} ${E(n)}`).join(' → ')}</p>
+<h3>📤 Compartir rutina</h3><div class=g><button data-a=exp>Copiar mi código</button></div>
+<textarea id=imp rows=3 placeholder="Pega aquí un código" style="margin:8px 0"></textarea><button class=pri data-a=imp>Importar</button>
+<h3>⚙️ Datos</h3><button class=sec data-a=rst>Borrar todo</button></aside>`}
 function act(a,v){
 const p=P(),k=dk(D);
-if(a=='pet'){const e=$('.pet');e.classList.remove('bn');void e.offsetWidth;e.classList.add('bn');return}
-if(a=='menu')menu=1;
+if(a=='pet'){const e=$('.pet');e.classList.remove('bn');void e.offsetWidth;e.classList.add('bn');S.taps=(S.taps||0)+1;chk();save();return}
+if(a=='ok')PU=null;
+else if(a=='menu')menu=1;
 else if(a=='close')menu=0;
 else if(a=='d')D.setDate(D.getDate()+ +v);
 else if(a=='tab')tab=v;
-else if(a=='chk'){const d=p.done[k]=p.done[k]||{};const n=((d[v]||0)+1)%3;n?d[v]=n:delete d[v]}
+else if(a=='chk'){const d=p.done[k]=p.done[k]||{};const n=((d[v]||0)+1)%3;n?d[v]=n:delete d[v];if(n==1)p.act=Date.now()}
 else if(a=='sel'){const l=p.plan[k]=p.plan[k]||[];const i=l.indexOf(v);i<0?l.push(v):l.splice(i,1)}
 else if(a=='copy'){const o=new Date(D);o.setDate(o.getDate()-1);p.plan[k]=[...(p.plan[dk(o)]||[])]}
 else if(a=='ed'){const t=p.tasks.find(x=>x.id==v),n=prompt('Editar tarea',t.t);if(n&&n.trim())t.t=n.trim();const c=prompt('Categoría',t.c);if(c&&c.trim())t.c=c.trim()}
@@ -243,6 +321,12 @@ else if(a=='hc'){S.base='color';S.h=+v}
 else if(a=='pn'){const n=(prompt('Nombre de tu mascota',S.pet)||'').trim();if(n)S.pet=n}
 else if(a=='rr'){const n=(prompt('Nombre del rango',S.rk[v])||'').trim();if(n)S.rk[v]=n}
 else if(a=='pf')S.cur=v;
+else if(a=='m1')menu=1;
+else if(a=='m2')menu=2;
+else if(a=='pic'){$('#ph').click();return}
+else if(a=='npic')delete p.pic;
+else if(a=='psv'){const n=($('#pn2').value||'').trim();p.bio=$('#bio').value.trim();if(n&&n!=S.cur&&!S.p[n]){S.p[n]=S.p[S.cur];delete S.p[S.cur];S.cur=n}menu=1}
+else if(a=='card'){const s=fs(p),c=`${S.cur} · ${S.rk[s.rk]} · Nivel ${s.l} · 🔥 ${s.cur} · 🏆 ${s.ac}/${AD.length} logros`;navigator.clipboard?navigator.clipboard.writeText(c).then(()=>alert('Tarjeta copiada')):prompt('Copia tu tarjeta',c)}
 else if(a=='np'){const n=(prompt('Nombre del perfil')||'').trim();if(n&&!S.p[n]){S.p[n]=mk();S.cur=n}}
 else if(a=='rn'){const n=(prompt('Nuevo nombre',S.cur)||'').trim();if(n&&!S.p[n]){S.p[n]=S.p[S.cur];delete S.p[S.cur];S.cur=n}}
 else if(a=='dp'){if(Object.keys(S.p).length<2)alert('Necesitas al menos un perfil.');else if(confirm('¿Eliminar el perfil '+S.cur+'?')){delete S.p[S.cur];S.cur=Object.keys(S.p)[0]}}
@@ -259,7 +343,8 @@ q.rkk=s.rk;save();r();
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.v)});
 document.addEventListener('submit',e=>{e.preventDefault();const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({id:'u'+Date.now(),t,c});const q=P(),s=chk();q.lv=s.l;q.rkk=s.rk;save();r()}});
-Object.values(S.p).forEach(dec);
+document.addEventListener('change',e=>{if(e.target.id!='ph'||!e.target.files[0])return;const f=new FileReader();f.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=128;const m=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,128,128);P().pic=c.toDataURL('image/jpeg',.75);chk();save();r()};im.src=f.result};f.readAsDataURL(e.target.files[0])});
+Object.values(S.p).forEach(p=>dec(p,p===P()));
 {const s=chk(1),q=P();q.lv=s.l;q.rkk=s.rk}
 save();r();
 </script>
