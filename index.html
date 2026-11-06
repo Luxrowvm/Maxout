@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f0f14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Mi rutina</title>
+<style>
+:root{--bg:#0f0f14;--card:#1a1a23;--tx:#f2f2f7;--mu:#9090a0;--bd:#2c2c3a;--ac:#a855f7;color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[data-theme=light]{--bg:#f6f5fa;--card:#fff;--tx:#1b1b22;--mu:#6b6b7a;--bd:#dedde8;color-scheme:light}
+*{box-sizing:border-box;margin:0}
+body{font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+button,input,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+header{display:flex;align-items:center;gap:12px;padding:14px 16px}
+header>button{font-size:24px;width:44px;height:44px;border-radius:12px;background:var(--card)}
+header b{font-size:20px}header small{display:block;color:var(--mu);font-size:13px}
+.dn{display:flex;align-items:center;justify-content:space-between;padding:0 16px;text-transform:capitalize}
+.dn button{font-size:30px;width:44px;height:44px;color:var(--ac)}
+.tabs{display:flex;gap:6px;margin:8px 16px;background:var(--card);padding:4px;border-radius:14px}
+.tabs button{flex:1;padding:10px;border-radius:10px;color:var(--mu)}
+.tabs .on{background:var(--ac);color:#fff}
+main{padding:8px 16px 40px;max-width:640px;margin:auto}
+.bar{height:8px;background:var(--card);border-radius:8px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.mu,.empty{color:var(--mu);margin:8px 0}
+h2{margin:20px 0 8px}
+h3{margin:18px 0 8px;color:var(--ac);font-size:15px}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;margin:8px 0}
+.row span{flex:1}.row small{color:var(--mu);font-size:12px}
+.row>button{font-size:18px;padding:6px}
+.box{width:42px;height:42px;border-radius:10px;border:2px solid var(--bd);font-size:22px;font-weight:700;color:#fff}
+.s1 .box{background:#22c55e;border-color:#22c55e}
+.s2 .box{background:#ef4444;border-color:#ef4444}
+.s1 span,.s2 span{opacity:.6}.s1 span{text-decoration:line-through}
+.chips,.g{display:flex;flex-wrap:wrap;gap:8px}
+.chip,.g button{padding:9px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--card)}
+.chip.on,.g .on{background:var(--ac);border-color:var(--ac);color:#fff}
+.pri{background:var(--ac);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600}
+.sec{border:1px solid var(--ac);color:var(--ac);padding:10px 14px;border-radius:12px;width:100%}
+form{display:grid;gap:8px;margin:8px 0}
+input,textarea{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;width:100%}
+.ov{position:fixed;inset:0;background:#0009}
+aside{position:fixed;top:0;bottom:0;left:0;width:min(86vw,340px);background:var(--bg);border-right:1px solid var(--bd);padding:calc(16px + env(safe-area-inset-top,0px)) 16px 24px;overflow:auto}
+.x{position:absolute;right:8px;top:calc(8px + env(safe-area-inset-top,0px));font-size:22px;color:var(--mu)}
+.sw{display:inline-block;width:38px;height:38px;border-radius:50%;margin:4px;border:3px solid transparent}
+.sw.on{border-color:var(--tx)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const $=s=>document.querySelector(s);
+const E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const K='mi-rutina-v1',AC=['#a855f7','#ef4444','#3b82f6','#22c55e','#f97316','#ec4899'];
+const DEF={
+Sueño:['Acostarme a las 21:00','Dormir 8 horas','Sin pantallas 1 hora antes de dormir','Levantarme a mi hora'],
+Comida:['Desayuno saludable','Comer verdura','Comer fruta','Sin comida basura','Sin refrescos','Cena ligera','Beber 2 litros de agua'],
+Ejercicio:['Hacer deporte','Caminar 30 minutos','Estirar','Flexiones y abdominales','Correr','Subir escaleras'],
+Salud:['Descansar un rato','Ducharme','Lavarme los dientes','Tomar el sol','Respirar 5 minutos'],
+Mente:['Meditar','Escribir un diario','Leer 20 minutos','Ver una película','Practicar un hobby'],
+Clase:['Hacer deberes','Estudiar','Repasar apuntes','Preparar la mochila','Entregar un trabajo'],
+Social:['Salir con amigos','Llamar a la familia','Planear algo','Ayudar en casa']};
+const mk=()=>{let i=0,t=[];for(const c in DEF)DEF[c].forEach(x=>t.push({id:'d'+i++,t:x,c}));return{tasks:t,plan:{},done:{}}};
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!S||!S.p)S={p:{Yo:mk()},cur:'Yo',theme:'dark',ac:AC[0]};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const P=()=>S.p[S.cur];
+const cats=p=>[...new Set(p.tasks.map(t=>t.c))];
+const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+let D=new Date(),tab='hoy',menu=0;
+const rel=()=>{const a=new Date();a.setHours(0,0,0,0);const b=new Date(D);b.setHours(0,0,0,0);return({'-1':'Ayer','0':'Hoy','1':'Mañana'})[Math.round((b-a)/864e5)]||''};
+
+function r(){
+const y=scrollY;
+document.documentElement.dataset.theme=S.theme;
+document.documentElement.style.setProperty('--ac',S.ac);
+const k=dk(D),p=P(),pl=p.plan[k]||[],dn=p.done[k]||{};
+const ts=pl.map(i=>p.tasks.find(t=>t.id===i)).filter(Boolean);
+const ok=ts.filter(t=>dn[t.id]===1).length;
+const tit=D.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
+let h=`<header><button data-a=menu aria-label="Menú">☰</button><div><b>${E(S.cur)}</b><small>${rel()}</small></div></header>
+<nav class=dn><button data-a=d data-v=-1 aria-label="Día anterior">‹</button><span>${tit}</span><button data-a=d data-v=1 aria-label="Día siguiente">›</button></nav>
+<nav class=tabs>${[['hoy','Hoy'],['elegir','Elegir'],['tareas','Tareas']].map(([a,b])=>`<button data-a=tab data-v=${a} class="${tab==a?'on':''}">${b}</button>`).join('')}</nav><main>`;
+if(tab=='hoy'){
+h+=`<div class=bar><i style="width:${ts.length?ok/ts.length*100:0}%"></i></div><p class=mu>${ok} de ${ts.length} hechas</p>`;
+h+=ts.length?ts.map(t=>`<div class="row s${dn[t.id]||0}"><button class=box data-a=chk data-v="${t.id}">${['','✓','✗'][dn[t.id]||0]}</button><span>${E(t.t)}</span><small>${E(t.c)}</small></div>`).join(''):`<p class=empty>No has elegido tareas para este día.</p><button class=pri data-a=tab data-v=elegir>Elegir tareas</button>`;
+}else if(tab=='elegir'){
+h+=`<p class=mu>Toca las tareas que quieres hacer este día.</p><button class=sec data-a=copy>Copiar el plan del día anterior</button>`;
+cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3><div class=chips>`+p.tasks.filter(t=>t.c==c).map(t=>`<button class="chip ${pl.includes(t.id)?'on':''}" data-a=sel data-v="${t.id}">${E(t.t)}</button>`).join('')+`</div>`});
+}else{
+h+=`<form id=f><input id=nt placeholder="Nueva tarea" required><input id=nc list=cl placeholder="Categoría" required><datalist id=cl>${cats(p).map(c=>`<option value="${E(c)}">`).join('')}</datalist><button class=pri>Añadir tarea</button></form>`;
+cats(p).forEach(c=>{h+=`<h3>${E(c)}</h3>`+p.tasks.filter(t=>t.c==c).map(t=>`<div class=row><span>${E(t.t)}</span><button data-a=ed data-v="${t.id}" aria-label="Editar">✎</button><button data-a=del data-v="${t.id}" aria-label="Borrar">🗑</button></div>`).join('')});
+}
+h+=`</main>`;
+if(menu)h+=`<div class=ov data-a=close></div><aside><button class=x data-a=close aria-label="Cerrar">✕</button>
+<h2>Perfil</h2><div class=g>${Object.keys(S.p).map(n=>`<button class="${n==S.cur?'on':''}" data-a=pf data-v="${E(n)}">${E(n)}</button>`).join('')}</div>
+<div class=g style="margin-top:8px"><button data-a=np>Nuevo</button><button data-a=rn>Renombrar</button><button data-a=dp>Eliminar</button></div>
+<h2>Ajustes</h2><h3>Tema</h3><div class=g><button class="${S.theme=='dark'?'on':''}" data-a=th data-v=dark>Oscuro</button><button class="${S.theme=='light'?'on':''}" data-a=th data-v=light>Claro</button></div>
+<h3>Color</h3>${AC.map(c=>`<button class="sw ${S.ac==c?'on':''}" style="background:${c}" data-a=ac data-v="${c}" aria-label="Color"></button>`).join('')}
+<h3>Compartir rutina</h3><div class=g><button data-a=exp>Copiar mi código</button></div>
+<textarea id=imp rows=3 placeholder="Pega aquí un código" style="margin:8px 0"></textarea><button class=pri data-a=imp>Importar</button>
+<h3>Datos</h3><button class=sec data-a=rst>Borrar todo</button></aside>`;
+$('#app').innerHTML=h;scrollTo(0,y);
+}
+
+function act(a,v){
+const p=P(),k=dk(D);
+if(a=='menu')menu=1;
+else if(a=='close')menu=0;
+else if(a=='d')D.setDate(D.getDate()+ +v);
+else if(a=='tab')tab=v;
+else if(a=='chk'){const d=p.done[k]=p.done[k]||{};const n=((d[v]||0)+1)%3;n?d[v]=n:delete d[v]}
+else if(a=='sel'){const l=p.plan[k]=p.plan[k]||[];const i=l.indexOf(v);i<0?l.push(v):l.splice(i,1)}
+else if(a=='copy'){const o=new Date(D);o.setDate(o.getDate()-1);p.plan[k]=[...(p.plan[dk(o)]||[])]}
+else if(a=='ed'){const t=p.tasks.find(x=>x.id==v),n=prompt('Editar tarea',t.t);if(n&&n.trim())t.t=n.trim();const c=prompt('Categoría',t.c);if(c&&c.trim())t.c=c.trim()}
+else if(a=='del'){if(confirm('¿Borrar esta tarea?'))p.tasks=p.tasks.filter(x=>x.id!=v)}
+else if(a=='th')S.theme=v;
+else if(a=='ac')S.ac=v;
+else if(a=='pf')S.cur=v;
+else if(a=='np'){const n=(prompt('Nombre del perfil')||'').trim();if(n&&!S.p[n]){S.p[n]=mk();S.cur=n}}
+else if(a=='rn'){const n=(prompt('Nuevo nombre',S.cur)||'').trim();if(n&&!S.p[n]){S.p[n]=S.p[S.cur];delete S.p[S.cur];S.cur=n}}
+else if(a=='dp'){if(Object.keys(S.p).length>1&&confirm('¿Eliminar el perfil '+S.cur+'?')){delete S.p[S.cur];S.cur=Object.keys(S.p)[0]}else if(Object.keys(S.p).length<2)alert('Necesitas al menos un perfil.')}
+else if(a=='exp'){const c=btoa(unescape(encodeURIComponent(JSON.stringify({n:S.cur,t:p.tasks.map(t=>[t.c,t.t])}))));
+if(navigator.clipboard)navigator.clipboard.writeText(c).then(()=>alert('Código copiado'),()=>prompt('Copia tu código',c));else prompt('Copia tu código',c)}
+else if(a=='imp'){try{const o=JSON.parse(decodeURIComponent(escape(atob($('#imp').value.trim()))));let n=o.n,i=2;while(S.p[n])n=o.n+' '+i++;const q=mk();q.tasks=o.t.map((x,j)=>({id:'i'+j,t:String(x[1]),c:String(x[0])}));S.p[n]=q;S.cur=n;alert('Perfil importado: '+n)}catch(e){alert('Ese código no es válido.')}}
+else if(a=='rst'){if(confirm('¿Borrar todos tus datos?')){try{localStorage.removeItem(K)}catch(e){}location.reload();return}}
+save();r();
+}
+
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.v)});
+document.addEventListener('submit',e=>{e.preventDefault();const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({id:'u'+Date.now(),t,c});save();r()}});
+r();
+</script>
+</body>
+</html>
