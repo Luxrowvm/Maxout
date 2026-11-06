@@ -90,6 +90,8 @@ main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
 .ch i{width:100%;background:var(--ac);border-radius:6px 6px 0 0;min-height:3px}.ch small{color:var(--mu)}
 .run{text-align:center;padding:20px 8px}.run small{color:var(--mu)}.big{display:block;font-size:28px;margin:8px 0}
 .tm{font-size:64px;font-weight:700;color:var(--ac);font-variant-numeric:tabular-nums;margin:10px 0}
+.ms{background:var(--card);border:1px solid var(--ac);border-radius:16px;padding:12px;margin:8px 0}.ms p{margin:6px 0 10px}.ms small{color:var(--mu)}
+.ems{font-size:26px;width:44px;height:44px;border-radius:12px;background:var(--bg)}
 </style>
 </head>
 <body>
@@ -233,7 +235,30 @@ const AD=`✅|Primer paso|Marca tu primera tarea|t|1
 🔟|Sesión larga|Completa un entrenamiento de 8 ejercicios o más|gx|8
 🥊|One Punch|?Ponle a una rutina el nombre del héroe calvo de One Punch Man|ee|1
 🌅|Madrugador|Termina un entrenamiento antes de las 8:00|eb|1
-🌙|Búho|Termina un entrenamiento después de las 21:00|en|1`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
+🌙|Búho|Termina un entrenamiento después de las 21:00|en|1
+🍿|Cinéfilo novato|Apunta 5 películas|fl|5
+🎞️|Videoclub|Apunta 25 películas|fl|25
+🎬|Programa doble|Marca 5 películas como vistas|fs|5
+🎥|Maratonista|Marca 25 películas como vistas|fs|25
+🏛️|Cinemateca|Marca 50 películas como vistas|fs|50
+⭐|Crítico|Puntúa 10 películas|fr|10
+🍥|Otaku en prácticas|Apunta 5 animes|al|5
+📺|Maratón de anime|Apunta 25 animes|al|25
+🎌|Primer anime visto|Marca 1 anime como visto|as|1
+🏯|Sensei del anime|Marca 10 animes como vistos|as|10
+🌸|Senpai|Marca 25 animes como vistos|as|25
+👀|Viendo ahora|Ten 3 títulos en Viendo a la vez|wn|3
+🎯|Misión cumplida|Cumple tu primera misión diaria|md|1
+🗡️|Misionero|Cumple 10 misiones diarias|md|10
+🛡️|Veterano de misiones|Cumple 30 misiones diarias|md|30
+🌍|Misión semanal|Cumple tu primera misión semanal|mw|1
+🏔️|Expedición|Cumple 5 misiones semanales|mw|5
+🐔|Cambio de planes|Cambia de misión 5 veces|mrr|5
+💍|Mi tesoro|?Apunta cierta película sobre un anillo|x1|1
+🔮|Kamehameha|?Apunta cierta saga de bolas de dragón|x2|1
+🍃|Dattebayo|?Apunta al ninja de la hoja|x3|1
+💊|Píldora roja|?Apunta cierta película de realidad simulada|x4|1
+🌑|Arise|?Apunta tu serie favorita de cazadores|x5|1`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
 
 const PC=`hat|Gorra|🧢||
 hat|Sombrero de paja|👒||
@@ -328,7 +353,15 @@ hand|Trofeo|🏆||6
 hand|Pesas|🏋️||112
 hand|Guantes de boxeo|🥊||114
 hand|Batido de proteínas|🥛||118
-neck|Toalla de gimnasio|🧻||113`.split('\n').map(l=>{const a=l.split('|');return{s:a[0],n:a[1],e:a[2],c:a[3],a:a[4]===''?null:+a[4]}});
+neck|Toalla de gimnasio|🧻||113
+hat|Banda de Konoha|🍥||147
+hat|Monarca de las Sombras|🌑||149
+neck|Anillo único|💍||145
+neck|Estrella de crítico|⭐||132
+shirt|Gabardina de realidad virtual|🕶️|#0a0a0a|148
+hand|Esfera de dragón|🟠||146
+hand|Entrada de cine|🎟️||129
+hand|Brújula de aventurero|🧭||139`.split('\n').map(l=>{const a=l.split('|');return{s:a[0],n:a[1],e:a[2],c:a[3],a:a[4]===''?null:+a[4]}});
 const SL=[['hat','🎩 Cabeza'],['neck','📿 Cuello'],['shirt','👕 Camisa'],['pants','👖 Pantalón'],['shoes','👟 Zapatos'],['hand','✋ Mano']],FUR=['#c08457','#8b5a2b','#6b7280','#f5c26b','#3f3f46','#ef9a9a'];
 const BG={gym:`<path d='M14 28v8M20 24v16M20 32h24M44 24v16M50 28v8' stroke='@' stroke-width='3' fill='none' stroke-linecap='round'/>`,hoy:`<path d='M32 22l2.5 7.5 7.5 2.5-7.5 2.5L32 42l-2.5-7.5L22 32l7.5-2.5z' fill='@'/>`,saru:`<path d='M14 30q0-14 14-14 0 14-14 14zM44 52q0-12 12-12 0 12-12 12z' fill='@'/><circle cx='48' cy='18' r='3' fill='@'/>`,notas:`<path d='M0 21h64M0 42h64' stroke='@' fill='none'/><circle cx='10' cy='10' r='2' fill='@'/>`,stats:`<path d='M32 12l16 9v19l-16 9-16-9V21z' fill='none' stroke='@' stroke-width='1.5'/>`};
 const bgi=col=>{const c=`hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)`;return`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'>${BG[scr].replace(/@/g,c)}</svg>`)}")`};
@@ -371,10 +404,10 @@ return`<main><div class="sw2 ${an}" data-a=pet>${svg(p,s,g)}</div><p class=say>$
 <h3>👕 Armario · ${s.pw}/${PC.length}</h3><div class=g>${SL.map(([k,n])=>`<button class="${wt==k?'on':''}" data-a=wt data-v=${k}>${n}</button>`).join('')}</div>
 <div class=wg style="margin-top:10px">${PC.map((c,i)=>{const own=c.a===null||p.ach[c.a];return c.s!=wt?'':`<button class="pcard ${z.eq[c.s]==i?'on':''} ${own?'':'lk'}" data-a=eqp data-v=${i}><span style="${c.c?`background:${c.c};border-radius:50%`:''}">${c.e}</span><small>${E(c.n)}</small>${own?'':`<small>🔒 ${E(AD[c.a].n)}</small>`}</button>`}).join('')}</div></main>`},
 notas:p=>{p.notes=p.notes||[];p.shop=p.shop||[];
-return`<main><div class=tabs style="margin:0 0 8px"><button data-a=nv data-v=idea class="${nv=='idea'?'on':''}">💡 Ideas</button><button data-a=nv data-v=compra class="${nv=='compra'?'on':''}">🛒 Compra</button></div>`+(nv=='idea'?`<form id=nf><textarea id=nx rows=3 placeholder="Escribe una idea…" required></textarea><button class=pri>Guardar nota</button></form>`+p.notes.map((n,i)=>`<div class=row><span style="white-space:pre-wrap">${E(n)}</span><button data-a=dnote data-v=${i} aria-label="Borrar">🗑</button></div>`).join(''):`<form id=sf><input id=sx placeholder="Añadir a la compra" required><button class=pri>Añadir</button></form>`+p.shop.map((x,i)=>`<div class="row s${x.d?1:0}"><button class=box data-a=sd data-v=${i}>${x.d?'✓':''}</button><span>${E(x.t)}</span><button data-a=ds data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')+(p.shop.some(x=>x.d)?`<button class=sec data-a=cs>Quitar lo comprado</button>`:''))+`</main>`},
+return`<main><div class=tabs style="margin:0 0 8px"><button data-a=nv data-v=idea class="${nv=='idea'?'on':''}">💡 Ideas</button><button data-a=nv data-v=compra class="${nv=='compra'?'on':''}">🛒 Compra</button><button data-a=nv data-v=film class="${nv=='film'?'on':''}">🎬 Pelis</button><button data-a=nv data-v=anime class="${nv=='anime'?'on':''}">🍥 Anime</button></div>`+(nv=='film'||nv=='anime'?LS(p):nv=='idea'?`<form id=nf><textarea id=nx rows=3 placeholder="Escribe una idea…" required></textarea><button class=pri>Guardar nota</button></form>`+p.notes.map((n,i)=>`<div class=row><span style="white-space:pre-wrap">${E(n)}</span><button data-a=dnote data-v=${i} aria-label="Borrar">🗑</button></div>`).join(''):`<form id=sf><input id=sx placeholder="Añadir a la compra" required><button class=pri>Añadir</button></form>`+p.shop.map((x,i)=>`<div class="row s${x.d?1:0}"><button class=box data-a=sd data-v=${i}>${x.d?'✓':''}</button><span>${E(x.t)}</span><button data-a=ds data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')+(p.shop.some(x=>x.d)?`<button class=sec data-a=cs>Quitar lo comprado</button>`:''))+`</main>`},
 stats:(p,s)=>{const A=[['💪 Fuerza',(s.cEjercicio||0)+s.gw*2],['🧠 Mente',(s.cMente||0)+(s.cClase||0)],['❤️ Vitalidad',(s.cSueño||0)+(s.cComida||0)+(s.cSalud||0)],['🎭 Carisma',s.cSocial||0],['🔥 Disciplina',s.b*3]],M=Math.max(1,...A.map(a=>a[1]));
 const ds=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return[d.toLocaleDateString('es-ES',{weekday:'narrow'}),Object.values(p.done[dk(d)]||{}).filter(v=>v==1).length]}),dm=Math.max(1,...ds.map(x=>x[1]));
-const T=[['Nivel',s.l],['XP',s.x],['Racha',s.cur],['Mejor racha',s.b],['Tareas hechas',s.t],['Días activos',s.dy],['Días redondos',s.p],['Logros',s.ac+'/'+AD.length],['Piezas',s.pw+'/'+PC.length],['Notas',s.nt],['Entrenos',s.gw]];
+const T=[['Nivel',s.l],['XP',s.x],['Racha',s.cur],['Mejor racha',s.b],['Tareas hechas',s.t],['Días activos',s.dy],['Días redondos',s.p],['Logros',s.ac+'/'+AD.length],['Piezas',s.pw+'/'+PC.length],['Notas',s.nt],['Entrenos',s.gw],['Misiones',s.md+s.mw],['Pelis vistas',s.fs],['Animes vistos',s.as]];
 return`<main><div class=sg>${T.map(([a,b])=>`<div class=sc><b>${b}</b><small>${a}</small></div>`).join('')}</div><h3>⚔️ Atributos</h3>${A.map(([n,v])=>`<div class=at><span>${n}</span><div class=bar><i style="width:${v/M*100}%"></i></div><b>${v}</b></div>`).join('')}<h3>📅 Últimos 7 días</h3><div class=ch>${ds.map(([n,v])=>`<div><i style="height:${v/dm*100}%"></i><small>${n}</small></div>`).join('')}</div></main>`}};
 const mk=()=>{let i=0,t=[];for(const c in DEF)DEF[c].forEach(x=>t.push({id:'d'+i++,t:x,c}));return{tasks:t,plan:{},done:{},ach:{},pen:0,pg:0,lv:1,rkk:0}};
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
@@ -388,7 +421,7 @@ const P=()=>S.p[S.cur];
 const cats=p=>[...new Set(p.tasks.map(t=>t.c))];
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const dn=k=>Date.parse(k)/864e5,td=()=>dk(new Date());
-let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='',gv='list',ge=null,W=null,tmr=0;
+let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='',gv='list',ge=null,W=null,tmr=0,lfl='all';
 const rel=()=>{const a=new Date();a.setHours(0,0,0,0);const b=new Date(D);b.setHours(0,0,0,0);return({'-1':'Ayer','0':'Hoy','1':'Mañana'})[Math.round((b-a)/864e5)]||''};
 
 function st(p){
@@ -407,9 +440,10 @@ let run=0;ds.forEach((k,i)=>{run=i&&dn(k)-dn(ds[i-1])==1?run+1:1;o.b=Math.max(o.
 o.run=run;o.dy=ds.length;o.last=ds[ds.length-1]||null;
 o.cur=o.last&&dn(td())-dn(o.last)<=1?run:0;
 return o}
-const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25+(p.gw||0)*20;
+const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25+(p.gw||0)*20+seen(p)*10+(p.md||0)*25+(p.mw||0)*60;
 function fs(p){const s=st(p);s.x=Math.max(0,base(p,s)-p.pen);s.l=LV(s.x);s.rk=RL.filter(v=>s.l>=v).length-1;
-s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;s.tp=S.taps||0;s.pm=Math.max(0,...Object.values(p.plan).map(a=>a.length));s.nc=cats(p).length;s.tk=p.tasks.length;s.ac=Object.keys(p.ach).length;s.bio=p.bio?1:0;s.pic=p.pic?1:0;s.fx=p.fx?1:0;s.fd=p.fd||0;s.wc=p.wc||0;s.pl=p.pl||0;s.nt=p.nw||0;s.pw=PC.filter(c=>c.a===null||p.ach[c.a]).length;s.gw=p.gw||0;s.gm=p.gm||0;s.gx=p.gx||0;s.tm=p.tm||0;s.eb=p.eb||0;s.en=p.en||0;s.ee=p.ee||0;s.gr=p.gym?p.gym.rs.filter(x=>x.id[0]=='u').length:0;s.fu=SL.every(([k])=>p.sr&&p.sr.eq[k]!=null)?1:0;return s}
+s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;s.tp=S.taps||0;s.pm=Math.max(0,...Object.values(p.plan).map(a=>a.length));s.nc=cats(p).length;s.tk=p.tasks.length;s.ac=Object.keys(p.ach).length;s.bio=p.bio?1:0;s.pic=p.pic?1:0;s.fx=p.fx?1:0;s.fd=p.fd||0;s.wc=p.wc||0;s.pl=p.pl||0;s.nt=p.nw||0;s.pw=PC.filter(c=>c.a===null||p.ach[c.a]).length;s.gw=p.gw||0;s.gm=p.gm||0;s.gx=p.gx||0;s.tm=p.tm||0;s.eb=p.eb||0;s.en=p.en||0;s.ee=p.ee||0;s.gr=p.gym?p.gym.rs.filter(x=>x.id[0]=='u').length:0;
+{const F=p.films||[],A=p.anime||[],T=[...F,...A].map(x=>x.t).join('|');s.fl=F.length;s.fs=F.filter(x=>x.st=='v').length;s.fr=F.filter(x=>x.r>0).length;s.al=A.length;s.as=A.filter(x=>x.st=='v').length;s.wn=[...F,...A].filter(x=>x.st=='w').length;s.md=p.md||0;s.mw=p.mw||0;s.mrr=p.mrr||0;s.x1=/anillos|lord of the rings/i.test(T)?1:0;s.x2=/dragon ?ball/i.test(T)?1:0;s.x3=/naruto/i.test(T)?1:0;s.x4=/matrix/i.test(T)?1:0;s.x5=/solo leveling/i.test(T)?1:0}s.fu=SL.every(([k])=>p.sr&&p.sr.eq[k]!=null)?1:0;return s}
 function dec(p,pop){const s=st(p);if(!s.last)return;const g=dn(td())-dn(s.last)-1;
 if(g<=0){p.pg=0;return}
 if(g>p.pg){const x0=Math.max(0,base(p,s)-p.pen);
@@ -447,6 +481,7 @@ let h=`<header><button data-a=menu aria-label="Menú">☰</button>${p.pic?`<img 
 <nav class=dn><button data-a=d data-v=-1 aria-label="Día anterior">‹</button><span>${tit}</span><button data-a=d data-v=1 aria-label="Día siguiente">›</button></nav>
 <nav class=tabs>${[['hoy','Hoy'],['elegir','Elegir'],['tareas','Tareas'],['logros','Logros']].map(([a,b])=>`<button data-a=tab data-v=${a} class="${tab==a?'on':''}">${b}</button>`).join('')}</nav><main>`;
 if(tab=='hoy'){
+h+=mcard(p);
 h+=`<div class=bar><i style="width:${ts.length?ok/ts.length*100:0}%"></i></div><p class=mu>${ok} de ${ts.length} hechas · cada tarea suma 10 XP</p>`;
 h+=ts.length?ts.map(t=>`<div class="row s${dd[t.id]||0}"><button class=box data-a=chk data-v="${t.id}">${['','✓','✗'][dd[t.id]||0]}</button><span>${E(t.t)}</span><small>${E(t.c)}</small></div>`).join(''):`<p class=empty>No has elegido tareas para este día.</p><button class=pri data-a=tab data-v=elegir>Elegir tareas</button>`;
 }else if(tab=='elegir'){
@@ -473,6 +508,87 @@ if(menu)h+=drawer(p,s,col);if(0)h+=`<div class=ov data-a=close></div><aside><but
 $('#app').innerHTML=h;scrollTo(0,y);
 }
 
+const seen=p=>[...(p.films||[]),...(p.anime||[])].filter(x=>x.st=='v').length;
+const hs=s=>{let h=7;for(const c of s)h=Math.imul(h,31)+c.charCodeAt(0)|0;return Math.abs(h)};
+const MD=['Escucha un opening de anime y baila la canción entera.','Habla hoy con alguien con quien casi nunca hablas.','Aprende 5 palabras en japonés y úsalas hoy.','Haz 10 minutos de ejercicio a una hora a la que nunca entrenas.','Mira el tráiler de una película que normalmente no verías.','Escribe en Notas 3 ideas locas para tu próximo fin de semana.','Prepara algo de comer que nunca hayas probado.','Pasea 15 minutos sin móvil ni música.','Dibuja a tu personaje favorito, aunque sea un garabato.','Haz una pose de héroe durante 2 minutos antes de empezar el día.','Reta a un amigo a una mini competición de flexiones o plancha.','Escribe una reseña de 3 líneas de la última película que viste.','Haz tres cosas amables por alguien hoy.'];
+const MW=['Mira una película de un país del que nunca hayas visto cine.','Empieza un anime nuevo y ve al menos 3 episodios.','Prueba un deporte o actividad que nunca hayas hecho.','Entrena en un lugar nuevo: un parque, la playa u otra sala.','Haz una noche de peli con un amigo y comentadla después.','Aprende un movimiento nuevo: calistenia, baile o artes marciales.','Escribe en Notas el guion de una escena de una página.','Cambia una rutina de tu semana por una completamente distinta.'];
+const MP=`d|corr|caminar|sombra|En vez de tu cardio de siempre, haz intervalos: 1 minuto rápido y 1 lento, 8 veces.
+d|corr|caminar|Cambia hoy tu ruta de siempre y descubre una calle nueva.
+d|estudi|deber|repasar|apunt|Estudia en bloques de 25 minutos con 5 de descanso y explícale lo aprendido a Saru en voz alta.
+d|leer|manga|Lee 10 páginas de un género que nunca lees.
+d|medit|respir|diario|Haz 5 minutos de silencio total, sin móvil, y escribe una frase sobre cómo te sientes.
+d|dormir|acost|pantalla|Antes de dormir, cambia el móvil por un manga o un libro durante 15 minutos.
+d|comer|desayuno|fruta|verdura|cena|Prueba hoy una fruta o verdura que nunca comes.
+d|pelicula|película|Ve hoy una película que se estrenó antes del año 2000.
+d|flexion|abdom|plancha|estir|ejerc|deport|gimnas|Reto sorpresa: 50 repeticiones de tu ejercicio favorito repartidas durante el día.
+d|salir|amigos|llamar|familia|Propón a alguien un plan nuevo en lugar del de siempre.
+w|deport|ejerc|corr|gimnas|flexion|Reto de 5 días: un ejercicio nuevo cada día.
+w|estudi|deber|clase|Crea un resumen visual de un tema y enséñaselo a alguien.
+w|leer|manga|Termina un tomo o un libro que lleves aparcado.`.split('\n').map(l=>{const a=l.split('|');return{w:a[0],r:new RegExp(a.slice(1,-1).join('|')),t:a[a.length-1]}});
+function mpick(p,w,key,x=''){const nm=p.tasks.map(t=>t.t.toLowerCase()).join(' '),c=MP.filter(m=>m.w==w&&m.r.test(nm)).map(m=>m.t),a=[...c,...c,...(w=='d'?MD:MW)];return a[hs(S.cur+p.ms.salt+key+x+w)%a.length]}
+function mstate(p){const m=p.ms=p.ms||{salt:Math.random()*1e9|0},k=td(),w=new Date();w.setDate(w.getDate()-(w.getDay()+6)%7);const wk=dk(w);let ch=0;
+if(!m.d||m.d.k!=k){m.d={k,t:mpick(p,'d',k),done:0,rr:0};ch=1}
+if(!m.w||m.w.k!=wk){m.w={k:wk,t:mpick(p,'w',wk),done:0,rr:0};ch=1}
+if(ch)save();return m}
+function mcard(p){if(dk(D)!=td())return'';const m=mstate(p),c=(x,w,xp)=>`<div class=ms><b>${w=='d'?'🎯 Misión del día':'🗓️ Misión de la semana'} · +${xp} XP</b><p>${E(x.t)}</p>${x.done?'<small>✅ Cumplida</small>':`<div class=g><button class=pri data-a=${w=='d'?'mdn':'mwk'}>✓ Hecha</button>${x.rr?'':`<button data-a=${w=='d'?'mrd':'mrw'}>🔄 Otra</button>`}</div>`}</div>`;return c(m.d,'d',25)+c(m.w,'w',60)}
+function mre(p,w){const m=mstate(p)[w];if(m.done||m.rr)return;const o=m.t;m.rr=1;for(let i=1;i<7&&m.t==o;i++)m.t=mpick(p,w,m.k,'r'+i);p.mrr=(p.mrr||0)+1}
+function mok(p,w){const m=mstate(p)[w];if(m.done)return;m.done=1;if(w=='d'){p.md=(p.md||0)+1;toast('🎯','¡Misión cumplida!','+25 XP')}else{p.mw=(p.mw||0)+1;toast('🗓️','¡Misión semanal cumplida!','+60 XP')}}
+const EM=`tibur|shark|jaws=🦈
+mountain|montañ=⛰️
+ocean|océano|oceano|mar de=🌊
+espada|samur|katana|sword|kenshin|demon slayer=⚔️
+robot|mecha|gundam|evangelion|transformers=🤖
+espacio|galax|star|estrella|interstellar|alien|extraterr=🚀
+guerra|war|soldado|batalla=🪖
+amor|love|romance|your name|kimi=💘
+terror|horror|miedo|conjuring=👻
+comedia|risa=😂
+dragon|dragón=🐉
+ninja|naruto=🥷
+pirata|one piece|barco=🏴‍☠️
+futbol|fútbol|soccer|haikyu|blue lock=⚽
+basket|slam dunk=🏀
+box|rocky|punch|hajime=🥊
+carrera|coche|rápidos|furious|initial d=🏎️
+avión|vuelo|top gun|porco=✈️
+zombi|walking dead|busan=🧟
+vampiro|drácula=🧛
+lobo|wolf=🐺
+gato|cat=🐱
+perro|dog=🐶
+mono|simio|kong|apes=🦍
+dinosaurio|jurassic=🦖
+batman|spider|araña|marvel|vengadores|avengers|superman|héroe|hero academia=🦸
+tiempo|time|futuro|back to=⏳
+sueño|inception|paprika=💭
+matrix=🕶️
+desierto|dune=🏜️
+nieve|frozen|hielo|invierno=❄️
+fuego|fire=🔥
+bosque|forest|ghibli|totoro|mononoke=🌲
+flor|flower|sakura=🌸
+muerte|death=💀
+detective|crimen|asesin|conan|sherlock=🕵️
+ladrón|heist|robo=💰
+cocina|ratat|shokugeki=🍳
+música|musical|canción|whiplash=🎵
+baile|dance=💃
+escuela|instituto|school|classroom=🏫
+doctor|hospital=🩺
+juego|game|squid=🎮
+bruja|witch|kiki=🧙
+rey|reino|king|lion=👑
+anillos|rings|hobbit=💍
+solo leveling|cazador|hunter=🗡️
+demonio|demon|devil=😈
+isla|island=🏝️
+tren|train=🚆
+luna|moon|sailor=🌙`.split('\n').map(l=>{const a=l.split('=');return[new RegExp(a[0],'i'),a[1]]});
+const emo=(t,k)=>{for(const[r,e]of EM)if(r.test(t))return e;return k=='anime'?'🍥':'🎬'};
+function LS(p){const k=nv=='film'?'films':'anime',L=p[k]=p[k]||[],ST3={p:'📌',w:'👀',v:'✅'};
+return`<form id=lsf><input id=lx placeholder="${nv=='film'?'Título de la película':'Título del anime'}" required><button class=pri>Añadir</button></form>
+<div class=g style="margin:8px 0">${[['all','Todo'],['p','📌 Por ver'],['w','👀 Viendo'],['v','✅ Vistas']].map(([a,b])=>`<button class="${lfl==a?'on':''}" data-a=lfl data-v=${a}>${b}</button>`).join('')}</div>
+${L.map((x,i)=>lfl=='all'||x.st==lfl?`<div class=row><button class=ems data-a=lem data-v=${i} aria-label="Emoji">${x.e}</button><div style="flex:1"><b>${E(x.t)}</b></div><button data-a=lst data-v=${i} aria-label="Estado">${ST3[x.st]}</button><button data-a=lrt data-v=${i} aria-label="Nota">${x.r?'★'+x.r:'☆'}</button><button data-a=ldl data-v=${i} aria-label="Borrar">🗑</button></div>`:'').join('')||'<p class=empty>Aún no hay nada aquí.</p>'}`}
 const fm2=t=>Math.floor(t/60)+':'+String(t%60).padStart(2,'0');
 function setT(n){W.t=n;W.end=Date.now()+n*1000;if(!tmr)tmr=setInterval(tick,400)}
 function beep(){try{const a=new(window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator();o.connect(a.destination);o.frequency.value=880;o.start();setTimeout(()=>o.stop(),350)}catch(e){}try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}}
@@ -525,6 +641,15 @@ else if(a=='hc'){S.base='color';S.h=+v}
 else if(a=='pn'){const n=(prompt('Nombre de tu mascota',S.pet)||'').trim();if(n)S.pet=n}
 else if(a=='rr'){const n=(prompt('Nombre del rango',S.rk[v])||'').trim();if(n)S.rk[v]=n}
 else if(a=='pf')S.cur=v;
+else if(a=='mdn')mok(p,'d');
+else if(a=='mwk')mok(p,'w');
+else if(a=='mrd')mre(p,'d');
+else if(a=='mrw')mre(p,'w');
+else if(a=='lfl')lfl=v;
+else if(a=='lem'){const x=p[nv=='film'?'films':'anime'][+v],n=(prompt('Emoji para '+x.t,x.e)||'').trim();if(n)x.e=n}
+else if(a=='lst'){const x=p[nv=='film'?'films':'anime'][+v];x.st={p:'w',w:'v',v:'p'}[x.st]}
+else if(a=='lrt'){const x=p[nv=='film'?'films':'anime'][+v];x.r=((x.r||0)+1)%6}
+else if(a=='ldl'){if(confirm('¿Quitar de la lista?'))p[nv=='film'?'films':'anime'].splice(+v,1)}
 else if(a=='gs'){const R=gy(p).rs.find(x=>x.id==v);if(!R||!R.ex.length){alert('Añade ejercicios a la rutina primero.');return}W={rid:v,ei:0,si:0,ph:'w',st:Date.now(),t:0,end:0};p.tm=(p.tm||0)+1;if(R.ex[0].d)setT(R.ex[0].d)}
 else if(a=='gdone'||a=='gskip'){if(W&&W.rid){if(W.ph=='r')wgo();else wnext(p)}}
 else if(a=='gend'){if(confirm('¿Cancelar?'))W=null}
@@ -570,6 +695,7 @@ q.rkk=s.rk;save();r();
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.v)});
 document.addEventListener('submit',e=>{e.preventDefault();
+if(e.target.id=='lsf'){const t=$('#lx').value.trim();if(t){const p=P(),k=nv=='film'?'films':'anime';(p[k]=p[k]||[]).unshift({t,e:emo(t,nv),st:'p',r:0});chk();save();r()}return}
 if(e.target.id=='gf'){const n=$('#gn').value.trim();if(n){const p=P(),G=gy(p);G.rs.push({id:'u'+Date.now(),n,ex:[]});if(/saitama|one punch/i.test(n))p.ee=1;ge=G.rs[G.rs.length-1].id;chk();save();r()}return}
 if(e.target.id=='nf'){const t=$('#nx').value.trim();if(t){const p=P();(p.notes=p.notes||[]).unshift(t);p.nw=(p.nw||0)+1;chk();save();r()}return}
 if(e.target.id=='sf'){const t=$('#sx').value.trim();if(t){const p=P();(p.shop=p.shop||[]).push({t,d:0});save();r()}return}
