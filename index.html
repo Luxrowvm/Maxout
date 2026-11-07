@@ -165,6 +165,16 @@ main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
 .slots .on{background:#3b6cff;border-color:#7da2ff;box-shadow:0 0 0 2px #3b6cff55}
 .arm .pcard{background:#1d2140;border-color:#2e3558;color:#e8e8ff}.arm .pcard small{color:#9aa3d6}.arm .pcard.on{border-color:#7da2ff;box-shadow:0 0 0 2px #3b6cff}
 .arm .g button{background:#1d2140;border-color:#2e3558;color:#e8e8ff}
+.lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;max-width:250px;margin:10px auto}
+.gcell{aspect-ratio:1;font-size:26px;display:flex;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--bd);border-radius:12px;cursor:default}
+button.gcell{cursor:pointer}.gcell.ob{background:#7c2d1222}
+.clue{font-size:34px;text-align:center;letter-spacing:4px;margin:10px 0}
+.ansg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ans{padding:10px 6px;border-radius:12px;background:var(--bg);border:1px solid var(--bd);font-size:14px}
+.ans.ok{background:#16a34a;color:#fff;border-color:#16a34a}.ans.bad{background:#dc2626;color:#fff;border-color:#dc2626}
+.trk{position:relative;height:40px;background:var(--bg);border:1px solid var(--bd);border-radius:12px;margin:16px 0;overflow:hidden}
+.zone1{position:absolute;left:38%;width:24%;top:0;bottom:0;background:#22c55e33}.zone2{position:absolute;left:46%;width:8%;top:0;bottom:0;background:#22c55e88}
+.mk{position:absolute;top:-4px;bottom:-4px;width:6px;margin-left:-3px;background:var(--ac);border-radius:4px}
+.xtra{margin:8px 0}.xtra summary{cursor:pointer;list-style:none;padding:12px 14px;background:var(--card);border:1px solid var(--bd);border-radius:14px;font-weight:600}.xtra summary::-webkit-details-marker{display:none}.xtra[open] summary{margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -785,6 +795,31 @@ const SCENE=`<svg class="scn" viewBox="0 0 400 300" preserveAspectRatio="xMidYMi
 <g><circle cx="52" cy="150" r="16" fill="#fbbf24" opacity=".22"/><rect x="46" y="142" width="12" height="16" rx="3" fill="#fbbf24"/><circle cx="330" cy="180" r="14" fill="#fbbf24" opacity=".2"/><rect x="324" y="172" width="12" height="16" rx="3" fill="#fbbf24"/><circle cx="150" cy="168" r="12" fill="#fbbf24" opacity=".2"/><rect x="145" y="161" width="10" height="14" rx="3" fill="#fbbf24"/></g>
 <g fill="#3b2a5c" opacity=".9"><ellipse cx="20" cy="200" rx="40" ry="26"/><ellipse cx="385" cy="196" rx="44" ry="28"/><ellipse cx="130" cy="210" rx="30" ry="18"/></g>
 <path d="M0 232Q200 212 400 234V300H0Z" fill="#120d26"/><ellipse cx="200" cy="262" rx="150" ry="16" fill="#2d2250" opacity=".7"/></svg>`;
+let AC0=null;function sfx(f,d){try{AC0=AC0||new(window.AudioContext||window.webkitAudioContext)();const o=AC0.createOscillator(),g=AC0.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(AC0.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,AC0.currentTime+d);o.stop(AC0.currentTime+d)}catch(e){}}
+const EQ=[['🦖🏝️','Parque Jurásico'],['🦈🌊','Tiburón'],['🦇🌃','Batman'],['💍🌋','El Señor de los Anillos'],['🍥🍜🥷','Naruto'],['⚔️👹','Guardianes de la noche'],['🗡️📈','Solo Leveling'],['🏀🔥','Slam Dunk'],['🧊👑','Frozen'],['🤖🔁','Terminator'],['🐠🔍','Buscando a Nemo'],['🦁👑','El Rey León'],['👽📞','E.T.'],['🕷️🕸️','Spider-Man'],['🏴‍☠️👒','One Piece'],['🐉🔥','Dragon Ball']];
+const NGI={run:380,leaf:700,rhy:40};
+const shuf=a=>[...a].sort(()=>Math.random()-.5);
+function ginit(v){if(v=='run')return{l:1,rows:[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],d:0,over:0};
+if(v=='leaf')return{t:30,it:[],n:0,bad:0,id:1,over:0};
+if(v=='rhy')return{pos:0,sp:2,dir:1,taps:0,sc:0,msg:'',over:0};
+if(v=='emo')return{q:shuf(EQ).slice(0,8).map(([c,a])=>({c,a,o:shuf([a,...shuf(EQ.filter(x=>x[1]!=a)).slice(0,3).map(x=>x[1])])})),i:0,sc:0,ch:null,over:0}}
+function endG(mode){clearInterval(gtm);gtm=0;const G=G2,p=P();if(!G||G.over)return;G.over=1;
+const pts=mode=='run'?Math.min(15,Math.floor(G.d/4)):mode=='leaf'?Math.min(15,G.n):mode=='rhy'?Math.min(15,G.sc):Math.min(15,G.sc*2);
+p.gbest=p.gbest||{};p.gbest[mode]=Math.max(p.gbest[mode]||0,pts);p.mgp=(p.mgp||0)+1;mgx(p,pts);save();r()}
+function paintG(){const el=$('#ln'),G=G2;if(!el||!G)return;
+if(gmode=='run')el.innerHTML=G.rows.map((row,ri)=>row.map((c,ci)=>`<div class="gcell${c?' ob':''}">${ri==5&&ci==G.l?'🐒':c?'🧱':''}</div>`).join('')).join('');
+else if(gmode=='leaf')el.innerHTML=[...Array(15)].map((_,i)=>{const x=i%3,y=i/3|0,it=G.it.find(a=>a.x==x&&a.y==y);return it?`<button class=gcell data-a=lft data-v=${it.id}>${it.e}</button>`:'<div class=gcell></div>'}).join('')}
+function gguard(){if(scr!='saru'){clearInterval(gtm);gtm=0;return true}return false}
+function rtick(){if(gguard())return;const G=G2;if(!G||G.over)return;G.d++;G.rows.pop();const r0=Math.random()*3|0,row=[0,0,0];row[r0]=1;if(Math.random()<.35)row[(r0+1+(Math.random()*2|0))%3]=1;G.rows.unshift(row);
+if(G.rows[5][G.l]){sfx(160,.35);endG('run');return}paintG()}
+function ltick(){if(gguard())return;const G=G2;if(!G||G.over)return;G.t=Math.round((G.t-.7)*10)/10;G.it.forEach(x=>x.y++);G.it=G.it.filter(x=>x.y<5);
+if(Math.random()<.85){const x=Math.random()*3|0;if(!G.it.some(i=>i.y==0&&i.x==x))G.it.push({id:G.id++,x,y:0,e:Math.random()<.6?'🎋':'🍂'})}
+if(G.t<=0){endG('leaf');return}paintG()}
+function lt(id){const G=G2;if(!G||G.over)return;const it=G.it.find(x=>x.id==id);if(!it)return;G.it=G.it.filter(x=>x!=it);if(it.e=='🎋'){G.n++;sfx(880,.08)}else{G.bad++;sfx(180,.2);if(G.bad>=3){endG('leaf');return}}paintG()}
+function htick(){if(gguard())return;const G=G2;if(!G||G.over)return;const now=Date.now(),kk=Math.min(3,(now-(G.last||now))/40);G.last=now;G.pos+=G.dir*G.sp*kk;if(G.pos>=100){G.pos=100;G.dir=-1}if(G.pos<=0){G.pos=0;G.dir=1}const m=$('#hm');if(m&&m.style)m.style.left=G.pos+'%'}
+function ht(){const G=G2;if(!G||G.over)return;const d=Math.abs(G.pos-50);let pts=0;if(d<=4){pts=3;G.msg='¡Perfecto! +3'}else if(d<=12){pts=1;G.msg='Bien +1'}else G.msg='Fallo';sfx(pts?(pts==3?988:660):160,.15);G.sc+=pts;G.taps++;G.sp=Math.min(6,2+G.taps*.35);if(G.taps>=10){endG('rhy');return}r()}
+function ec(v){const G=G2;if(!G||G.over||G.ch!=null)return;const q=G.q[G.i];G.ch=v;if(q.o[v]==q.a)G.sc++;r();
+setTimeout(()=>{if(scr!='saru'||G2!==G)return;G.i++;G.ch=null;if(G.i>=G.q.length){endG('emo');return}r()},1100)}
 const HS=(a,j,p)=>a.d[0]=='?'&&!p.ach[j];
 const gy=p=>p.gym=p.gym||{rs:[
 {id:'r0',n:'Empuje',ex:[{n:'Flexiones',s:3,r:12,d:0,p:60},{n:'Fondos en silla',s:3,r:10,d:0,p:60},{n:'Pike push-ups',s:3,r:8,d:0,p:60},{n:'Plancha',s:3,r:0,d:40,p:45}]},
@@ -812,7 +847,7 @@ return`<main><div class=scn-w>${SCENE}<div class="sw3 ${cl}" data-a=pet>${svg(p,
 <h3>✨ Animaciones</h3><div class=anrow>${[['wave','👋','Saludar'],['dance','💃','Bailar'],['flex','💪','Flexionar'],['love','🤗','Mimar'],['happy','😄','Feliz']].map(([a,i,n])=>`<button data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
 <h3>🍽️ Alimentar · saciedad ${fp}%</h3><div class=bar><i style="width:${fp}%"></i></div><p class=mu>${fav?'Su comida favorita: '+fav[0]+' '+fav[1]:'Prueba distintas comidas para descubrir su favorita.'}</p>
 <div class=g>${FD.map((x,i)=>`<button data-a=food data-v=${i}>${x[0]} ${x[1]}</button>`).join('')}</div>
-<h3>🎮 Mini juegos</h3><div class=g>${[['ban','🍌 Atrapa plátanos'],['rps','✊ Piedra, papel o tijera'],['mem','🧠 Memoria']].map(([a,b])=>`<button class="${gmode==a?'on':''}" data-a=mg data-v=${a}>${b}</button>`).join('')}</div>${gpanel(p)}
+<h3>🎮 Mini juegos</h3><div class=g>${[['ban','🍌 Atrapa plátanos'],['rps','✊ Piedra, papel o tijera'],['mem','🧠 Memoria'],['run','🐒 Carrera de monos'],['emo','🎬 Adivina el emoji'],['leaf','🍃 Ninja de hojas'],['rhy','🥁 Dojo de ritmo']].map(([a,b])=>`<button class="${gmode==a?'on':''}" data-a=mg data-v=${a}>${b}</button>`).join('')}</div>${gpanel(p)}
 <h3>🧬 Cuerpo</h3><div class=g>${FUR.map((c,i)=>`<button class="sw ${z.fur==i?'on':''}" style="background:${c}" data-a=fur data-v=${i} aria-label="Pelaje"></button>`).join('')}</div>
 <div class=g style="margin-top:8px">${['Delgado','Normal','Fuerte'].map((n,i)=>`<button class="${z.bd==i?'on':''}" data-a=bd data-v=${i}>${n}</button>`).join('')}</div>
 <div class=arm><div class=arh><b>👕 Armario</b><span>${s.pw} / ${PC.length}</span></div><div class=slots>${SL.map(([k2,n])=>`<button class="${wt==k2?'on':''}" data-a=wt data-v=${k2}>${n}</button>`).join('')}</div>
@@ -836,7 +871,7 @@ const P=()=>S.p[S.cur];
 const cats=p=>[...new Set(p.tasks.map(t=>t.c))];
 const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const dn=k=>Date.parse(k)/864e5,td=()=>dk(new Date());
-let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='',gv='list',ge=null,W=null,tmr=0,lfl='all',cd={t:'',r:'',n:0},mood='',mt=0,smsg='',fdE='',cv='films',gmode='',G2={},gtm=0,rlr=null,pm=0;
+let D=new Date(),tab='hoy',menu=0,PU=null,scr='hoy',nv='idea',wt='hat',anim='',gv='list',ge=null,W=null,tmr=0,lfl='all',cd={t:'',r:'',n:0},mood='',mt=0,smsg='',fdE='',cv='films',gmode='',G2={},gtm=0,rlr=null,pm=0,xo=0;
 const rel=()=>{const a=new Date();a.setHours(0,0,0,0);const b=new Date(D);b.setHours(0,0,0,0);return({'-1':'Ayer','0':'Hoy','1':'Mañana'})[Math.round((b-a)/864e5)]||''};
 
 function st(p){
@@ -898,7 +933,7 @@ let h=`<header><button data-a=menu aria-label="Menú">☰</button>${p.pic?`<img 
 <nav class=dn><button data-a=d data-v=-1 aria-label="Día anterior">‹</button><span>${tit}</span><button data-a=d data-v=1 aria-label="Día siguiente">›</button></nav>
 <nav class=tabs>${[['hoy','Hoy'],['elegir','Elegir'],['tareas','Tareas'],['logros','Logros']].map(([a,b])=>`<button data-a=tab data-v=${a} class="${tab==a?'on':''}">${b}</button>`).join('')}</nav><main>`;
 if(tab=='hoy'){
-h+=mcard(p)+bossCard(p)+chestCard(p)+dayCards(p,k);
+h+=`<details class=xtra ${xo?'open':''}><summary data-a=xh>✨ Extras del día · misiones, cofre, agua y ánimo</summary>${mcard(p)+bossCard(p)+chestCard(p)+dayCards(p,k)}</details>`;
 h+=`<div class=bar><i style="width:${ts.length?ok/ts.length*100:0}%"></i></div><p class=mu>${ok} de ${ts.length} hechas · cada tarea suma 10 XP</p>`;
 h+=ts.length?ts.map(t=>`<div class="row s${dd[t.id]||0}"><button class=box data-a=chk data-v="${t.id}">${['','✓','✗'][dd[t.id]||0]}</button><span>${E(t.t)}</span><small>${E(t.c)}</small></div>`).join(''):`<p class=empty>No has elegido tareas para este día.</p><button class=pri data-a=tab data-v=elegir>Elegir tareas</button>`;
 }else if(tab=='elegir'){
@@ -1028,6 +1063,10 @@ const ggrid=()=>[...Array(9)].map((_,i)=>`<button class=gc data-a=bt data-v=${i}
 function btick(){const G=G2;G.t-=.65;if(G.t<=0){clearInterval(gtm);gtm=0;G.t=0;G.c=-1;const p=P();p.bg=Math.max(p.bg||0,G.n);p.mgp=(p.mgp||0)+1;mgx(p,G.n);fin2();return}G.c=Math.random()*9|0;G.b=Math.random()<.2?1:0;const g=$('#gg');if(g)g.innerHTML=ggrid();const tb=$('#gtb');if(tb)tb.style.width=G.t/20*100+'%'}
 function mgx(p,pts){const k=td();if(!p.mgd||p.mgd.k!=k)p.mgd={k,x:0};const g=Math.max(0,Math.min(pts,15,40-p.mgd.x));p.mgd.x+=g;p.mgxp=(p.mgxp||0)+g}
 function gpanel(p){const G=G2;
+if(gmode=='run'){const cells=G.rows.map((row,ri)=>row.map((c,ci)=>`<div class="gcell${c?' ob':''}">${ri==5&&ci==G.l?'🐒':c?'🧱':''}</div>`).join('')).join('');return`<div class=gp><p class=mu>Esquiva los obstáculos · Distancia: ${G.d} · Mejor: ${(p.gbest||{}).run||0}</p><div class="lanes" id=ln>${cells}</div>${G.over?'<p><b>¡Choque!</b></p><button class=pri data-a=mg data-v=run>Otra carrera</button>':`<div class=g style="justify-content:center"><button data-a=rmv data-v=-1>⬅️</button><button data-a=rmv data-v=1>➡️</button></div>`}</div>`}
+if(gmode=='leaf'){const cells=[...Array(15)].map((_,i)=>{const x=i%3,y=i/3|0,it=G.it.find(a=>a.x==x&&a.y==y);return it?`<button class=gcell data-a=lft data-v=${it.id}>${it.e}</button>`:'<div class=gcell></div>'}).join('');return`<div class=gp><p class=mu>Toca solo los bambúes 🎋 y evita las hojas 🍂 · Puntos: ${G.n} · Fallos: ${G.bad}/3 · ${Math.max(0,Math.ceil(G.t))} s</p><div class="lanes" id=ln>${cells}</div>${G.over?'<p><b>¡Fin del entreno!</b></p><button class=pri data-a=mg data-v=leaf>Otra vez</button>':''}</div>`}
+if(gmode=='rhy')return`<div class=gp><p class=mu>Pulsa Golpear cuando la marca esté en el centro · Puntos: ${G.sc} · Golpes: ${G.taps}/10</p><div class=trk><div class=zone1></div><div class=zone2></div><div id=hm class=mk style="left:${G.pos}%"></div></div><p style="text-align:center;min-height:24px">${G.msg||''}</p>${G.over?'<p><b>¡Dojo completado!</b></p><button class=pri data-a=mg data-v=rhy>Otra ronda</button>':'<div class=g style="justify-content:center"><button class=pri data-a=rhyt>🥁 Golpear</button></div>'}</div>`;
+if(gmode=='emo'){if(G.over)return`<div class=gp><p><b>¡Acertaste ${G.sc} de ${G.q.length}!</b></p><button class=pri data-a=mg data-v=emo>Otra ronda</button></div>`;const q=G.q[G.i];return`<div class=gp><p class=mu>Pregunta ${G.i+1}/${G.q.length} · Aciertos: ${G.sc}</p><p class=clue>${q.c}</p><div class=ansg>${q.o.map((o,i)=>{const c=G.ch==null?'':o==q.a?'ok':i==G.ch?'bad':'';return`<button class="ans ${c}" data-a=emc data-v=${i}>${E(o)}</button>`}).join('')}</div></div>`}
 if(gmode=='ban')return`<div class=gp><p class=mu>Toca los plátanos 🍌 y evita las bombas 💣. Tu mejor marca: ${p.bg||0}</p><div class=bar><i id=gtb style="width:${G.t/20*100}%"></i></div><p id=gh><b>Puntos: ${G.n}</b></p>${G.t<=0?'<p>¡Tiempo!</p>':''}<div id=gg class=gg>${ggrid()}</div>${G.t<=0?'<button class=pri data-a=mg data-v=ban>Jugar otra vez</button>':''}</div>`;
 if(gmode=='rps')return`<div class=gp><p class=mu>Gana a Saru. Victorias: ${p.rw||0} · Racha: ${p.rc||0}</p><div class=g style="justify-content:center">${['✊','✋','✌️'].map((x,i)=>`<button class=big2 data-a=rp data-v=${i}>${x}</button>`).join('')}</div>${G.me?`<p style="text-align:center;font-size:30px">${G.me} vs ${G.sa}</p><p class=mu style="text-align:center">${['Empate','¡Has ganado!','Ha ganado Saru'][G.r]}</p>`:''}</div>`;
 if(gmode=='mem')return`<div class=gp><p class=mu>Encuentra las parejas. Movimientos: ${G.mv}${p.mbm?' · Mejor: '+p.mbm:''}</p><div class="gg m4">${G.c.map((c,i)=>`<button class=gc data-a=mc data-v=${i}>${G.m[i]||G.f.includes(i)?c:'❔'}</button>`).join('')}</div>${Object.keys(G.m).length==12?'<p><b>¡Completado!</b></p><button class=pri data-a=mg data-v=mem>Otra partida</button>':''}</div>`;
@@ -1072,6 +1111,12 @@ ${HU.map(c=>`<button class="sw ${col&&S.h==c?'on':''}" style="background:hsl(${c
 <h3>⚙️ Datos</h3><button class=sec data-a=rst>Borrar todo</button></aside>`}
 function act(a,v){
 const p=P(),k=dk(D);
+if(a=='mg'&&NGI.hasOwnProperty(v)||a=='mg'&&v=='emo'){clearInterval(gtm);gtm=0;gmode=v;G2=ginit(v);if(NGI[v])gtm=setInterval(v=='run'?rtick:v=='leaf'?ltick:htick,NGI[v]);save();r();return}
+if(a=='rmv'){const G=G2;if(G&&!G.over){const nl=Math.max(0,Math.min(2,G.l+ +v));G.l=nl;if(G.rows[5][nl]){endG('run');return}}r();return}
+if(a=='xh'){xo=xo?0:1;r();return}
+if(a=='lft'){lt(+v);return}
+if(a=='rhyt'){ht();return}
+if(a=='emc'){ec(+v);return}
 if(scr=='cine'&&$('#ct')){cd.t=$('#ct').value;cd.r=$('#cr').value}
 if(a=='pet'){const e=$('.pet')||$('.sw2');if(e){e.classList.remove('bn');void e.offsetWidth;e.classList.add('bn')}S.taps=(S.taps||0)+1;chk();save();return}
 if(a=='ok')PU=null;
@@ -1167,6 +1212,7 @@ q.rkk=s.rk;save();r();
 }
 
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.v)});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&gtm){clearInterval(gtm);gtm=0}});
 document.addEventListener('submit',e=>{e.preventDefault();
 if(e.target.id=='qf'){const t=$('#qt').value.trim();if(t){const p=P(),k=dk(D),id='u'+Date.now();p.tasks.push({id,t,c:'Rápidas'});(p.plan[k]=p.plan[k]||[]).push(id);p.qa=(p.qa||0)+1;chk();save();r()}return}
 if(e.target.id=='cf'){const t=$('#ct').value.trim();if(t){const p=P();(p[cv]=p[cv]||[]).unshift({t,e:emo(t,cv=='films'?'film':'anime'),st:cd.n?'v':'p',r:cd.n,rv:$('#cr').value.trim()});cd={t:'',r:'',n:0};chk();save();r()}return}
