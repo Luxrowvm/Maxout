@@ -115,7 +115,7 @@ main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
 [data-b=kai]{--bg:#fff0f5;--card:#ffe3ec;--tx:#5a2a3c;--mu:#a8607b;--bd:#f8c8d8;--ac:#ec6fa5;--on:#fff;color-scheme:light}
 .kai{padding:9px 18px;border-radius:20px;background:linear-gradient(135deg,#ffe3ec,#f9a8c9);color:#5a2a3c;border:2px solid #ec6fa5;font-weight:700}
 .g .kai.on,.kai.on{background:linear-gradient(135deg,#ffe3ec,#f9a8c9);color:#5a2a3c;box-shadow:0 0 0 3px #ec6fa5}
-.sw2{width:min(46vw,184px)}
+.sw2{width:min(46vw,184px)}.sv{overflow:visible}
 .hero{position:relative;overflow:hidden;color:var(--rc,#fff);border:2px solid var(--rb,var(--bd))}
 .hero .hi small,.hero .fire small{color:inherit;opacity:.78}
 .rt{display:flex;align-items:center;gap:8px}.emb{width:40px;height:40px;flex:none;filter:drop-shadow(0 2px 4px #0006)}
@@ -178,6 +178,7 @@ button.gcell{cursor:pointer}.gcell.ob{background:#7c2d1222}
 .bb small,.tabs button,.act,.anrow button{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.bb small{font-size:10px}.act{font-size:10.5px}
 .fr2{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;margin:8px 16px}.fr2 small{display:block;color:var(--mu);font-size:12px}
 .fform{display:flex;gap:8px;margin:0 16px}.fform input{flex:1}.fform .pri{padding:0 16px}
+.sw3 .sv{overflow:visible}
 </style>
 </head>
 <body>
@@ -802,11 +803,21 @@ const rn=(i,k=1)=>{const x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.fl
 const fuzz=(cx,cy,rx,ry,n,len,c,sw=3)=>[...Array(n)].map((_,i)=>{const a=(360*i/n)*Math.PI/180,l=len*(.7+rn(i)*.6),P=(r,d)=>[(cx+r*Math.cos(a+d)).toFixed(1),(cy+(r*ry/rx)*Math.sin(a+d)).toFixed(1)],A=P(rx-2,0),B=P(rx+l*.5,-.08),C=P(rx+l,.12);return`<path d="M${A[0]} ${A[1]}Q${B[0]} ${B[1]} ${C[0]} ${C[1]}" stroke="${c}" stroke-width="${sw}" stroke-linecap="round" fill="none"/>`}).join('');
 const fstr=(cx,cy,rx,ry,n,c,op,k)=>[...Array(n)].map((_,i)=>{const a=rn(i,k)*6.283,r=Math.sqrt(rn(i,k+5)),x=cx+rx*.85*r*Math.cos(a),y=cy+ry*.85*r*Math.sin(a),l=5+rn(i,k+9)*5,dx=Math.cos(a)*.6,dy=Math.abs(Math.sin(a))+.7;return`<path d="M${x.toFixed(1)} ${y.toFixed(1)}q${(dx*l/2).toFixed(1)} ${(dy*l/2).toFixed(1)} ${(dx*l).toFixed(1)} ${(dy*l).toFixed(1)}" stroke="${c}" stroke-opacity="${op}" stroke-width="1.6" stroke-linecap="round" fill="none"/>`}).join('');
 const clump=(cx,cy,rx,ry,n,c,op,k,ox,oy)=>[...Array(n)].map((_,i)=>{const a=rn(i,k)*6.283,r=Math.sqrt(rn(i,k+5))*.7,x=cx+rx*r*Math.cos(a),y=cy+ry*r*Math.sin(a),ang=Math.atan2(y-oy,x-ox),L=8+rn(i,k+9)*5,w=2.4+rn(i,k+3)*1.6,dx=Math.cos(ang)*L,dy=Math.sin(ang)*L,nx=-Math.sin(ang)*w,ny=Math.cos(ang)*w,F=v=>v.toFixed(1);return`<path d="M${F(x)} ${F(y)}Q${F(x+dx*.5+nx)} ${F(y+dy*.5+ny)} ${F(x+dx)} ${F(y+dy)}Q${F(x+dx*.5-nx)} ${F(y+dy*.5-ny)} ${F(x)} ${F(y)}Z" fill="${c}" fill-opacity="${op}"/>`}).join('');
+function POSE(m,sx,side){const cl=v=>Math.max(14,Math.min(186,v)),up=(y)=>Math.max(44,y),
+P={wave:{L:[[sx,144],[sx-14,176],[sx-22,206]],R:[[sx,144],[sx+30,124],[sx+34,86]]},
+dance:{L:[[sx,144],[sx-26,118],[sx-22,72]],R:[[sx,144],[sx+26,118],[sx+22,72]]},
+flex:{L:[[sx,144],[sx-30,132],[sx-10,108]],R:[[sx,144],[sx+30,132],[sx+10,108]]},
+love:{L:[[sx,144],[sx+16,170],[88,166]],R:[[sx,144],[sx-16,170],[112,166]]},
+eat:{L:[[sx,144],[sx-16,178],[sx-22,206]],R:[[sx,144],[sx+14,132],[116,122]]},
+jump:{L:[[sx,144],[sx-32,110],[sx-24,62]],R:[[sx,144],[sx+32,110],[sx+24,62]]},
+celebrate:{L:[[sx,144],[sx-32,110],[sx-24,62]],R:[[sx,144],[sx+32,110],[sx+24,62]]}},
+def={L:[[sx,144],[sx-16,176],[sx-18,208]],R:[[sx,144],[sx+16,176],[sx+18,208]]};
+return((P[m]||def)[side]).map(([x,y])=>[cl(x),up(y)])}
 function svg(p,s,g,m){m=m||(g>0?'sad':'');
 const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},f=FUR[z.fur||0],bw=[36,44,52][z.bd??1]+s.rk*1.5,x1=100-bw,x2=100+bw,q=k=>z.eq[k]!=null?PC[z.eq[k]]:null,
 sr=q('shirt'),pa=q('pants'),so=q('shoes'),nk=q('neck'),ht=q('hat'),hd=q('hand'),cr='#f8e3c4',cr2='#e6c59b',dk2=shd(f,-.3),oc=shd(f,-.55),fl=shd(f,.3),hw=y=>bw*Math.sqrt(Math.max(.02,1-((y-170)/54)**2)),
 LP={dance:'up',happy:'up',flex:'up',love:'love',jump:'up',celebrate:'up'}[m]||'down',RP={wave:'wave',dance:'up',happy:'up',flex:'up',eat:'eat',love:'love',jump:'up',celebrate:'up'}[m]||'down',
-AL=AP(LP,-1,x1+6),AR=AP(RP,1,x2-6),SR=sr?SHR(sr,hw,bw,x1,x2):null,H=ht?HT(ht.n):null,sad=m=='sad',
+AL=POSE(m,x1+6,'L'),AR=POSE(m,x2-6,'R'),SR=sr?SHR(sr,hw,bw,x1,x2):null,H=ht?HT(ht.n):null,sad=m=='sad',
 slv=A=>SR&&SR.t?`<path d="${qp(A,SR.t)}" fill="none" stroke="${SR.c}" stroke-width="${SR.w}" stroke-linecap="${SR.w>25?'round':'butt'}"/>`:'',
 rot=hd&&/katana|espada|hacha|arco|varita|guitarra|paraguas|trofeo|linterna/i.test(hd.n)?-28:0,
 item=m=='eat'?`<text x="${AR[2][0]+4}" y="${AR[2][1]-4}" font-size="26" text-anchor="middle">${fdE||'🍌'}</text>`:hd?`<g transform="translate(${AR[2][0]} ${AR[2][1]-2}) rotate(${rot})">${HI(hd)}</g>`:'',
@@ -819,9 +830,9 @@ mouth=m=='sad'?'<path d="M89 133Q100 123 111 133" fill="none" stroke="#3b1d12" s
 extra=m=='sleep'?'<text class="zz" x="150" y="52" font-size="18" fill="#93c5fd">z</text><text class="zz" x="164" y="36" font-size="24" fill="#93c5fd" style="animation-delay:.8s">Z</text>':m=='love'?'<text class="hr" x="36" y="70" font-size="18">❤️</text><text class="hr" x="158" y="60" font-size="22" style="animation-delay:.6s">❤️</text><text class="hr" x="100" y="30" font-size="16" style="animation-delay:1.2s">❤️</text>':'',
 tl=`M${x2-6} 214C170 232 196 196 176 164S150 150 160 138`,
 confetti=m=='celebrate'?'<text class="hr" x="24" y="40" font-size="20">🎉</text><text class="hr" x="170" y="30" font-size="18" style="animation-delay:.5s">✨</text>':'',
-ear=cx=>`<g>${fuzz(cx,100,20,20,12,5,f,2.6)}<circle cx="${cx}" cy="100" r="20" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/><circle cx="${cx}" cy="101" r="12" fill="url(#ear)"/><path d="M${cx-6} 96Q${cx} 91 ${cx+6} 96" stroke="#fff" stroke-opacity=".5" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M${cx-5} 108q5 4 10 0" stroke="#b86b5c" stroke-opacity=".5" stroke-width="1.4" fill="none"/></g>`,
+ear=cx=>`<g><circle cx="${cx}" cy="100" r="20" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/><circle cx="${cx}" cy="101" r="12" fill="url(#ear)"/><path d="M${cx-6} 96Q${cx} 91 ${cx+6} 96" stroke="#fff" stroke-opacity=".5" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M${cx-5} 108q5 4 10 0" stroke="#b86b5c" stroke-opacity=".5" stroke-width="1.4" fill="none"/></g>`,
 foot=cx=>`<ellipse cx="${cx}" cy="237" rx="22" ry="12" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/><ellipse cx="${cx}" cy="238" rx="9" ry="5.5" fill="${cr2}" fill-opacity=".65"/>${[-13,-4.5,4.5,13].map((d,i)=>`<ellipse cx="${cx+d}" cy="${i%3?247:245}" rx="4.6" ry="3.8" fill="${cr}" stroke="${oc}" stroke-opacity=".45"/>`).join('')}`;
-return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" class="sv"><defs><radialGradient id="fg" cx=".35" cy=".3" r=".95"><stop offset="0" stop-color="${shd(f,.35)}"/><stop offset=".5" stop-color="${f}"/><stop offset="1" stop-color="${shd(f,-.3)}"/></radialGradient>
+return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -12 232 276" class="sv"><defs><radialGradient id="fg" cx=".35" cy=".3" r=".95"><stop offset="0" stop-color="${shd(f,.35)}"/><stop offset=".5" stop-color="${f}"/><stop offset="1" stop-color="${shd(f,-.3)}"/></radialGradient>
 <radialGradient id="bgr" cx=".5" cy=".3" r=".75"><stop offset="0" stop-color="#fff4e0"/><stop offset=".7" stop-color="${cr}"/><stop offset="1" stop-color="${cr2}"/></radialGradient>
 <radialGradient id="mz" cx=".5" cy=".4" r=".78"><stop offset="0" stop-color="#fff2de"/><stop offset=".75" stop-color="${cr}"/><stop offset="1" stop-color="${cr2}"/></radialGradient>
 <radialGradient id="ei" cx=".4" cy=".35" r=".85"><stop offset="0" stop-color="#8a5a34"/><stop offset=".55" stop-color="#3b2314"/><stop offset="1" stop-color="#150d08"/></radialGradient>
@@ -834,7 +845,7 @@ ${SR?SR.b:''}
 <path d="${tl}" fill="none" stroke="${oc}" stroke-opacity=".55" stroke-width="16" stroke-linecap="round"/><path d="${tl}" fill="none" stroke="url(#fg)" stroke-width="12" stroke-linecap="round"/><circle cx="160" cy="138" r="7.5" fill="${cr}" stroke="${oc}" stroke-opacity=".45"/>
 <ellipse cx="82" cy="216" rx="16.5" ry="22" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/><ellipse cx="118" cy="216" rx="16.5" ry="22" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/>
 ${foot(76)}${foot(124)}
-${fuzz(100,170,bw,54,24,6,f,3)}<ellipse cx="100" cy="170" rx="${bw}" ry="54" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/>${clump(100,172,bw,52,20,dk2,.16,1,100,140)}${clump(100,166,bw,48,16,fl,.18,8,100,140)}
+<ellipse cx="100" cy="170" rx="${bw}" ry="54" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/>${clump(100,172,bw,52,20,dk2,.16,1,100,140)}${clump(100,166,bw,48,16,fl,.18,8,100,140)}
 <ellipse cx="100" cy="178" rx="${bw*.64}" ry="38" fill="url(#bgr)"/>${clump(100,182,bw*.62,34,9,cr2,.55,2,100,150)}
 <path d="M${100-bw*.5} 118Q100 134 ${100+bw*.5} 118" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="3" stroke-linecap="round"/>
 ${!SR?`<path d="M91 150Q100 164 109 150Q105 160 100 170Q95 160 91 150Z" fill="url(#bgr)" fill-opacity=".9"/>`:''}
@@ -842,7 +853,7 @@ ${pa?PAN(pa,hw,bw):''}${so&&so.c?SHO(so):''}${SR?SR.f:''}
 <ellipse cx="100" cy="152" rx="${bw*.8}" ry="13" fill="#000" fill-opacity=".2" filter="url(#sb)"/>
 ${arm(AL,LP,0)}${arm(AR,RP,m=='wave',item)}
 ${ear(50)}${ear(150)}
-${fuzz(100,96,52,52,36,7,f,3)}<circle cx="100" cy="96" r="52" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.6"/>${clump(100,96,52,50,26,dk2,.16,6,100,118)}${clump(100,88,50,44,20,fl,.22,7,100,118)}
+<circle cx="100" cy="96" r="52" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.6"/>${clump(100,96,52,50,26,dk2,.16,6,100,118)}${clump(100,88,50,44,20,fl,.22,7,100,118)}
 <path d="M58 74A52 52 0 0 1 92 47" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="4" stroke-linecap="round"/>
 <path d="M96 50Q91 32 104 27Q113 30 109 39Q118 38 112 50Q104 45 96 50Z" fill="${fl}" stroke="${oc}" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/><path d="M84 54Q78 40 89 37Q92 45 90 54Z" fill="${fl}" stroke="${oc}" stroke-opacity=".5" stroke-width="1.2"/><path d="M114 53Q118 40 127 41Q124 48 122 56Z" fill="${fl}" stroke="${oc}" stroke-opacity=".5" stroke-width="1.2"/>
 <circle cx="84" cy="105" r="23.5" fill="url(#mz)"/><circle cx="116" cy="105" r="23.5" fill="url(#mz)"/><ellipse cx="100" cy="123" rx="28.5" ry="21.5" fill="url(#mz)"/>
@@ -1307,7 +1318,7 @@ document.addEventListener('change',e=>{if(e.target.id!='ph'||!e.target.files[0])
 Object.values(S.p).forEach(p=>dec(p,p===P()));
 {const s=chk(1),q=P();q.lv=s.l;q.rkk=s.rk}
 snapSave();save();r();
-const need=(!S.bdt&&Object.keys(P().done).length>0)||(S.bdt&&Date.now()-S.bdt>6048e5);if(need)setTimeout(()=>toast('💾','Copia semanal','Ve a ☰ y guarda una copia de seguridad'),1200);
+const need=Object.keys(P().done).length>0&&Date.now()-(S.bdt||S.bdr||0)>6048e5;if(need){S.bdr=Date.now();save();setTimeout(()=>toast('💾','Copia semanal','Ve a ☰ y guarda una copia de seguridad'),1200)}
 </script>
 </body>
 </html>
