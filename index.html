@@ -156,15 +156,15 @@ main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
 .sb{background:#0b0920b8;border-radius:12px;padding:6px 8px;color:#fff;font-size:11px}
 .sbt{height:7px;background:#ffffff28;border-radius:5px;overflow:hidden;margin-top:4px}.sbt i{display:block;height:100%;border-radius:5px}
 .acts{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:4px 0 10px}
-.act,.anrow button{background:#171a2e;border:1px solid #2e3558;border-radius:16px;color:#e8e8ff;padding:9px 2px 7px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:inset 0 -3px 0 #0003}
+.act,.anrow button{background:var(--card);border:1px solid var(--bd);border-radius:16px;color:var(--tx);padding:9px 2px 7px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:inset 0 -3px 0 #0003}
 .act span,.anrow span{font-size:24px;line-height:1}
 .anrow{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-.arm{background:#15172a;border:1px solid #2e3558;border-radius:18px;padding:10px;margin-top:10px;color:#e8e8ff}
-.arh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.arh span{color:#9aa3d6}
-.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.slots button{background:#1d2140;border:1px solid #2e3558;border-radius:12px;color:#e8e8ff;padding:8px 4px;font-size:13px}
-.slots .on{background:#3b6cff;border-color:#7da2ff;box-shadow:0 0 0 2px #3b6cff55}
-.arm .pcard{background:#1d2140;border-color:#2e3558;color:#e8e8ff}.arm .pcard small{color:#9aa3d6}.arm .pcard.on{border-color:#7da2ff;box-shadow:0 0 0 2px #3b6cff}
-.arm .g button{background:#1d2140;border-color:#2e3558;color:#e8e8ff}
+.arm{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:10px;margin-top:10px;color:var(--tx)}
+.arh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.arh span{color:var(--mu)}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.slots button{background:var(--bg);border:1px solid var(--bd);border-radius:12px;color:var(--tx);padding:8px 4px;font-size:13px}
+.slots .on{background:var(--ac);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
+.arm .pcard{background:var(--bg);border-color:var(--bd);color:var(--tx)}.arm .pcard small{color:var(--mu)}.arm .pcard.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
+.arm .g button{background:var(--bg);border-color:var(--bd);color:var(--tx)}
 .lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;max-width:250px;margin:10px auto}
 .gcell{aspect-ratio:1;font-size:26px;display:flex;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--bd);border-radius:12px;cursor:default}
 button.gcell{cursor:pointer}.gcell.ob{background:#7c2d1222}
@@ -175,6 +175,9 @@ button.gcell{cursor:pointer}.gcell.ob{background:#7c2d1222}
 .zone1{position:absolute;left:38%;width:24%;top:0;bottom:0;background:#22c55e33}.zone2{position:absolute;left:46%;width:8%;top:0;bottom:0;background:#22c55e88}
 .mk{position:absolute;top:-4px;bottom:-4px;width:6px;margin-left:-3px;background:var(--ac);border-radius:4px}
 .xtra{margin:8px 0}.xtra summary{cursor:pointer;list-style:none;padding:12px 14px;background:var(--card);border:1px solid var(--bd);border-radius:14px;font-weight:600}.xtra summary::-webkit-details-marker{display:none}.xtra[open] summary{margin-bottom:6px}
+.bb small,.tabs button,.act,.anrow button{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.bb small{font-size:10px}.act{font-size:10.5px}
+.fr2{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;margin:8px 16px}.fr2 small{display:block;color:var(--mu);font-size:12px}
+.fform{display:flex;gap:8px;margin:0 16px}.fform input{flex:1}.fform .pri{padding:0 16px}
 </style>
 </head>
 <body>
@@ -366,7 +369,11 @@ const AD=`✅|Primer paso|Marca tu primera tarea|t|1
 💾|Plantillero|Guarda tu primera plantilla de día|tl|1
 🎲|Indeciso|Usa la ruleta de qué ver|rl|1
 🛟|A salvo|Haz una copia de seguridad|bu|1
-⚡|Rápido y furioso|Añade 5 tareas rápidas desde Hoy|qa|5`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
+⚡|Rápido y furioso|Añade 5 tareas rápidas desde Hoy|qa|5
+🐒|Corredor de monos|Consigue 10 puntos en la Carrera de monos|gbr|10
+🎬|Adivino|Acierta 4 preguntas en Adivina el emoji|gbe|8
+🍃|Ninja de bambú|Consigue 10 bambúes en Ninja de hojas|gbl|10
+🥁|Ritmo perfecto|Consigue 15 puntos en el Dojo de ritmo|gbh|15`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
 
 const PC=`hat|Gorra|🧢||
 hat|Sombrero de paja|👒||
@@ -593,7 +600,7 @@ const KAI=`<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><g f
 const bgi=col=>{if(S.base=='kai')return`url("data:image/svg+xml,${encodeURIComponent(KAI)}")`;const c=`hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)`;return`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'>${BG[scr].replace(/@/g,c)}</svg>`)}")`};
 const shd=(c,a)=>'#'+[1,3,5].map(i=>Math.max(0,Math.min(255,Math.round(parseInt(c.substr(i,2),16)*(1+a)))).toString(16).padStart(2,'0')).join('');
 const FD=[['🍌','Plátano',15],['🍎','Manzana',12],['🍙','Onigiri',20],['🍜','Ramen',30],['🍡','Dango',14],['🥭','Mango',18],['🍓','Fresa',10],['🥜','Cacahuetes',12],['🍫','Chocolate',8]];
-const GM={wave:'¡Hola! ¿Cómo va el día?',dance:'¡A bailar! 🎶',flex:'¡Mira estos músculos!',love:'Qué bien me cuidas…',happy:'¡Yuju! ¡Otra vez!',sleep:'Zzz… cinco minutitos más…'};
+const GM={jump:'¡Salto! ¡Qué alto llego!',celebrate:'¡Lo hemos conseguido! 🎉',wave:'¡Hola! ¿Cómo va el día?',dance:'¡A bailar! 🎶',flex:'¡Mira estos músculos!',love:'Qué bien me cuidas…',happy:'¡Yuju! ¡Otra vez!',sleep:'Zzz… cinco minutitos más…'};
 const fv=p=>Math.max(0,Math.min(100,(p.hg??55)-(Date.now()-(p.ht||Date.now()))/72e4));
 function gm(m,ms,nx){mood=m;clearTimeout(mt);mt=setTimeout(()=>{if(nx){gm(nx,2200);if(scr=='saru')r()}else{mood='';fdE='';smsg='';if(scr=='saru')r()}},ms||2800)}
 const lm=c=>parseInt(c.substr(1,2),16)*.3+parseInt(c.substr(3,2),16)*.6+parseInt(c.substr(5,2),16)*.1;
@@ -732,7 +739,7 @@ const clump=(cx,cy,rx,ry,n,c,op,k,ox,oy)=>[...Array(n)].map((_,i)=>{const a=rn(i
 function svg(p,s,g,m){m=m||(g>0?'sad':'');
 const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},f=FUR[z.fur||0],bw=[36,44,52][z.bd??1]+s.rk*1.5,x1=100-bw,x2=100+bw,q=k=>z.eq[k]!=null?PC[z.eq[k]]:null,
 sr=q('shirt'),pa=q('pants'),so=q('shoes'),nk=q('neck'),ht=q('hat'),hd=q('hand'),cr='#f8e3c4',cr2='#e6c59b',dk2=shd(f,-.3),oc=shd(f,-.55),fl=shd(f,.3),hw=y=>bw*Math.sqrt(Math.max(.02,1-((y-170)/54)**2)),
-LP={dance:'up',happy:'up',flex:'up',love:'love'}[m]||'down',RP={wave:'wave',dance:'up',happy:'up',flex:'up',eat:'eat',love:'love'}[m]||'down',
+LP={dance:'up',happy:'up',flex:'up',love:'love',jump:'up',celebrate:'up'}[m]||'down',RP={wave:'wave',dance:'up',happy:'up',flex:'up',eat:'eat',love:'love',jump:'up',celebrate:'up'}[m]||'down',
 AL=AP(LP,-1,x1+6),AR=AP(RP,1,x2-6),SR=sr?SHR(sr,hw,bw,x1,x2):null,H=ht?HT(ht.n):null,sad=m=='sad',
 slv=A=>SR&&SR.t?`<path d="${qp(A,SR.t)}" fill="none" stroke="${SR.c}" stroke-width="${SR.w}" stroke-linecap="${SR.w>25?'round':'butt'}"/>`:'',
 rot=hd&&/katana|espada|hacha|arco|varita|guitarra|paraguas|trofeo|linterna/i.test(hd.n)?-28:0,
@@ -740,11 +747,12 @@ item=m=='eat'?`<text x="${AR[2][0]+4}" y="${AR[2][1]-4}" font-size="26" text-anc
 hnd=(A,po)=>{const[x,y]=A[2],r=po=='up'||po=='wave'?180:po=='eat'?-35:po=='love'?25:0,tx=x+(A[0][0]<100?10:-10);return`<g transform="rotate(${r} ${x} ${y})">${[[-6.5,9,18],[-2.2,11.5,6],[2.2,11.5,-6],[6.5,9,-18]].map(([dx,dy,a])=>`<ellipse cx="${x+dx}" cy="${y+dy}" rx="2.9" ry="5.3" fill="url(#fg)" stroke="${oc}" stroke-opacity=".45" transform="rotate(${a} ${x+dx} ${y+dy})"/>`).join('')}<ellipse cx="${tx}" cy="${y+2}" rx="3.1" ry="5.6" fill="url(#fg)" stroke="${oc}" stroke-opacity=".45" transform="rotate(${tx>x?-50:50} ${tx} ${y+2})"/><circle cx="${x}" cy="${y}" r="9.5" fill="url(#fg)" stroke="${oc}" stroke-opacity=".45"/><ellipse cx="${x}" cy="${y+2}" rx="4.5" ry="3.2" fill="${cr2}" fill-opacity=".7"/></g>`},
 arm=(A,po,wv,it)=>`<g${wv?` class="wv" style="transform-origin:${A[0][0]}px 144px"`:''}><path d="${qa(A)}" fill="none" stroke="${oc}" stroke-opacity=".55" stroke-width="20" stroke-linecap="round"/><path d="${qa(A)}" fill="none" stroke="url(#fg)" stroke-width="16" stroke-linecap="round"/>${slv(A)}${it||''}${hnd(A,po)}</g>`,
 eye=(x,o)=>`<g class="eye"><ellipse cx="${x}" cy="99" rx="8.8" ry="10.8" fill="#150d08"/><ellipse cx="${x}" cy="100.5" rx="6.8" ry="8.8" fill="url(#ei)"/><ellipse cx="${x+2.8}" cy="94.5" rx="3.5" ry="4" fill="#fff"/><circle cx="${x-2.6}" cy="104" r="1.8" fill="#fff" fill-opacity=".85"/><path d="M${x-9} 95Q${x} 85 ${x+9} 95" fill="none" stroke="${oc}" stroke-width="2.4" stroke-linecap="round"/><path d="M${x+8.5*o} 93l${5*o} -3.5M${x+7.5*o} 96l${5.5*o} -1" stroke="${oc}" stroke-width="1.8" stroke-linecap="round"/></g>`,
-eyes=m=='sleep'?'<path d="M76 99Q84 105 92 99M108 99Q116 105 124 99" fill="none" stroke="#2a1810" stroke-width="3.5" stroke-linecap="round"/>':/^(happy|eat|love|dance)$/.test(m)?'<path d="M76 102Q84 90 92 102M108 102Q116 90 124 102" fill="none" stroke="#2a1810" stroke-width="4" stroke-linecap="round"/><path d="M74 96l-4 -3M126 96l4 -3" stroke="#2a1810" stroke-width="2" stroke-linecap="round"/>':eye(84,-1)+eye(116,1),
+eyes=m=='sleep'?'<path d="M76 99Q84 105 92 99M108 99Q116 105 124 99" fill="none" stroke="#2a1810" stroke-width="3.5" stroke-linecap="round"/>':/^(happy|eat|love|dance|jump|celebrate)$/.test(m)?'<path d="M76 102Q84 90 92 102M108 102Q116 90 124 102" fill="none" stroke="#2a1810" stroke-width="4" stroke-linecap="round"/><path d="M74 96l-4 -3M126 96l4 -3" stroke="#2a1810" stroke-width="2" stroke-linecap="round"/>':eye(84,-1)+eye(116,1),
 brows=sad?'M73 85Q83 83 93 76M107 76Q117 83 127 85':m=='flex'?'M73 78L93 87M127 78L107 87':'M73 81Q83 73 93 81M107 81Q117 73 127 81',
-mouth=m=='sad'?'<path d="M89 133Q100 123 111 133" fill="none" stroke="#3b1d12" stroke-width="2.8" stroke-linecap="round"/>':/^(happy|dance|wave)$/.test(m)?'<path d="M85 124Q100 152 115 124Z" fill="#6b1d1d" stroke="#3b1d12" stroke-width="2" stroke-linejoin="round"/><path d="M89 125Q100 129 111 125L110 130Q100 133 90 130Z" fill="#fff"/><ellipse cx="100" cy="138" rx="8" ry="5" fill="#ff8da1"/>':m=='flex'?'<path d="M86 126Q100 142 114 126Z" fill="#fff" stroke="#3b1d12" stroke-width="2.5" stroke-linejoin="round"/><path d="M93 130v6M100 131v7M107 130v6" stroke="#3b1d12" stroke-width="1.2"/>':m=='eat'?'<g class="chew"><ellipse cx="100" cy="129" rx="9" ry="6" fill="#6b1d1d"/><ellipse cx="100" cy="131" rx="5" ry="3" fill="#ff8da1"/></g>':m=='full'?'<ellipse cx="100" cy="130" rx="5" ry="7" fill="#6b1d1d" stroke="#3b1d12" stroke-width="1.6"/>':m=='sleep'?'<path d="M94 128Q100 131 106 128" fill="none" stroke="#3b1d12" stroke-width="2.6" stroke-linecap="round"/>':'<path d="M88 125Q100 136 112 125" fill="none" stroke="#3b1d12" stroke-width="2.8" stroke-linecap="round"/><path d="M86 123q-2 2-2 5M114 123q2 2 2 5" stroke="#3b1d12" stroke-opacity=".6" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
+mouth=m=='sad'?'<path d="M89 133Q100 123 111 133" fill="none" stroke="#3b1d12" stroke-width="2.8" stroke-linecap="round"/>':/^(happy|dance|wave|jump|celebrate)$/.test(m)?'<path d="M85 124Q100 152 115 124Z" fill="#6b1d1d" stroke="#3b1d12" stroke-width="2" stroke-linejoin="round"/><path d="M89 125Q100 129 111 125L110 130Q100 133 90 130Z" fill="#fff"/><ellipse cx="100" cy="138" rx="8" ry="5" fill="#ff8da1"/>':m=='flex'?'<path d="M86 126Q100 142 114 126Z" fill="#fff" stroke="#3b1d12" stroke-width="2.5" stroke-linejoin="round"/><path d="M93 130v6M100 131v7M107 130v6" stroke="#3b1d12" stroke-width="1.2"/>':m=='eat'?'<g class="chew"><ellipse cx="100" cy="129" rx="9" ry="6" fill="#6b1d1d"/><ellipse cx="100" cy="131" rx="5" ry="3" fill="#ff8da1"/></g>':m=='full'?'<ellipse cx="100" cy="130" rx="5" ry="7" fill="#6b1d1d" stroke="#3b1d12" stroke-width="1.6"/>':m=='sleep'?'<path d="M94 128Q100 131 106 128" fill="none" stroke="#3b1d12" stroke-width="2.6" stroke-linecap="round"/>':'<path d="M88 125Q100 136 112 125" fill="none" stroke="#3b1d12" stroke-width="2.8" stroke-linecap="round"/><path d="M86 123q-2 2-2 5M114 123q2 2 2 5" stroke="#3b1d12" stroke-opacity=".6" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
 extra=m=='sleep'?'<text class="zz" x="150" y="52" font-size="18" fill="#93c5fd">z</text><text class="zz" x="164" y="36" font-size="24" fill="#93c5fd" style="animation-delay:.8s">Z</text>':m=='love'?'<text class="hr" x="36" y="70" font-size="18">❤️</text><text class="hr" x="158" y="60" font-size="22" style="animation-delay:.6s">❤️</text><text class="hr" x="100" y="30" font-size="16" style="animation-delay:1.2s">❤️</text>':'',
 tl=`M${x2-6} 214C170 232 196 196 176 164S150 150 160 138`,
+confetti=m=='celebrate'?'<text class="hr" x="24" y="40" font-size="20">🎉</text><text class="hr" x="170" y="30" font-size="18" style="animation-delay:.5s">✨</text>':'',
 ear=cx=>`<g>${fuzz(cx,100,20,20,12,5,f,2.6)}<circle cx="${cx}" cy="100" r="20" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/><circle cx="${cx}" cy="101" r="12" fill="url(#ear)"/><path d="M${cx-6} 96Q${cx} 91 ${cx+6} 96" stroke="#fff" stroke-opacity=".5" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M${cx-5} 108q5 4 10 0" stroke="#b86b5c" stroke-opacity=".5" stroke-width="1.4" fill="none"/></g>`,
 foot=cx=>`<ellipse cx="${cx}" cy="237" rx="22" ry="12" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/><ellipse cx="${cx}" cy="238" rx="9" ry="5.5" fill="${cr2}" fill-opacity=".65"/>${[-13,-4.5,4.5,13].map((d,i)=>`<ellipse cx="${cx+d}" cy="${i%3?247:245}" rx="4.6" ry="3.8" fill="${cr}" stroke="${oc}" stroke-opacity=".45"/>`).join('')}`;
 return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 260" class="sv"><defs><radialGradient id="fg" cx=".35" cy=".3" r=".95"><stop offset="0" stop-color="${shd(f,.35)}"/><stop offset=".5" stop-color="${f}"/><stop offset="1" stop-color="${shd(f,-.3)}"/></radialGradient>
@@ -777,12 +785,12 @@ ${eyes}<path d="${brows}" fill="none" stroke="${shd(f,-.42)}" stroke-width="4.2"
 <ellipse cx="68" cy="116" rx="11" ry="8" fill="url(#bl)" transform="scale(${m=='eat'?1.25:1}) translate(${m=='eat'?-13:0} ${m=='eat'?-24:0})"/><ellipse cx="132" cy="116" rx="11" ry="8" fill="url(#bl)" transform="scale(${m=='eat'?1.25:1}) translate(${m=='eat'?-26:0} ${m=='eat'?-24:0})"/>
 <path d="M93 112Q100 106 107 112Q105 119 100 120Q95 119 93 112Z" fill="#4a2b1d"/><ellipse cx="98" cy="110.6" rx="3" ry="1.6" fill="#fff" fill-opacity=".6"/><path d="M100 120V124" stroke="#3b1d12" stroke-width="1.5" stroke-opacity=".7"/>
 ${mouth}${sad?'<path d="M122 106q-5 9 0 12q5-3 0-12z" fill="#7dd3fc" stroke="#38bdf8" stroke-width="1"/>':''}${nk?NEC(nk):''}
-${H?hat(H[0],H[1]):ht?`<text x="100" y="60" font-size="54" text-anchor="middle">${ht.e}</text>`:''}${extra}</svg>`}
+${H?hat(H[0],H[1]):ht?`<text x="100" y="60" font-size="54" text-anchor="middle">${ht.e}</text>`:''}${extra}${confetti}</svg>`}
 const AQ=[];let am=null;
 function apop(j){AQ.push(j);anx()}
 function anx(){if(am||!AQ.length)return;const j=AQ.shift(),a=AD[j],ps=PC.filter(c=>c.a===j);
 am=document.createElement('div');
-am.innerHTML=`<div class=ov style="z-index:11"></div><div class="pu ap" style="z-index:12"><div class=bi>${a.i}</div><b style="font-size:22px">¡Logro desbloqueado!</b><b>${E(a.n)}</b><p class=mu>${E(a.d.replace(/^\?/,''))}</p><p>+25 XP</p>${ps.length?`<p>🎁 ${ps.length>1?'Nuevas piezas':'Nueva pieza'}: ${ps.map(c=>c.e+' '+E(c.n)).join(', ')}</p>`:''}<button class=pri id=apx>Cancelar</button></div>`;
+am.innerHTML=`<div class=ov style="z-index:11"></div><div class="pu ap" style="z-index:12"><div class=bi>${a.i}</div><b style="font-size:22px">¡Logro desbloqueado!</b><b>${E(a.n)}</b><p class=mu>${E(a.d.replace(/^\?/,''))}</p><p>+${ps.length?25:45} XP${ps.length?'':' · este logro no tiene pieza, así que da XP extra'}</p>${ps.length?`<p>🎁 ${ps.length>1?'Nuevas piezas':'Nueva pieza'}: ${ps.map(c=>c.e+' '+E(c.n)).join(', ')}</p>`:''}<button class=pri id=apx>Cancelar</button></div>`;
 document.body.appendChild(am);confetti();
 $('#apx').onclick=()=>{am.remove();am=null;anx()}}
 
@@ -797,11 +805,14 @@ const SCENE=`<svg class="scn" viewBox="0 0 400 300" preserveAspectRatio="xMidYMi
 <path d="M0 232Q200 212 400 234V300H0Z" fill="#120d26"/><ellipse cx="200" cy="262" rx="150" ry="16" fill="#2d2250" opacity=".7"/></svg>`;
 let AC0=null;function sfx(f,d){try{AC0=AC0||new(window.AudioContext||window.webkitAudioContext)();const o=AC0.createOscillator(),g=AC0.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(AC0.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,AC0.currentTime+d);o.stop(AC0.currentTime+d)}catch(e){}}
 const EQ=[['🦖🏝️','Parque Jurásico'],['🦈🌊','Tiburón'],['🦇🌃','Batman'],['💍🌋','El Señor de los Anillos'],['🍥🍜🥷','Naruto'],['⚔️👹','Guardianes de la noche'],['🗡️📈','Solo Leveling'],['🏀🔥','Slam Dunk'],['🧊👑','Frozen'],['🤖🔁','Terminator'],['🐠🔍','Buscando a Nemo'],['🦁👑','El Rey León'],['👽📞','E.T.'],['🕷️🕸️','Spider-Man'],['🏴‍☠️👒','One Piece'],['🐉🔥','Dragon Ball']];
+let NOPC=null;function nopc(){if(!NOPC)NOPC=new Set(AD.map((_,j)=>j).filter(j=>!PC.some(c=>c.a===j)));return NOPC}
+function snapSave(){const k=K+'-snaps';let L=[];try{L=JSON.parse(localStorage.getItem(k))||[]}catch(e){}const d=td();if(L[0]&&L[0].d==d)L[0].s=JSON.stringify(S);else L.unshift({d,s:JSON.stringify(S)});L=L.slice(0,5);try{localStorage.setItem(k,JSON.stringify(L))}catch(e){}}
+function snaps(){try{return JSON.parse(localStorage.getItem(K+'-snaps'))||[]}catch(e){return[]}}
 const NGI={run:380,leaf:700,rhy:40};
 const shuf=a=>[...a].sort(()=>Math.random()-.5);
 function ginit(v){if(v=='run')return{l:1,rows:[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],d:0,over:0};
 if(v=='leaf')return{t:30,it:[],n:0,bad:0,id:1,over:0};
-if(v=='rhy')return{pos:0,sp:2,dir:1,taps:0,sc:0,msg:'',over:0};
+if(v=='rhy')return{pos:0,sp:2+Math.min(2,((P().gbest||{}).rhy||0)/10),dir:1,taps:0,sc:0,msg:'',over:0};
 if(v=='emo')return{q:shuf(EQ).slice(0,8).map(([c,a])=>({c,a,o:shuf([a,...shuf(EQ.filter(x=>x[1]!=a)).slice(0,3).map(x=>x[1])])})),i:0,sc:0,ch:null,over:0}}
 function endG(mode){clearInterval(gtm);gtm=0;const G=G2,p=P();if(!G||G.over)return;G.over=1;
 const pts=mode=='run'?Math.min(15,Math.floor(G.d/4)):mode=='leaf'?Math.min(15,G.n):mode=='rhy'?Math.min(15,G.sc):Math.min(15,G.sc*2);
@@ -840,11 +851,11 @@ return`<main><div class=sg><div class=sc><b>${s.gw}</b><small>Entrenos</small></
 <h3>⏱️ Temporizador rápido</h3><div class=g>${[30,60,90,180].map(x=>`<button data-a=gq data-v=${x}>${x<60?x+' s':x/60+' min'}</button>`).join('')}<button data-a=gqc>Otro…</button><button data-a=gf>🍅 Foco 25 min</button></div>
 <h3>📋 Rutinas</h3>${G.rs.map(t=>`<div class=row><div style="flex:1"><b>${E(t.n)}</b><small style="display:block">${t.ex.length} ejercicios · ~${Math.max(1,Math.round(t.ex.reduce((a,e)=>a+e.s*((e.d||e.r*3)+e.p),0)/60))} min</small></div><button data-a=gs data-v=${t.id} aria-label="Empezar">▶</button><button data-a=ged data-v=${t.id} aria-label="Editar">✎</button><button data-a=gdl data-v=${t.id} aria-label="Borrar">🗑</button></div>`).join('')}
 <form id=gf><input id=gn placeholder="Nueva rutina" required><button class=pri>Crear rutina</button></form></main>`},
-saru:(p,s,g,say)=>{const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},cl={happy:'jp',love:'jp',dance:'dc'}[mood]||'',fp=Math.round(fv(p)),k=dk(D),pl=p.plan[k]||[],dd=p.done[k]||{},ok=pl.filter(i=>dd[i]==1).length,en=pl.length?Math.round(ok/pl.length*100):0,fe=Math.min(100,(s.cur||0)*12),fav=(p.fd||0)>=3?FD[hs(S.cur+'fav')%FD.length]:null;
+saru:(p,s,g,say)=>{const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},cl={happy:'jp',love:'jp',jump:'jp',dance:'dc',celebrate:'dc'}[mood]||'',fp=Math.round(fv(p)),k=dk(D),pl=p.plan[k]||[],dd=p.done[k]||{},ok=pl.filter(i=>dd[i]==1).length,en=pl.length?Math.round(ok/pl.length*100):0,fe=Math.min(100,(s.cur||0)*12),fav=(p.fd||0)>=3?FD[hs(S.cur+'fav')%FD.length]:null;
 const B=(v,l,c)=>`<div class=sb><span>${l} · ${v}%</span><div class=sbt><i style="width:${v}%;background:${c}"></i></div></div>`;
 return`<main><div class=scn-w>${SCENE}<div class="sw3 ${cl}" data-a=pet>${svg(p,s,g,mood)}</div><div class=bub>${smsg||(fp<25?'Tengo hambre… ¿me das algo de comer?':say)}</div><div class=sbs>${B(fp,'Saciedad','#22c55e')}${B(en,'Energía','#3b82f6')}${B(fe,'Felicidad','#facc15')}</div></div>
 <div class=acts>${[['wave','👋','Interactuar'],['gym','🏋️','Entrenar'],['happy','🎮','Jugar'],['sleep','🛏️','Dormir'],['chst','🎁','Regalo']].map(([a,i,n])=>a=='gym'?`<button class=act data-a=sc data-v=gym><span>${i}</span>${n}</button>`:a=='chst'?`<button class=act data-a=chst><span>${i}</span>${n}</button>`:`<button class=act data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
-<h3>✨ Animaciones</h3><div class=anrow>${[['wave','👋','Saludar'],['dance','💃','Bailar'],['flex','💪','Flexionar'],['love','🤗','Mimar'],['happy','😄','Feliz']].map(([a,i,n])=>`<button data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
+<h3>✨ Animaciones</h3><div class=anrow>${[['wave','👋','Saludar'],['dance','💃','Bailar'],['flex','💪','Flexionar'],['love','🤗','Mimar'],['happy','😄','Feliz'],['jump','🦘','Saltar'],['celebrate','🎉','Celebrar']].map(([a,i,n])=>`<button data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
 <h3>🍽️ Alimentar · saciedad ${fp}%</h3><div class=bar><i style="width:${fp}%"></i></div><p class=mu>${fav?'Su comida favorita: '+fav[0]+' '+fav[1]:'Prueba distintas comidas para descubrir su favorita.'}</p>
 <div class=g>${FD.map((x,i)=>`<button data-a=food data-v=${i}>${x[0]} ${x[1]}</button>`).join('')}</div>
 <h3>🎮 Mini juegos</h3><div class=g>${[['ban','🍌 Atrapa plátanos'],['rps','✊ Piedra, papel o tijera'],['mem','🧠 Memoria'],['run','🐒 Carrera de monos'],['emo','🎬 Adivina el emoji'],['leaf','🍃 Ninja de hojas'],['rhy','🥁 Dojo de ritmo']].map(([a,b])=>`<button class="${gmode==a?'on':''}" data-a=mg data-v=${a}>${b}</button>`).join('')}</div>${gpanel(p)}
@@ -890,10 +901,10 @@ let run=0;ds.forEach((k,i)=>{run=i&&dn(k)-dn(ds[i-1])==1?run+1:1;o.b=Math.max(o.
 o.run=run;o.dy=ds.length;o.last=ds[ds.length-1]||null;
 o.cur=o.last&&dn(td())-dn(o.last)<=1?run:0;
 return o}
-const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25+(p.gw||0)*20+seen(p)*10+(p.md||0)*25+(p.mw||0)*60+(p.mgxp||0)+(p.bk||0)*100+(p.cxp||0)+(p.fc||0)*15+Object.values(p.wt||{}).filter(n=>n>=8).length*10;
+const base=(p,s)=>s.t*10+s.p*30+Object.keys(p.ach).length*25+(p.gw||0)*20+seen(p)*10+(p.md||0)*25+(p.mw||0)*60+(p.mgxp||0)+(p.bk||0)*100+(p.cxp||0)+(p.fc||0)*15+Object.values(p.wt||{}).filter(n=>n>=8).length*10+Object.keys(p.ach).filter(j=>nopc().has(+j)).length*20;
 function fs(p){const s=st(p);s.x=Math.max(0,base(p,s)-p.pen);s.l=LV(s.x);s.rk=RL.filter(v=>s.l>=v).length-1;
 s.ct=p.tasks.filter(t=>t.id[0]=='u').length;s.pr=Object.keys(S.p).length;s.th=S.base=='color'||S.base=='kai'?1:0;s.pn=S.pet!='Saru'?1:0;s.ex=S.ex?1:0;s.tp=S.taps||0;s.pm=Math.max(0,...Object.values(p.plan).map(a=>a.length));s.nc=cats(p).length;s.tk=p.tasks.length;s.ac=Object.keys(p.ach).length;s.bio=p.bio?1:0;s.pic=p.pic?1:0;s.fx=p.fx?1:0;s.fd=p.fd||0;s.wc=p.wc||0;s.pl=p.pl||0;s.nt=p.nw||0;s.pw=PC.filter(c=>c.a===null||p.ach[c.a]).length;s.gw=p.gw||0;s.gm=p.gm||0;s.gx=p.gx||0;s.tm=p.tm||0;s.eb=p.eb||0;s.en=p.en||0;s.ee=p.ee||0;s.gr=p.gym?p.gym.rs.filter(x=>x.id[0]=='u').length:0;
-{const F=p.films||[],A=p.anime||[],T=[...F,...A].map(x=>x.t).join('|');s.fl=F.length;s.fs=F.filter(x=>x.st=='v').length;s.fr=F.filter(x=>x.r>0).length;s.al=A.length;s.as=A.filter(x=>x.st=='v').length;s.wn=[...F,...A].filter(x=>x.st=='w').length;s.md=p.md||0;s.mw=p.mw||0;s.mrr=p.mrr||0;s.bg=p.bg||0;s.rw=p.rw||0;s.rs=p.rbs||0;s.mm=p.mbm&&p.mbm<=12?1:0;s.mgp=p.mgp||0;s.rvc=[...F,...A].filter(x=>x.rv).length;s.ar=A.filter(x=>x.r>0).length;s.bk=p.bk||0;s.cn=p.cn||0;s.wd=Object.values(p.wt||{}).filter(n=>n>=8).length;s.mo=Object.keys(p.mo||{}).length;s.fc=p.fc||0;s.tl=Object.keys(p.tpl||{}).length;s.rl=p.rl||0;s.bu=S.bu?1:0;s.qa=p.qa||0;s.x1=/anillos|lord of the rings/i.test(T)?1:0;s.x2=/dragon ?ball/i.test(T)?1:0;s.x3=/naruto/i.test(T)?1:0;s.x4=/matrix/i.test(T)?1:0;s.x5=/solo leveling/i.test(T)?1:0}s.fu=SL.every(([k])=>p.sr&&p.sr.eq[k]!=null)?1:0;return s}
+{const F=p.films||[],A=p.anime||[],T=[...F,...A].map(x=>x.t).join('|');s.fl=F.length;s.fs=F.filter(x=>x.st=='v').length;s.fr=F.filter(x=>x.r>0).length;s.al=A.length;s.as=A.filter(x=>x.st=='v').length;s.wn=[...F,...A].filter(x=>x.st=='w').length;s.md=p.md||0;s.mw=p.mw||0;s.mrr=p.mrr||0;s.bg=p.bg||0;s.rw=p.rw||0;s.rs=p.rbs||0;s.mm=p.mbm&&p.mbm<=12?1:0;s.mgp=p.mgp||0;s.rvc=[...F,...A].filter(x=>x.rv).length;s.ar=A.filter(x=>x.r>0).length;s.gbr=(p.gbest||{}).run||0;s.gbe=(p.gbest||{}).emo||0;s.gbl=(p.gbest||{}).leaf||0;s.gbh=(p.gbest||{}).rhy||0;s.bk=p.bk||0;s.cn=p.cn||0;s.wd=Object.values(p.wt||{}).filter(n=>n>=8).length;s.mo=Object.keys(p.mo||{}).length;s.fc=p.fc||0;s.tl=Object.keys(p.tpl||{}).length;s.rl=p.rl||0;s.bu=S.bu?1:0;s.qa=p.qa||0;s.x1=/anillos|lord of the rings/i.test(T)?1:0;s.x2=/dragon ?ball/i.test(T)?1:0;s.x3=/naruto/i.test(T)?1:0;s.x4=/matrix/i.test(T)?1:0;s.x5=/solo leveling/i.test(T)?1:0}s.fu=SL.every(([k])=>p.sr&&p.sr.eq[k]!=null)?1:0;return s}
 function dec(p,pop){const s=st(p);if(!s.last)return;const g=dn(td())-dn(s.last)-1;
 if(g<=0){p.pg=0;return}
 if(g>p.pg){const x0=Math.max(0,base(p,s)-p.pen);
@@ -1088,7 +1099,7 @@ function profModal(p,s){const pic=p.pic?`<img class="av big" src="${p.pic}" alt=
 return`<div class=ov style="z-index:11" data-a=pclose></div><div class="pu pf" style="z-index:12"><button class=x data-a=pclose aria-label="Cerrar">✕</button><div class="pbn rk${s.rk}"></div><div class=pav>${pic}</div><div class=pbd><h2>${E(S.cur)}</h2><p class=mu>${E(S.rk[s.rk])} · Nivel ${s.l} · ${s.x} XP</p><p>${E(p.bio||'Sin descripción todavía.')}</p></div>
 <div class=sg3><div class=sc><b>🔥 ${s.cur}</b><small>Racha</small></div><div class=sc><b>🏆 ${s.ac}</b><small>Logros</small></div><div class=sc><b>✅ ${s.t}</b><small>Tareas</small></div></div>
 <h3>🏅 Logros</h3><div class=lgr>${A.slice(0,14).map(i=>`<span title="${E(AD[i].n)}">${AD[i].i}</span>`).join('')||'<small class=mu>Aún no hay logros</small>'}</div>
-<h3>👥 Amigos · 0</h3><div class=fr><span>🫥</span><p>Aún no hay amigos. Cuando la app sea online podrás añadirlos y ver su nivel.</p></div>
+<h3>👥 Amigos · ${(S.friends||[]).length}</h3>${(S.friends||[]).map((x,i)=>`<div class=fr2><div><b>${E(x.n)}</b><small>${E(x.r)} · Nivel ${x.l} · 🔥 ${x.c}</small></div><button data-a=fdel data-v=${i} aria-label="Quitar">✕</button></div>`).join('')||'<p class=mu>Aún no tienes amigos. Pásale tu código a alguien o pega el suyo.</p>'}<div class=g style="margin:8px 0"><button data-a=fcode>📋 Copiar mi código</button></div><form class=fform onsubmit="return false"><input id=fc placeholder="Pega el código de un amigo"><button type=button class=pri data-a=fadd>Añadir</button></form>
 <div class=g style="margin-top:12px"><button class=pri data-a=ped>✏️ Editar perfil</button></div></div>`}
 function drawer(p,s,col){
 const pf=p.pic?`<img class=av src="${p.pic}" alt="">`:`<span class=av>${AX[s.rk]}</span>`;
@@ -1108,11 +1119,16 @@ ${HU.map(c=>`<button class="sw ${col&&S.h==c?'on':''}" style="background:hsl(${c
 <h3>📤 Compartir rutina</h3><div class=g><button data-a=exp>Copiar mi código</button></div>
 <textarea id=imp rows=3 placeholder="Pega aquí un código" style="margin:8px 0"></textarea><button class=pri data-a=imp>Importar</button>
 <h3>💾 Copia de seguridad</h3><div class=g><button data-a=bke>Copiar copia completa</button></div><textarea id=bkt rows=2 placeholder="Pega aquí una copia" style="margin:8px 0"></textarea><button class=sec data-a=bki>Restaurar copia</button>
+<h3>🗂️ Copias automáticas</h3>${snaps().map((x,i)=>`<div class=row><span>${x.d}</span><button data-a=snr data-v=${i}>Restaurar</button></div>`).join('')||'<p class=mu>Aún no hay copias.</p>'}
 <h3>⚙️ Datos</h3><button class=sec data-a=rst>Borrar todo</button></aside>`}
 function act(a,v){
 const p=P(),k=dk(D);
-if(a=='mg'&&NGI.hasOwnProperty(v)||a=='mg'&&v=='emo'){clearInterval(gtm);gtm=0;gmode=v;G2=ginit(v);if(NGI[v])gtm=setInterval(v=='run'?rtick:v=='leaf'?ltick:htick,NGI[v]);save();r();return}
+if(a=='mg'&&NGI.hasOwnProperty(v)||a=='mg'&&v=='emo'){clearInterval(gtm);gtm=0;gmode=v;G2=ginit(v);if(NGI[v])gtm=setInterval(v=='run'?rtick:v=='leaf'?ltick:htick,v=='run'?Math.max(220,380-((P().gbest||{}).run||0)*3):v=='leaf'?700-Math.min(250,((P().gbest||{}).leaf||0)*15):NGI[v]);save();r();return}
 if(a=='rmv'){const G=G2;if(G&&!G.over){const nl=Math.max(0,Math.min(2,G.l+ +v));G.l=nl;if(G.rows[5][nl]){endG('run');return}}r();return}
+if(a=='fcode'){const s2=fs(p),c=btoa(unescape(encodeURIComponent(JSON.stringify({f:1,n:S.cur,r:S.rk[s2.rk],l:s2.l,c:s2.cur,a:s2.ac}))));if(navigator.clipboard)navigator.clipboard.writeText(c).then(()=>alert('Código copiado. Pásaselo a tu amigo.'),()=>prompt('Copia tu código',c));else prompt('Copia tu código',c);return}
+if(a=='fadd'){const raw=(($('#fc')||{}).value||'').trim();try{const o=JSON.parse(decodeURIComponent(escape(atob(raw))));if(!o.f)throw 0;S.friends=S.friends||[];if(S.friends.some(x=>x.n==o.n)){alert('Ese amigo ya está en tu lista.');return}S.friends.push({n:String(o.n).slice(0,24),r:String(o.r),l:+o.l||1,c:+o.c||0,a:+o.a||0});save();r();return}catch(e){alert('Ese código no es válido.');return}}
+if(a=='fdel'){S.friends.splice(+v,1);save();r();return}
+if(a=='snr'){const x=snaps()[+v];if(x&&confirm('¿Restaurar la copia del '+x.d+'? Tus datos actuales se reemplazarán.')){localStorage.setItem(K,x.s);location.reload()}return}
 if(a=='xh'){xo=xo?0:1;r();return}
 if(a=='lft'){lt(+v);return}
 if(a=='rhyt'){ht();return}
@@ -1173,7 +1189,7 @@ else if(a=='gf'){scr='gym';W={q:1,f:1};setT(1500);p.tm=(p.tm||0)+1}
 else if(a=='tps'){const n=(prompt('Nombre de la plantilla (ej. Día de gym)')||'').trim();if(n&&(p.plan[k]||[]).length)(p.tpl=p.tpl||{})[n]=[...p.plan[k]]}
 else if(a=='tpa'){p.plan[k]=((p.tpl||{})[v]||[]).filter(i=>p.tasks.some(t=>t.id==i))}
 else if(a=='tpd'){if(confirm('¿Borrar la plantilla?'))delete p.tpl[v]}
-else if(a=='bke'){S.bu=1;const c=btoa(unescape(encodeURIComponent(JSON.stringify(S))));if(navigator.clipboard)navigator.clipboard.writeText(c).then(()=>alert('Copia de seguridad copiada. Guárdala en un sitio seguro.'),()=>prompt('Copia tu copia de seguridad',c));else prompt('Copia tu copia de seguridad',c)}
+else if(a=='bke'){S.bu=1;S.bdt=Date.now();const c=btoa(unescape(encodeURIComponent(JSON.stringify(S))));if(navigator.clipboard)navigator.clipboard.writeText(c).then(()=>alert('Copia de seguridad copiada. Guárdala en un sitio seguro.'),()=>prompt('Copia tu copia de seguridad',c));else prompt('Copia tu copia de seguridad',c)}
 else if(a=='bki'){try{const o=JSON.parse(decodeURIComponent(escape(atob($('#bkt').value.trim()))));if(!o.p)throw 0;if(confirm('Se reemplazarán todos tus datos actuales. ¿Continuar?')){localStorage.setItem(K,JSON.stringify(o));location.reload();return}}catch(e){alert('Esa copia no es válida.')}}
 else if(a=='rul'){const L=p[cv]||[],c=L.map((x,i)=>i).filter(i=>L[i].st=='p');if(!c.length)toast('🎲','Sin opciones','Añade algo a «Por ver»');else{rlr={cv,i:c[Math.random()*c.length|0]};p.rl=(p.rl||0)+1}}
 else if(a=='rvw'){if(rlr&&p[rlr.cv][rlr.i])p[rlr.cv][rlr.i].st='w';rlr=null}
@@ -1224,7 +1240,8 @@ const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({i
 document.addEventListener('change',e=>{if(e.target.id!='ph'||!e.target.files[0])return;const f=new FileReader();f.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=128;const m=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,128,128);P().pic=c.toDataURL('image/jpeg',.75);chk();save();r()};im.src=f.result};f.readAsDataURL(e.target.files[0])});
 Object.values(S.p).forEach(p=>dec(p,p===P()));
 {const s=chk(1),q=P();q.lv=s.l;q.rkk=s.rk}
-save();r();
+snapSave();save();r();
+const need=(!S.bdt&&Object.keys(P().done).length>0)||(S.bdt&&Date.now()-S.bdt>6048e5);if(need)setTimeout(()=>toast('💾','Copia semanal','Ve a ☰ y guarda una copia de seguridad'),1200);
 </script>
 </body>
 </html>
