@@ -370,7 +370,6 @@ const AD=`✅|Primer paso|Marca tu primera tarea|t|1
 🎲|Indeciso|Usa la ruleta de qué ver|rl|1
 🛟|A salvo|Haz una copia de seguridad|bu|1
 ⚡|Rápido y furioso|Añade 5 tareas rápidas desde Hoy|qa|5
-🐒|Corredor de monos|Consigue 10 puntos en la Carrera de monos|gbr|10
 🎬|Adivino|Acierta 4 preguntas en Adivina el emoji|gbe|8
 🍃|Ninja de bambú|Consigue 10 bambúes en Ninja de hojas|gbl|10
 🥁|Ritmo perfecto|Consigue 15 puntos en el Dojo de ritmo|gbh|15`.split('\n').map(l=>{const a=l.split('|');return{i:a[0],n:a[1],d:a[2],k:a[3],v:+a[4]}});
@@ -609,7 +608,7 @@ const qa=a=>`M${a[0][0]} ${a[0][1]}Q${a[1][0]} ${a[1][1]} ${a[2][0]} ${a[2][1]}`
 const qp=(a,t)=>{const[S,C,E]=a,u=1-t;return`M${S[0]} ${S[1]}Q${(S[0]+t*(C[0]-S[0])).toFixed(1)} ${(S[1]+t*(C[1]-S[1])).toFixed(1)} ${(u*u*S[0]+2*u*t*C[0]+t*t*E[0]).toFixed(1)} ${(u*u*S[1]+2*u*t*C[1]+t*t*E[1]).toFixed(1)}`};
 function SHR(sr,hw,bw,x1,x2){const n=sr.n,c=sr.c,d=shd(c,-.3),l=shd(c,.25),k=/kimono|haori/i.test(n)?'kim':/hoodie|sudadera/i.test(n)?'hood':/armadura|cazador/i.test(n)?'arm':/capa/i.test(n)?'cape':/chaleco/i.test(n)?'vest':/chaqueta|cuero|gabardina|uniforme/i.test(n)?'jack':/esmoquin|traje de (rey|espía)/i.test(n)?'suit':/túnica|bata|poncho/i.test(n)?'robe':'tee',
 tor=(y0,y1,o,e)=>{const a=100-hw(y0)-o,b2=100+hw(y0)+o,c2=100-hw(y1)-o,k2=100+hw(y1)+o,m=(y0+y1)/2;return`M${a} ${y0}Q100 ${y0-12} ${b2} ${y0}Q${100+bw+o} ${m} ${k2} ${y1}Q100 ${y1+e} ${c2} ${y1}Q${100-bw-o} ${m} ${a} ${y0}Z`},
-em=`<text x="100" y="184" font-size="24" text-anchor="middle">${sr.e}</text>`;let b='',f='',t=0,w=21;
+em=SDEC(n,c,hw);let b='',f='',t=0,w=21;
 if(k=='tee'){t=/jersey|pijama|traje/i.test(n)?.9:.45;f=`<path d="${tor(150,200,3,10)}" fill="${c}"/><path d="M84 150Q100 164 116 150" fill="none" stroke="${d}" stroke-width="4"/>${em}`}
 else if(k=='hood'){b=`<path d="M62 136Q100 112 138 136Q150 164 136 174H64Q50 164 62 136Z" fill="${d}"/>`;t=.92;f=`<path d="${tor(150,202,3,10)}" fill="${c}"/><path d="M${100-bw*.5} 186H${100+bw*.5}L${100+bw*.6} 202H${100-bw*.6}Z" fill="${d}"/><path d="M92 152V172M108 152V172" stroke="#fff" stroke-width="2.5"/>${em}`}
 else if(k=='kim'){const ac=lm(c)>150?'#b91c1c':'#f8fafc';t=.62;w=34;f=`<path d="${tor(150,222,4,6)}" fill="${c}"/><path d="M116 148L92 206" stroke="${d}" stroke-width="3"/><path d="M84 148L112 206" stroke="#f8fafc" stroke-width="5" stroke-linecap="round"/><path d="M${100-hw(196)-5} 190H${100+hw(196)+5}V204H${100-hw(196)-5}Z" fill="${ac}"/><rect x="102" y="188" width="14" height="17" rx="3" fill="${shd(ac,-.25)}"/>`}
@@ -621,12 +620,79 @@ else if(k=='suit'){t=.92;f=`<path d="${tor(150,204,4,8)}" fill="${c}"/><path d="
 else if(/poncho/i.test(n)){f=`<path d="M${x1-16} 150L100 236L${x2+16} 150Q100 136 ${x1-16} 150Z" fill="${c}"/><path d="M${x1-2} 168L100 222L${x2+2} 168M${x1+12} 188L100 216L${x2-12} 188" stroke="${l}" stroke-width="4" fill="none"/><path d="M84 150Q100 168 116 150Z" fill="${d}"/>`}
 else{t=.9;f=`<path d="${tor(150,226,4,6)}" fill="${c}"/><path d="M82 148Q100 176 118 148" fill="none" stroke="${d}" stroke-width="4"/>${/bata/i.test(n)?`<path d="M100 176V226" stroke="${d}" stroke-width="2"/><rect x="${100+bw*.25}" y="204" width="14" height="12" rx="2" fill="none" stroke="${d}" stroke-width="2"/>`:`<path d="M${100-hw(190)-4} 186H${100+hw(190)+4}V198H${100-hw(190)-4}Z" fill="${d}"/>`}`}
 return{b,f,t,w,c}}
-function PAN(pa,hw,bw){const n=pa.n,c=pa.c,d=shd(c,-.28),l=shd(c,.22),k=/bermuda/i.test(n)?'sho':/hakama|samur|karate/i.test(n)?'hak':/chándal|pijama|nieve|arcoíris|skater/i.test(n)?'jog':/cargo|explorador|buzo|piloto/i.test(n)?'car':/mallas|laboratorio|espía|ninja/i.test(n)?'tig':'jea',
+const SDK=[
+[/ramen/i,()=>`<path d="M86 166H114Q112 188 100 188Q88 188 86 166Z" fill="#f8fafc" stroke="#dc2626" stroke-width="2"/><path d="M90 170Q100 178 110 170" stroke="#f59e0b" stroke-width="2" fill="none"/><path d="M93 158q3-6 0-10M100 158q3-6 0-10M107 158q3-6 0-10" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/>`],
+[/pirata/i,()=>`<circle cx="100" cy="170" r="12" fill="#f8fafc"/><rect x="95" y="178" width="10" height="8" rx="2" fill="#f8fafc"/><circle cx="95" cy="169" r="3.5" fill="#111"/><circle cx="105" cy="169" r="3.5" fill="#111"/><path d="M96 183v3M100 183v3M104 183v3" stroke="#111" stroke-width="1.2"/>`],
+[/robot/i,()=>`<rect x="84" y="158" width="32" height="22" rx="5" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/><circle cx="93" cy="168" r="3" fill="#22d3ee"/><circle cx="107" cy="168" r="3" fill="#22d3ee"/><path d="M92 176h16" stroke="#94a3b8" stroke-width="2"/><path d="M100 158V148" stroke="#94a3b8" stroke-width="2"/><circle cx="100" cy="146" r="3" fill="#ef4444"/>`],
+[/astronauta/i,()=>`<path d="M80 150Q100 162 120 150" stroke="#e5e7eb" stroke-width="4" fill="none"/><circle cx="100" cy="172" r="12" fill="#e5e7eb" stroke="#1e3a8a" stroke-width="3"/><path d="M92 172H108" stroke="#f97316" stroke-width="3"/>`],
+[/esmoqu/i,()=>`<path d="M86 150L100 196L114 150Z" fill="#fff"/><path d="M86 150L96 178L92 190L80 160ZM114 150L104 178L108 190L120 160Z" fill="#171717"/><path d="M92 156l8-4v8zM108 156l-8-4v8z" fill="#dc2626"/><circle cx="100" cy="156" r="3" fill="#dc2626"/>`],
+[/haori/i,()=>`<path d="M84 150L104 200M116 150L96 200" stroke="#0005" stroke-width="2.5" fill="none"/><path d="M76 200l6-10 5 7 5-12 5 10 5-8 5 9 5-7 6 10 5-8 5 8" stroke="#f97316" stroke-width="2" fill="none"/>`],
+[/kimono|túnica/i,()=>`<path d="M84 150L104 200M116 150L96 200" stroke="#0005" stroke-width="2.5" fill="none"/><path d="M92 176Q100 182 108 176" stroke="#0004" stroke-width="2" fill="none"/><path d="M90 186Q100 192 110 186" stroke="#0002" stroke-width="2" fill="none"/>`],
+[/flores/i,()=>`<g fill="#fbcfe8"><circle cx="90" cy="164" r="4"/><circle cx="110" cy="170" r="4"/><circle cx="98" cy="184" r="4"/></g><g fill="#fff"><circle cx="90" cy="164" r="1.6"/><circle cx="110" cy="170" r="1.6"/><circle cx="98" cy="184" r="1.6"/></g>`],
+[/hawai/i,()=>`<g fill="#16a34a"><ellipse cx="90" cy="168" rx="7" ry="3" transform="rotate(-30 90 168)"/><ellipse cx="110" cy="176" rx="7" ry="3" transform="rotate(30 110 176)"/></g>`],
+[/cuero|chaqueta|equipo/i,()=>`<path d="M100 150V200" stroke="#0006" stroke-width="2.5"/><path d="M96 158l8-2" stroke="#e5e7eb" stroke-width="2"/>`],
+[/escolar|uniforme/i,()=>`<path d="M100 152l-5 6 5 28 5-28z" fill="#1e3a8a"/><path d="M92 150L100 158L108 150" fill="#fff"/>`],
+[/pijama|luna/i,()=>`<path d="M96 158a8 8 0 1 0 6 13a7 7 0 0 1-6-13z" fill="#fde047"/><circle cx="110" cy="176" r="1.8" fill="#fde047"/><circle cx="88" cy="184" r="1.5" fill="#fde047"/>`],
+[/gamer/i,()=>`<rect x="86" y="170" width="28" height="13" rx="6" fill="#111"/><circle cx="94" cy="176" r="2" fill="#22c55e"/><circle cx="106" cy="172" r="2" fill="#ef4444"/><path d="M108 172h4M110 170v4" stroke="#fff" stroke-width="1.5"/>`],
+[/lava/i,()=>`<path d="M88 152l6 10-4 8 6 10M112 160l-6 8 4 8-6 10" stroke="#fb923c" stroke-width="2" fill="none"/>`],
+[/nieve|jersey/i,()=>`<g stroke="#fff" stroke-width="1.6"><path d="M100 160v14M93 167h14M95 162l10 10M105 162l-10 10"/></g>`],
+[/zen/i,()=>`<circle cx="100" cy="176" r="10" fill="none" stroke="#f0fdfa" stroke-width="3" stroke-dasharray="54 8" transform="rotate(40 100 176)"/>`],
+[/rey/i,()=>`<path d="M88 172L88 160L94 166L100 156L106 166L112 160L112 172Z" fill="#facc15" stroke="#a16207" stroke-width="1.5"/>`],
+[/armadura|cazador|dorada/i,()=>`<path d="M84 156Q100 172 116 156M84 170Q100 186 116 170" stroke="#0005" stroke-width="2" fill="none"/><rect x="96" y="158" width="8" height="5" rx="1" fill="#facc15"/>`],
+[/buzo/i,()=>`<path d="M84 170H116M84 178H116" stroke="#fff" stroke-width="3"/>`],
+[/espía/i,()=>`<path d="M100 150l-6 4 6 30 6-30z" fill="#111"/><path d="M88 150L100 156L112 150" fill="#fff"/>`],
+[/bata|laboratorio|científico/i,()=>`<rect x="110" y="168" width="10" height="11" fill="none" stroke="#94a3b8" stroke-width="1.5"/><path d="M114 160v8" stroke="#2563eb" stroke-width="2.5"/>`],
+[/mago/i,()=>`<path d="M100 160l2 5h5l-4 3 2 5-5-3-5 3 2-5-4-3h5z" fill="#fde047"/><path d="M86 180l1.5 3h3l-2.5 2 1 3-3-2-3 2 1-3-2.5-2h3z" fill="#fde047"/>`],
+[/explorador|chaleco|ninja/i,()=>`<rect x="86" y="170" width="11" height="13" rx="2" fill="#0003"/><rect x="103" y="170" width="11" height="13" rx="2" fill="#0003"/>`],
+[/desierto|poncho/i,()=>`<path d="M84 186Q100 180 116 186" stroke="#fff5" stroke-width="2" fill="none"/>`],
+[/hoodie|sudadera/i,()=>`<path d="M92 152V172M108 152V172" stroke="#fff" stroke-width="2.5"/><rect x="92" y="184" width="16" height="6" rx="2" fill="#0004"/>`],
+[/anime|retro/i,()=>`<path d="M86 166h28M86 176h28" stroke="#fff" stroke-width="3" stroke-dasharray="4 3"/>`],
+];
+const SDEC=(n,c,hw)=>{const e=SDK.find(x=>x[0].test(n));return e?e[1]():''};
+const PDK=[
+[/fuego/i,()=>`<path d="M70 226l4-8 3 5 4-9 3 6 4-7 3 5 4-8 4 7 3-6 3 8 4-5 4 7" stroke="#f97316" stroke-width="2" fill="none"/>`],
+[/lava/i,()=>`<path d="M80 200l8 12-6 10M120 200l-8 12 6 10" stroke="#fb923c" stroke-width="2" fill="none"/>`],
+[/galáctico|galaxia/i,()=>`<g fill="#c4b5fd"><circle cx="82" cy="204" r="1.5"/><circle cx="96" cy="216" r="1.5"/><circle cx="114" cy="206" r="2"/><circle cx="124" cy="222" r="1.5"/></g>`],
+[/floral|flores|rosa/i,()=>`<g fill="#fbcfe8"><circle cx="84" cy="206" r="3.5"/><circle cx="116" cy="214" r="3.5"/><circle cx="100" cy="224" r="3"/></g>`],
+[/arcoíris/i,()=>`<path d="M70 200H130M70 208H130M70 216H130" stroke="#ef4444" stroke-width="3"/><path d="M70 212H130M70 220H130" stroke="#facc15" stroke-width="2"/>`],
+[/dorado|oro|real|campeón|samurái/i,()=>`<path d="M70 226H130" stroke="#facc15" stroke-width="2.5"/>`],
+[/cargo|explorador|piloto|desierto/i,()=>`<rect x="80" y="206" width="10" height="11" rx="2" fill="#0002" stroke="#0004"/><rect x="110" y="206" width="10" height="11" rx="2" fill="#0002" stroke="#0004"/>`],
+[/skater|cazador/i,()=>`<rect x="82" y="206" width="12" height="7" rx="3" fill="#0003"/><rect x="106" y="206" width="12" height="7" rx="3" fill="#0003"/>`],
+[/robot/i,()=>`<rect x="86" y="200" width="28" height="10" rx="3" fill="#0003"/><circle cx="90" cy="205" r="1.5" fill="#22d3ee"/><circle cx="110" cy="205" r="1.5" fill="#22d3ee"/>`],
+[/laboratorio/i,()=>`<rect x="110" y="206" width="9" height="10" fill="none" stroke="#0004"/><path d="M114 200v7" stroke="#2563eb" stroke-width="2"/>`],
+[/nieve/i,()=>`<g fill="#fff"><circle cx="82" cy="206" r="1.6"/><circle cx="96" cy="210" r="1.6"/><circle cx="110" cy="206" r="1.6"/><circle cx="120" cy="216" r="1.6"/></g>`],
+[/zen|buzo/i,()=>`<path d="M70 210H130" stroke="#fff" stroke-width="2.5"/>`],
+[/mago/i,()=>`<path d="M96 206l2 4h4l-3 2 1 4-4-2-3 2 1-4-3-2h4z" fill="#fde047"/>`],
+[/gamer/i,()=>`<path d="M70 222h60" stroke="#22c55e" stroke-width="3" stroke-dasharray="6 4"/>`],
+[/pirata/i,()=>`<circle cx="112" cy="206" r="4" fill="#111"/><circle cx="110.5" cy="205" r="1" fill="#fff"/><circle cx="113.5" cy="205" r="1" fill="#fff"/>`],
+[/karate/i,()=>`<rect x="70" y="194" width="60" height="6" fill="#111"/>`],
+[/ninja/i,()=>`<path d="M70 196H130" stroke="#0006" stroke-width="3"/>`],
+[/espía/i,()=>`<path d="M70 206H130" stroke="#0005" stroke-width="2"/>`],
+];
+const PDEC=(n,c,hw,bw)=>{const e=PDK.find(x=>x[0].test(n));return e?e[1]():''};
+const ODK=[
+[/rayo/i,x=>`<path d="M${x+4} 222l-4 7h5l-4 7" stroke="#facc15" stroke-width="2.5" fill="none" stroke-linejoin="round"/>`],
+[/dragón/i,x=>`<g fill="#14532d" opacity=".5"><circle cx="${x-10}" cy="232" r="2.5"/><circle cx="${x}" cy="234" r="2.5"/><circle cx="${x+10}" cy="232" r="2.5"/></g>`],
+[/oro|dorad|reales|campeón/i,x=>`<path d="M${x-14} 228Q${x-8} 224 ${x-2} 228" stroke="#fff9" stroke-width="2.5" fill="none"/>`],
+[/turbo|rojas|fluor|gamer/i,x=>`<path d="M${x-22} 238H${x+22}" stroke="#fff8" stroke-width="2.5"/>`],
+[/karate/i,x=>`<path d="M${x-22} 236H${x+22}" stroke="#111" stroke-width="4"/>`],
+[/robot/i,x=>`<circle cx="${x-8}" cy="236" r="1.8" fill="#94a3b8"/><circle cx="${x+8}" cy="236" r="1.8" fill="#94a3b8"/>`],
+[/pirata/i,x=>`<circle cx="${x}" cy="232" r="3" fill="#facc15"/>`],
+[/nieve/i,x=>`<path d="M${x-22} 226Q${x} 222 ${x+22} 226" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>`],
+[/floreadas|arcoíris/i,x=>`<g fill="#fff"><circle cx="${x-8}" cy="236" r="2"/><circle cx="${x+4}" cy="238" r="2"/></g>`],
+[/espía|claqué/i,x=>`<path d="M${x-20} 240H${x+20}" stroke="#fff4" stroke-width="2"/>`],
+[/cazador|mago|explorador|desierto/i,x=>`<path d="M${x-12} 226L${x+12} 240" stroke="#0005" stroke-width="2"/>`],
+[/lava/i,x=>`<path d="M${x-10} 236l4-4 3 4 4-5" stroke="#fb923c" stroke-width="2" fill="none"/>`],
+];
+const ODEC=so=>{const e=ODK.find(x=>x[0].test(so.n));return e?[76,124].map(x=>e[1](x)).join(''):''};
+function PAN(pa,hw,bw){return PAN0(pa,hw,bw)+PDEC(pa.n,pa.c,hw,bw)}
+function PAN0(pa,hw,bw){const n=pa.n,c=pa.c,d=shd(c,-.28),l=shd(c,.22),k=/bermuda/i.test(n)?'sho':/hakama|samur|karate/i.test(n)?'hak':/chándal|pijama|nieve|arcoíris|skater/i.test(n)?'jog':/cargo|explorador|buzo|piloto/i.test(n)?'car':/mallas|laboratorio|espía|ninja/i.test(n)?'tig':'jea',
 wb=`<path d="M${100-hw(196)-3} 191H${100+hw(196)+3}V202H${100-hw(196)-3}Z" fill="${d}"/><rect x="95" y="192" width="10" height="8" rx="2" fill="#facc15"/>`;
 if(k=='hak')return`<path d="M${100-hw(196)-3} 192H${100+hw(196)+3}L${100+bw+22} 236H${100-bw-22}Z" fill="${c}"/><path d="M${100-bw*.3} 194L${100-bw*.5} 236M100 194V236M${100+bw*.3} 194L${100+bw*.5} 236" stroke="${d}" stroke-width="2.5"/>${wb}`;
 const e=k=='sho'?214:k=='tig'?238:232,w2=k=='tig'?14:k=='jog'?15:18;
 return`<ellipse cx="100" cy="203" rx="${hw(203)+3}" ry="13" fill="${c}"/>`+[82,118].map(cx=>`<path d="M${cx-18} 198H${cx+18}L${cx+w2} ${e}H${cx-w2}Z" fill="${c}"/>`+(k=='jog'?`<rect x="${cx-w2-1}" y="${e-6}" width="${2*w2+2}" height="8" rx="3" fill="${d}"/>`:k=='sho'?`<path d="M${cx-w2} ${e-3}H${cx+w2}" stroke="${d}" stroke-width="3"/>`:k=='car'?`<rect x="${cx-12}" y="208" width="10" height="13" rx="2" fill="${d}"/>`:k=='tig'?`<path d="M${cx-4} 206L${cx-5} 232" stroke="${l}" stroke-width="3" opacity=".6"/>`:`<path d="M${cx-w2} ${e-4}H${cx+w2}" stroke="${d}" stroke-width="3"/>`)).join('')+wb}
-function SHO(so){const n=so.n,c=so.c,d=shd(c,-.3),l=shd(c,.25),k=/sandalia|chancla/i.test(n)?'san':/bota/i.test(n)?'boo':/aleta/i.test(n)?'fin':/zapatos|claqué/i.test(n)?'dre':'sne';
+function SHO(so){return SHO0(so)+ODEC(so)}
+function SHO0(so){const n=so.n,c=so.c,d=shd(c,-.3),l=shd(c,.25),k=/sandalia|chancla/i.test(n)?'san':/bota/i.test(n)?'boo':/aleta/i.test(n)?'fin':/zapatos|claqué/i.test(n)?'dre':'sne';
 return[76,124].map(x=>{const f=x<100?-1:1;return k=='san'?`<rect x="${x-24}" y="240" width="48" height="6" rx="3" fill="${c}"/>${/madera|zen/i.test(n)?`<rect x="${x-18}" y="246" width="7" height="6" fill="${d}"/><rect x="${x+11}" y="246" width="7" height="6" fill="${d}"/>`:''}<path d="M${x-16} 240L${x} 227L${x+16} 240" fill="none" stroke="${d}" stroke-width="4"/>`
 :k=='boo'?`<path d="M${x-20} 214H${x+20}V240H${x+26}V247H${x-26}V240H${x-20}Z" fill="${c}"/><rect x="${x-20}" y="214" width="40" height="6" fill="${l}"/>`
 :k=='fin'?`<path d="M${x-8} 232L${x-36} 254H${x+36}L${x+8} 232Z" fill="${c}"/><path d="M${x-14} 240L${x-20} 252M${x} 238V253M${x+14} 240L${x+20} 252" stroke="${d}" stroke-width="2"/>`
@@ -808,7 +874,7 @@ const EQ=[['🦖🏝️','Parque Jurásico'],['🦈🌊','Tiburón'],['🦇🌃'
 let NOPC=null;function nopc(){if(!NOPC)NOPC=new Set(AD.map((_,j)=>j).filter(j=>!PC.some(c=>c.a===j)));return NOPC}
 function snapSave(){const k=K+'-snaps';let L=[];try{L=JSON.parse(localStorage.getItem(k))||[]}catch(e){}const d=td();if(L[0]&&L[0].d==d)L[0].s=JSON.stringify(S);else L.unshift({d,s:JSON.stringify(S)});L=L.slice(0,5);try{localStorage.setItem(k,JSON.stringify(L))}catch(e){}}
 function snaps(){try{return JSON.parse(localStorage.getItem(K+'-snaps'))||[]}catch(e){return[]}}
-const NGI={run:380,leaf:700,rhy:40};
+const NGI={leaf:700,rhy:40};
 const shuf=a=>[...a].sort(()=>Math.random()-.5);
 function ginit(v){if(v=='run')return{l:1,rows:[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],d:0,over:0};
 if(v=='leaf')return{t:30,it:[],n:0,bad:0,id:1,over:0};
@@ -858,7 +924,7 @@ return`<main><div class=scn-w>${SCENE}<div class="sw3 ${cl}" data-a=pet>${svg(p,
 <h3>✨ Animaciones</h3><div class=anrow>${[['wave','👋','Saludar'],['dance','💃','Bailar'],['flex','💪','Flexionar'],['love','🤗','Mimar'],['happy','😄','Feliz'],['jump','🦘','Saltar'],['celebrate','🎉','Celebrar']].map(([a,i,n])=>`<button data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
 <h3>🍽️ Alimentar · saciedad ${fp}%</h3><div class=bar><i style="width:${fp}%"></i></div><p class=mu>${fav?'Su comida favorita: '+fav[0]+' '+fav[1]:'Prueba distintas comidas para descubrir su favorita.'}</p>
 <div class=g>${FD.map((x,i)=>`<button data-a=food data-v=${i}>${x[0]} ${x[1]}</button>`).join('')}</div>
-<h3>🎮 Mini juegos</h3><div class=g>${[['ban','🍌 Atrapa plátanos'],['rps','✊ Piedra, papel o tijera'],['mem','🧠 Memoria'],['run','🐒 Carrera de monos'],['emo','🎬 Adivina el emoji'],['leaf','🍃 Ninja de hojas'],['rhy','🥁 Dojo de ritmo']].map(([a,b])=>`<button class="${gmode==a?'on':''}" data-a=mg data-v=${a}>${b}</button>`).join('')}</div>${gpanel(p)}
+<h3>🎮 Mini juegos</h3><div class=g>${[['ban','🍌 Atrapa plátanos'],['rps','✊ Piedra, papel o tijera'],['mem','🧠 Memoria'],['emo','🎬 Adivina el emoji'],['leaf','🍃 Ninja de hojas'],['rhy','🥁 Dojo de ritmo']].map(([a,b])=>`<button class="${gmode==a?'on':''}" data-a=mg data-v=${a}>${b}</button>`).join('')}</div>${gpanel(p)}
 <h3>🧬 Cuerpo</h3><div class=g>${FUR.map((c,i)=>`<button class="sw ${z.fur==i?'on':''}" style="background:${c}" data-a=fur data-v=${i} aria-label="Pelaje"></button>`).join('')}</div>
 <div class=g style="margin-top:8px">${['Delgado','Normal','Fuerte'].map((n,i)=>`<button class="${z.bd==i?'on':''}" data-a=bd data-v=${i}>${n}</button>`).join('')}</div>
 <div class=arm><div class=arh><b>👕 Armario</b><span>${s.pw} / ${PC.length}</span></div><div class=slots>${SL.map(([k2,n])=>`<button class="${wt==k2?'on':''}" data-a=wt data-v=${k2}>${n}</button>`).join('')}</div>
