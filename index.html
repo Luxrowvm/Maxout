@@ -985,7 +985,7 @@ ${eyes}<path d="${brows}" fill="none" stroke="${shd(f,-.42)}" stroke-width="4.2"
 ${mouth}${sad?'<path d="M122 106q-5 9 0 12q5-3 0-12z" fill="#7dd3fc" stroke="#38bdf8" stroke-width="1"/>':''}${nk?NEC(nk):''}
 ${H?hat(H[0],H[1]):ht?`<text x="100" y="60" font-size="54" text-anchor="middle">${ht.e}</text>`:''}${extra}${confetti}</g></svg>`}
 const AQ=[];let am=null;
-function apop(j){AQ.push(j);anx()}
+function apop(j){AQ.push(j);anx();sfx(660,.12);setTimeout(()=>sfx(990,.22),120)}
 function anx(){if(am||!AQ.length)return;const j=AQ.shift(),a=AD[j],ps=PC.filter(c=>c.a===j);
 am=document.createElement('div');
 am.innerHTML=`<div class=ov style="z-index:11"></div><div class="pu ap" style="z-index:12"><div class=bi>${a.i}</div><b style="font-size:22px">¡Logro desbloqueado!</b><b>${E(a.n)}</b><p class=mu>${E(a.d.replace(/^\?/,''))}</p><p>+${ps.length?25:45} XP${ps.length?'':' · este logro no tiene pieza, así que da XP extra'}</p>${ps.length?`<p>🎁 ${ps.length>1?'Nuevas piezas':'Nueva pieza'}: ${ps.map(c=>c.e+' '+E(c.n)).join(', ')}</p>`:''}<button class=pri id=apx>Cancelar</button></div>`;
@@ -1001,7 +1001,10 @@ const SCENE=`<svg class="scn" viewBox="0 0 400 300" preserveAspectRatio="xMidYMi
 <g><circle cx="52" cy="150" r="16" fill="#fbbf24" opacity=".22"/><rect x="46" y="142" width="12" height="16" rx="3" fill="#fbbf24"/><circle cx="330" cy="180" r="14" fill="#fbbf24" opacity=".2"/><rect x="324" y="172" width="12" height="16" rx="3" fill="#fbbf24"/><circle cx="150" cy="168" r="12" fill="#fbbf24" opacity=".2"/><rect x="145" y="161" width="10" height="14" rx="3" fill="#fbbf24"/></g>
 <g fill="#3b2a5c" opacity=".9"><ellipse cx="20" cy="200" rx="40" ry="26"/><ellipse cx="385" cy="196" rx="44" ry="28"/><ellipse cx="130" cy="210" rx="30" ry="18"/></g>
 <path d="M0 232Q200 212 400 234V300H0Z" fill="#120d26"/><ellipse cx="200" cy="262" rx="150" ry="16" fill="#2d2250" opacity=".7"/></svg>`;
-let AC0=null;function sfx(f,d){try{AC0=AC0||new(window.AudioContext||window.webkitAudioContext)();const o=AC0.createOscillator(),g=AC0.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(AC0.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,AC0.currentTime+d);o.stop(AC0.currentTime+d)}catch(e){}}
+let mT=0;const MN=[262,330,392,494,440,392,330,294];
+function note(f,d,v){try{AC0=AC0||new(window.AudioContext||window.webkitAudioContext)();const o=AC0.createOscillator(),g=AC0.createGain();o.type='triangle';o.frequency.value=f;g.gain.value=v||.02;o.connect(g);g.connect(AC0.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,AC0.currentTime+d);o.stop(AC0.currentTime+d)}catch(e){}}
+function mus(on){clearInterval(mT);mT=0;if(!on)return;let i=0;mT=setInterval(()=>{if(S&&S.mus&&S.snd!==false)note(MN[i++%MN.length],.28)},330)}
+let AC0=null;function sfx(f,d){if(S&&S.snd===false)return;try{AC0=AC0||new(window.AudioContext||window.webkitAudioContext)();const o=AC0.createOscillator(),g=AC0.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(AC0.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,AC0.currentTime+d);o.stop(AC0.currentTime+d)}catch(e){}}
 const EQ=[['🦖🏝️','Parque Jurásico'],['🦈🌊','Tiburón'],['🦇🌃','Batman'],['💍🌋','El Señor de los Anillos'],['🍥🍜🥷','Naruto'],['⚔️👹','Guardianes de la noche'],['🗡️📈','Solo Leveling'],['🏀🔥','Slam Dunk'],['🧊👑','Frozen'],['🤖🔁','Terminator'],['🐠🔍','Buscando a Nemo'],['🦁👑','El Rey León'],['👽📞','E.T.'],['🕷️🕸️','Spider-Man'],['🏴‍☠️👒','One Piece'],['🐉🔥','Dragon Ball']];
 let NOPC=null;function nopc(){if(!NOPC)NOPC=new Set(AD.map((_,j)=>j).filter(j=>!PC.some(c=>c.a===j)));return NOPC}
 function snapSave(){const k=K+'-snaps';let L=[];try{L=JSON.parse(localStorage.getItem(k))||[]}catch(e){}const d=td();if(L[0]&&L[0].d==d)L[0].s=JSON.stringify(S);else L.unshift({d,s:JSON.stringify(S)});L=L.slice(0,5);try{localStorage.setItem(k,JSON.stringify(L))}catch(e){}}
@@ -1313,6 +1316,7 @@ return h+`<div class=g style="margin:10px 0"><button data-a=m2>✏️ Editar per
 <h3>🎨 Apariencia</h3><div class=g><button class="${S.base=='light'?'on':''}" data-a=ba data-v=light>Claro</button><button class="${S.base=='dark'?'on':''}" data-a=ba data-v=dark>Oscuro</button></div>
 ${HU.map(c=>`<button class="sw ${col&&S.h==c?'on':''}" style="background:hsl(${c} 85% 60%)" data-a=hc data-v="${c}" aria-label="Color"></button>`).join('')}
 <div class=g style="margin-top:8px"><button class="kai ${S.base=='kai'?'on':''}" data-a=ba data-v=kai>🌸 Kai</button></div>
+<h3>🔊 Sonido</h3><div class=g><button data-a=snd>${S.snd===false?'🔇 Efectos apagados':'🔊 Efectos encendidos'}</button><button data-a=mus>${S.mus?'🎵 Música encendida':'🎵 Música apagada'}</button></div>
 <h3>🐒 Mascota</h3><div class=g><button data-a=pn>${E(S.pet)} ✎</button></div><p class=mu>Rangos: ${S.rk.map((n,i)=>`${AX[i]} ${E(n)}`).join(' → ')}</p>
 <h3>📤 Compartir rutina</h3><div class=g><button data-a=exp>Copiar mi código</button></div>
 <textarea id=imp rows=3 placeholder="Pega aquí un código" style="margin:8px 0"></textarea><button class=pri data-a=imp>Importar</button>
@@ -1348,6 +1352,8 @@ else if(a=='hc'){S.base='color';S.h=+v}
 else if(a=='pn'){const n=(prompt('Nombre de tu mascota',S.pet)||'').trim();if(n)S.pet=n}
 else if(a=='rr'){const n=(prompt('Nombre del rango',S.rk[v])||'').trim();if(n)S.rk[v]=n}
 else if(a=='pf')S.cur=v;
+else if(a=='snd'){S.snd=S.snd===false?true:false;if(S.snd===false)mus(false);else if(S.mus)mus(true)}
+else if(a=='mus'){S.mus=!S.mus;mus(!!S.mus&&S.snd!==false)}
 else if(a=='cst')cd.n=cd.n==+v?0:+v;
 else if(a=='cvv')cv=v;
 else if(a=='fst'){const[i,n]=v.split(',').map(Number),x=p[cv][i];x.r=x.r==n?0:n;if(x.r&&x.st=='p')x.st='v'}
@@ -1373,14 +1379,14 @@ else if(a=='grn'){const R=gy(p).rs.find(x=>x.id==ge),n=(prompt('Nombre de la rut
 else if(a=='gxd')gy(p).rs.find(x=>x.id==ge).ex.splice(+v,1);
 else if(a=='gadd'){const n=(prompt('Nombre del ejercicio')||'').trim();if(n){const se=parseInt(prompt('Series','3'))||3,rr=(prompt('Repeticiones, o segundos si termina en s (ej. 40s)','12')||'12').trim(),d=/s$/i.test(rr)?parseInt(rr)||30:0,pr=parseInt(prompt('Descanso en segundos','60'))||60;gy(p).rs.find(x=>x.id==ge).ex.push({n,s:se,r:d?0:parseInt(rr)||12,d,p:pr})}}
 else if(a=='sc'){scr=v;menu=0;if(v!='saru'){clearInterval(gtm);gtm=0;gmode=''}}
-else if(a=='food'){const o=FD[+v],f0=fv(p);if(f0>=96){smsg='No puedo más… ¡estoy lleno!';gm('full',2400)}else{const fav=hs(S.cur+'fav')%FD.length==+v;p.hg=Math.min(100,f0+o[2]+(fav?10:0));p.ht=Date.now();p.fd=(p.fd||0)+1;fdE=o[0];smsg=fav?'¡'+o[1]+'! ¡Es mi favorita!':'Ñam ñam… '+o[1]+' riquísimo';gm('eat',2000,fav?'love':'')}}
+else if(a=='food'){const o=FD[+v],f0=fv(p);if(f0>=96){smsg='No puedo más… ¡estoy lleno!';gm('full',2400)}else{const fav=hs(S.cur+'fav')%FD.length==+v;p.hg=Math.min(100,f0+o[2]+(fav?10:0));p.ht=Date.now();sfx(520,.15);p.fd=(p.fd||0)+1;fdE=o[0];smsg=fav?'¡'+o[1]+'! ¡Es mi favorita!':'Ñam ñam… '+o[1]+' riquísimo';gm('eat',2000,fav?'love':'')}}
 else if(a=='gst'){if(v!='sleep')p.pl=(p.pl||0)+1;smsg=GM[v];gm(v,v=='sleep'?4200:2800)}
 else if(a=='rnd'){const z=p.sr=p.sr||{fur:0,bd:1,eq:{}};SL.forEach(([k])=>{const o=PC.map((c,i)=>[c,i]).filter(([c])=>c.s==k&&(c.a===null||p.ach[c.a]));z.eq[k]=o[Math.random()*o.length|0][1]});p.wc=(p.wc||0)+1}
 else if(a=='mg'){clearInterval(gtm);gtm=0;gmode=v;G2={};if(v=='ban'){G2={n:0,t:20,c:-1,b:0};gtm=setInterval(btick,650)}else if(v=='mem'){const e=['🍌','🍎','🍙','🍜','🍡','🥭'];G2={c:[...e,...e].sort(()=>Math.random()-.5),f:[],m:{},mv:0,lock:0}}}
 else if(a=='bt'){if(G2.c==+v){G2.n=Math.max(0,G2.n+(G2.b?-3:1));G2.c=-1;const g=$('#gg');if(g)g.innerHTML=ggrid();const h=$('#gh');if(h)h.innerHTML='<b>Puntos: '+G2.n+'</b>'}return}
 else if(a=='rp'){const o=['✊','✋','✌️'],me=+v,sa=Math.random()*3|0,w=(me-sa+3)%3;G2={me:o[me],sa:o[sa],r:w};p.mgp=(p.mgp||0)+1;if(w==1){p.rw=(p.rw||0)+1;p.rc=(p.rc||0)+1;p.rbs=Math.max(p.rbs||0,p.rc);mgx(p,3);smsg='¡Has ganado! Saru protesta…';gm('sad',2200)}else if(w==2){p.rc=0;smsg='¡He ganado yo! 🐒';gm('happy',2200)}else{smsg='¡Empate!';gm('flex',1800)}}
 else if(a=='mc'){const G=G2,i=+v;if(G.lock||G.m[i]||G.f.includes(i))return;G.f.push(i);if(G.f.length==2){G.mv++;const[x,y]=G.f;if(G.c[x]==G.c[y]){G.m[x]=G.m[y]=1;G.f=[];if(Object.keys(G.m).length==12){p.mgp=(p.mgp||0)+1;p.mbm=Math.min(p.mbm||99,G.mv);mgx(p,Math.max(3,15-G.mv))}}else{G.lock=1;setTimeout(()=>{G.f=[];G.lock=0;r()},900)}}}
-else if(a=='chst'){if(p.ck!=td()){const x=5+Math.floor(Math.random()*21);p.cxp=(p.cxp||0)+x;p.cn=(p.cn||0)+1;p.ck=td();p.cr='+'+x+' XP · '+QT[hs(td()+S.cur)%QT.length];toast('🎁','¡Cofre abierto!','+'+x+' XP')}}
+else if(a=='chst'){if(p.ck!=td()){const x=5+Math.floor(Math.random()*21);p.cxp=(p.cxp||0)+x;p.cn=(p.cn||0)+1;p.ck=td();sfx(784,.25);p.cr='+'+x+' XP · '+QT[hs(td()+S.cur)%QT.length];toast('🎁','¡Cofre abierto!','+'+x+' XP')}}
 else if(a=='wtr'){const w=p.wt=p.wt||{},n=w[k]||0;w[k]=n==+v?+v-1:+v;if(w[k]==8&&n<8)toast('💧','¡Meta de agua!','+10 XP')}
 else if(a=='mod'){const m=p.mo=p.mo||{};if(m[k]==+v)delete m[k];else m[k]=+v}
 else if(a=='gf'){scr='gym';W={q:1,f:1};setT(1500);p.tm=(p.tm||0)+1}
@@ -1437,6 +1443,7 @@ if(e.target.id=='sf'){const t=$('#sx').value.trim();if(t){const p=P();(p.shop=p.
 const t=$('#nt').value.trim(),c=$('#nc').value.trim();if(t&&c){P().tasks.push({id:'u'+Date.now(),t,c});const q=P(),s=chk();q.lv=s.l;q.rkk=s.rk;save();r()}});
 document.addEventListener('change',e=>{if(e.target.id!='ph'||!e.target.files[0])return;const f=new FileReader();f.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=128;const m=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,128,128);P().pic=c.toDataURL('image/jpeg',.75);chk();save();r()};im.src=f.result};f.readAsDataURL(e.target.files[0])});
 Object.values(S.p).forEach(p=>dec(p,p===P()));
+document.addEventListener('pointerdown',function __m(){document.removeEventListener('pointerdown',__m);if(S.mus&&S.snd!==false)mus(true)});
 {const s=chk(1),q=P();q.lv=s.l;q.rkk=s.rk}
 snapSave();save();r();
 const need=Object.keys(P().done).length>0&&Date.now()-(S.bdt||S.bdr||0)>6048e5;if(need){S.bdr=Date.now();save();setTimeout(()=>toast('💾','Copia semanal','Ve a ☰ y guarda una copia de seguridad'),1200)}
