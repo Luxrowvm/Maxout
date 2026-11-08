@@ -150,8 +150,8 @@ main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
 .scn{position:absolute;inset:0;width:100%;height:100%}
 .sw3{position:absolute;left:50%;top:50%;transform:translate(-50%,-44%);width:min(52vw,220px)}
 .sw3.jp{animation:jp .7s}.sw3.dc{animation:dc .9s ease-in-out infinite}
-.bub{position:absolute;right:8px;bottom:12px;max-width:46%;background:#fffffff2;color:#2a1d3d;padding:8px 10px;border-radius:14px;font-size:12.5px;line-height:1.3;box-shadow:0 2px 10px #0005}
-.bub::after{content:"";position:absolute;left:18px;top:-7px;border:7px solid transparent;border-bottom-color:#fffffff2;border-top:0}
+.bub{position:absolute;right:8px;top:12px;max-width:46%;background:#fffffff2;color:#2a1d3d;padding:8px 10px;border-radius:14px;font-size:12.5px;line-height:1.3;box-shadow:0 2px 10px #0005}
+.bub::after{content:"";position:absolute;left:18px;bottom:-7px;border:7px solid transparent;border-top-color:#fffffff2;border-bottom:0}
 .sbs{position:absolute;left:8px;top:12px;display:grid;gap:6px;width:38%}
 .sb{background:#0b0920b8;border-radius:12px;padding:6px 8px;color:#fff;font-size:11px}
 .sbt{height:7px;background:#ffffff28;border-radius:5px;overflow:hidden;margin-top:4px}.sbt i{display:block;height:100%;border-radius:5px}
@@ -703,13 +703,13 @@ const e=k=='sho'?214:k=='tig'?238:232,w2=k=='tig'?14:k=='jog'?15:18;
 return`<ellipse cx="100" cy="203" rx="${hw(203)+3}" ry="13" fill="${c}"/>`+[82,118].map(cx=>`<path d="M${cx-18} 198H${cx+18}L${cx+w2} ${e}H${cx-w2}Z" fill="${c}"/>`+(k=='jog'?`<rect x="${cx-w2-1}" y="${e-6}" width="${2*w2+2}" height="8" rx="3" fill="${d}"/>`:k=='sho'?`<path d="M${cx-w2} ${e-3}H${cx+w2}" stroke="${d}" stroke-width="3"/>`:k=='car'?`<rect x="${cx-12}" y="208" width="10" height="13" rx="2" fill="${d}"/>`:k=='tig'?`<path d="M${cx-4} 206L${cx-5} 232" stroke="${l}" stroke-width="3" opacity=".6"/>`:`<path d="M${cx-w2} ${e-4}H${cx+w2}" stroke="${d}" stroke-width="3"/>`)).join('')+wb}
 function SHO(so){return SHO0(so)+ODEC(so)}
 function SHO0(so){const n=so.n,c=so.c,d=shd(c,-.3),l=shd(c,.25),k=/sandalia|chancla/i.test(n)?'san':/bota/i.test(n)?'boo':/aleta/i.test(n)?'fin':/zapatos|claqué|reales/i.test(n)?'dre':'sne';
-return[76,124].map(x=>{
+return[76,124].map(x=>'<g transform="translate('+x+' 236) scale(.8) translate('+(-x)+' -236)">'+[x].map(x=>{
 if(k=='fin')return`<path d="M${x-8} 232L${x-36} 254H${x+36}L${x+8} 232Z" fill="${c}"/><path d="M${x-14} 240L${x-20} 252M${x} 238V253M${x+14} 240L${x+20} 252" stroke="${d}" stroke-width="2"/>`;
 if(k=='san')return`<path d="M${x-22} 242H${x+22}" stroke="${c}" stroke-width="6" stroke-linecap="round"/><path d="M${x-14} 242L${x} 228L${x+14} 242" fill="none" stroke="${c}" stroke-width="4" stroke-linejoin="round"/><path d="M${x-9} 236L${x+9} 236" stroke="${d}" stroke-width="2.5"/><rect x="${x-22}" y="244" width="44" height="4" rx="2" fill="${d}"/>`;
 if(k=='boo')return`<path d="M${x-13} 206H${x+13}V236H${x+24}Q${x+30} 236 ${x+28} 244H${x-24}V238Q${x-24} 236 ${x-16} 236H${x-13}Z" fill="${c}"/><rect x="${x-13}" y="206" width="26" height="6" rx="2" fill="${l}"/><rect x="${x-24}" y="244" width="54" height="5" rx="2" fill="#111"/><path d="M${x-8} 214h12M${x-8} 220h12" stroke="${d}" stroke-width="1.5" opacity=".6"/>`;
 if(k=='dre')return`<path d="M${x-24} 240Q${x-24} 226 ${x-4} 226Q${x+14} 226 ${x+24} 238L${x+24} 242H${x-24}Z" fill="${c}"/><path d="M${x-10} 231L${x+2} 237M${x-4} 229L${x+6} 235" stroke="#fff8" stroke-width="2"/><rect x="${x-26}" y="241" width="52" height="5" rx="2" fill="${d}"/>`;
 return`<path d="M${x-24} 240Q${x-26} 226 ${x-6} 226H${x+8}Q${x+26} 226 ${x+24} 240Z" fill="${c}"/><path d="M${x+4} 226Q${x+22} 230 ${x+24} 240H${x+10}Z" fill="${d}" opacity=".35"/><path d="M${x-8} 232l5-3M${x-2} 234l5-3M${x+4} 236l5-3" stroke="#fff" stroke-width="1.6"/><rect x="${x-26}" y="239" width="52" height="7" rx="3.5" fill="#f1f5f9" stroke="#0003"/>`;
-}).join('')}
+}).join('')+'</g>').join('')}
 const NPD=[
 [/medalla|condecoración/i,'<path d="M-7 -6L0 8L7 -6Z" fill="#dc2626"/><circle cy="12" r="9" fill="#facc15" stroke="#a16207" stroke-width="2"/><path d="M0 7l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" fill="#a16207"/>'],
 [/estrella/i,'<path d="M0 -2l5 11 12 1-9 8 3 12-11-7-11 7 3-12-9-8 12-1z" fill="#fde047" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"/>'],
