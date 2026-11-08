@@ -961,7 +961,7 @@ return`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -12 232 276" class="
 <filter id="sb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter></defs>
 <circle cx="100" cy="150" r="100" style="fill:var(--ac);opacity:${.05+s.rk*.035}"/><ellipse cx="100" cy="249" rx="${bw+22}" ry="8" fill="#000" fill-opacity=".35" filter="url(#sb)"/>
 ${s.rk>=3?'<text class="tw" x="22" y="70" font-size="16" fill="#fde047">✦</text><text class="tw" x="170" y="50" font-size="20" fill="#fde047" style="animation-delay:.7s">✦</text><text class="tw" x="176" y="140" font-size="14" fill="#fde047" style="animation-delay:1.3s">✦</text>':''}
-${SR?SR.b:''}
+<g transform="translate(100 250) scale(1 1.12) translate(-100 -250)">${SR?SR.b:''}
 <path d="${tl}" fill="none" stroke="${oc}" stroke-opacity=".55" stroke-width="16" stroke-linecap="round"/><path d="${tl}" fill="none" stroke="url(#fg)" stroke-width="12" stroke-linecap="round"/><circle cx="160" cy="138" r="7.5" fill="${cr}" stroke="${oc}" stroke-opacity=".45"/>
 <ellipse cx="82" cy="216" rx="16.5" ry="22" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/><ellipse cx="118" cy="216" rx="16.5" ry="22" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/>
 ${foot(76)+foot(124)}
@@ -972,7 +972,7 @@ ${!SR?`<path d="M91 150Q100 164 109 150Q105 160 100 170Q95 160 91 150Z" fill="ur
 ${pa?PAN(pa,hw,bw):''}${so&&so.c?SHO(so):''}${SR?SR.f:''}
 <ellipse cx="100" cy="152" rx="${bw*.8}" ry="13" fill="#000" fill-opacity=".2" filter="url(#sb)"/>
 ${arm(AL,LP,0)}${arm(AR,RP,m=='wave',item)}
-${ear(50)}${ear(150)}
+</g><g transform="translate(0 -14)">${ear(50)}${ear(150)}
 <circle cx="100" cy="96" r="52" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.6"/>${clump(100,96,52,50,26,dk2,.08,6,100,118)}${clump(100,88,50,44,20,fl,.12,7,100,118)}
 <path d="M58 74A52 52 0 0 1 92 47" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="4" stroke-linecap="round"/>
 <path d="M96 50Q91 32 104 27Q113 30 109 39Q118 38 112 50Q104 45 96 50Z" fill="${fl}" stroke="${oc}" stroke-opacity=".55" stroke-width="1.3" stroke-linejoin="round"/><path d="M84 54Q78 40 89 37Q92 45 90 54Z" fill="${fl}" stroke="${oc}" stroke-opacity=".5" stroke-width="1.2"/><path d="M114 53Q118 40 127 41Q124 48 122 56Z" fill="${fl}" stroke="${oc}" stroke-opacity=".5" stroke-width="1.2"/>
@@ -982,7 +982,7 @@ ${eyes}<path d="${brows}" fill="none" stroke="${shd(f,-.42)}" stroke-width="4.2"
 <ellipse cx="68" cy="116" rx="11" ry="8" fill="url(#bl)" transform="scale(${m=='eat'?1.25:1}) translate(${m=='eat'?-13:0} ${m=='eat'?-24:0})"/><ellipse cx="132" cy="116" rx="11" ry="8" fill="url(#bl)" transform="scale(${m=='eat'?1.25:1}) translate(${m=='eat'?-26:0} ${m=='eat'?-24:0})"/>
 <path d="M93 112Q100 106 107 112Q105 119 100 120Q95 119 93 112Z" fill="#4a2b1d"/><ellipse cx="98" cy="110.6" rx="3" ry="1.6" fill="#fff" fill-opacity=".6"/><path d="M100 120V124" stroke="#3b1d12" stroke-width="1.5" stroke-opacity=".7"/>
 ${mouth}${sad?'<path d="M122 106q-5 9 0 12q5-3 0-12z" fill="#7dd3fc" stroke="#38bdf8" stroke-width="1"/>':''}${nk?NEC(nk):''}
-${H?hat(H[0],H[1]):ht?`<text x="100" y="60" font-size="54" text-anchor="middle">${ht.e}</text>`:''}${extra}${confetti}</svg>`}
+${H?hat(H[0],H[1]):ht?`<text x="100" y="60" font-size="54" text-anchor="middle">${ht.e}</text>`:''}${extra}${confetti}</g></svg>`}
 const AQ=[];let am=null;
 function apop(j){AQ.push(j);anx()}
 function anx(){if(am||!AQ.length)return;const j=AQ.shift(),a=AD[j],ps=PC.filter(c=>c.a===j);
