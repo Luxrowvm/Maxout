@@ -180,6 +180,7 @@ button.gcell{cursor:pointer}.gcell.ob{background:#7c2d1222}
 .fform{display:flex;gap:8px;margin:0 16px}.fform input{flex:1}.fform .pri{padding:0 16px}
 .sw3 .sv{overflow:visible}
 .pv{width:100%;height:58px;display:block}.pcard>.pv{margin:0 auto}
+.sw3.rn{animation:rn .35s ease-in-out infinite alternate}@keyframes rn{to{transform:translate(-50%,-50%) translateY(-6px) rotate(-3deg)}}
 </style>
 </head>
 <body>
@@ -601,7 +602,7 @@ const KAI=`<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><g f
 const bgi=col=>{if(S.base=='kai')return`url("data:image/svg+xml,${encodeURIComponent(KAI)}")`;const c=`hsl(${col?S.h:0} ${col?80:0}% ${S.base=='light'?30:70}% / .16)`;return`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'>${BG[scr].replace(/@/g,c)}</svg>`)}")`};
 const shd=(c,a)=>'#'+[1,3,5].map(i=>Math.max(0,Math.min(255,Math.round(parseInt(c.substr(i,2),16)*(1+a)))).toString(16).padStart(2,'0')).join('');
 const FD=[['🍌','Plátano',15],['🍎','Manzana',12],['🍙','Onigiri',20],['🍜','Ramen',30],['🍡','Dango',14],['🥭','Mango',18],['🍓','Fresa',10],['🥜','Cacahuetes',12],['🍫','Chocolate',8]];
-const GM={jump:'¡Salto! ¡Qué alto llego!',celebrate:'¡Lo hemos conseguido! 🎉',wave:'¡Hola! ¿Cómo va el día?',dance:'¡A bailar! 🎶',flex:'¡Mira estos músculos!',love:'Qué bien me cuidas…',happy:'¡Yuju! ¡Otra vez!',sleep:'Zzz… cinco minutitos más…'};
+const GM={run:'¡A correr! 💨',jump:'¡Salto! ¡Qué alto llego!',celebrate:'¡Lo hemos conseguido! 🎉',wave:'¡Hola! ¿Cómo va el día?',dance:'¡A bailar! 🎶',flex:'¡Mira estos músculos!',love:'Qué bien me cuidas…',happy:'¡Yuju! ¡Otra vez!',sleep:'Zzz… cinco minutitos más…'};
 const fv=p=>Math.max(0,Math.min(100,(p.hg??55)-(Date.now()-(p.ht||Date.now()))/72e4));
 function gm(m,ms,nx){mood=m;clearTimeout(mt);mt=setTimeout(()=>{if(nx){gm(nx,2200);if(scr=='saru')r()}else{mood='';fdE='';smsg='';if(scr=='saru')r()}},ms||2800)}
 const lm=c=>parseInt(c.substr(1,2),16)*.3+parseInt(c.substr(3,2),16)*.6+parseInt(c.substr(5,2),16)*.1;
@@ -930,7 +931,7 @@ flex:{L:[[sx,144],[sx-30,132],[sx-10,108]],R:[[sx,144],[sx+30,132],[sx+10,108]]}
 love:{L:[[sx,144],[sx+16,170],[88,166]],R:[[sx,144],[sx-16,170],[112,166]]},
 eat:{L:[[sx,144],[sx-16,178],[sx-22,206]],R:[[sx,144],[sx+14,132],[116,122]]},
 jump:{L:[[sx,144],[sx-22,112],[sx-16,66]],R:[[sx,144],[sx+22,112],[sx+16,66]]},
-celebrate:{L:[[sx,144],[sx-22,112],[sx-16,66]],R:[[sx,144],[sx+22,112],[sx+16,66]]}},
+celebrate:{L:[[sx,144],[sx-22,112],[sx-16,66]],R:[[sx,144],[sx+22,112],[sx+16,66]]},run:{L:[[sx,144],[sx-14,156],[sx-26,176]],R:[[sx,144],[sx+20,130],[sx+12,104]]}},
 def={L:[[sx,144],[sx-16,176],[sx-18,208]],R:[[sx,144],[sx+16,176],[sx+18,208]]};
 return((P[m]||def)[side]).map(([x,y])=>[cl(x),up(y)])}
 function svg(p,s,g,m){m=m||(g>0?'sad':'');
@@ -1048,11 +1049,11 @@ return`<main>${s.gw?'':'<p class=mu>Tu primer entreno te espera 💪 Pulsa ▶ e
 <h3>⏱️ Temporizador rápido</h3><div class=g>${[30,60,90,180].map(x=>`<button data-a=gq data-v=${x}>${x<60?x+' s':x/60+' min'}</button>`).join('')}<button data-a=gqc>Otro…</button><button data-a=gf>🍅 Foco 25 min</button></div>
 <h3>📋 Rutinas</h3>${G.rs.map(t=>`<div class=row><div style="flex:1"><b>${E(t.n)}</b><small style="display:block">${t.ex.length} ejercicios · ~${Math.max(1,Math.round(t.ex.reduce((a,e)=>a+e.s*((e.d||e.r*3)+e.p),0)/60))} min</small></div><button data-a=gs data-v=${t.id} aria-label="Empezar">▶</button><button data-a=ged data-v=${t.id} aria-label="Editar">✎</button><button data-a=gdl data-v=${t.id} aria-label="Borrar">🗑</button></div>`).join('')}
 <form id=gf><input id=gn placeholder="Nueva rutina" required><button class=pri>Crear rutina</button></form></main>`},
-saru:(p,s,g,say)=>{const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},cl={happy:'jp',love:'jp',jump:'jp',dance:'dc',celebrate:'dc'}[mood]||'',fp=Math.round(fv(p)),k=dk(D),pl=p.plan[k]||[],dd=p.done[k]||{},ok=pl.filter(i=>dd[i]==1).length,en=pl.length?Math.round(ok/pl.length*100):0,fe=Math.min(100,(s.cur||0)*12),fav=(p.fd||0)>=3?FD[hs(S.cur+'fav')%FD.length]:null;
+saru:(p,s,g,say)=>{const z=p.sr=p.sr||{fur:0,bd:1,eq:{}},cl={happy:'jp',love:'jp',jump:'jp',dance:'dc',celebrate:'dc',run:'rn'}[mood]||'',fp=Math.round(fv(p)),k=dk(D),pl=p.plan[k]||[],dd=p.done[k]||{},ok=pl.filter(i=>dd[i]==1).length,en=pl.length?Math.round(ok/pl.length*100):0,fe=Math.min(100,(s.cur||0)*12),fav=(p.fd||0)>=3?FD[hs(S.cur+'fav')%FD.length]:null;
 const B=(v,l,c)=>`<div class=sb><span>${l} · ${v}%</span><div class=sbt><i style="width:${v}%;background:${c}"></i></div></div>`;
 return`<main><div class=scn-w>${SCENE}<div class="sw3 ${cl}" data-a=pet>${svg(p,s,g,mood)}</div><div class=bub>${smsg||(fp<25?'Tengo hambre… ¿me das algo de comer?':say)}</div><div class=sbs>${B(fp,'Saciedad','#22c55e')}${B(en,'Energía','#3b82f6')}${B(fe,'Felicidad','#facc15')}</div></div>
 <div class=acts>${[['wave','👋','Interactuar'],['gym','🏋️','Entrenar'],['happy','🎮','Jugar'],['sleep','🛏️','Dormir'],['chst','🎁','Regalo']].map(([a,i,n])=>a=='gym'?`<button class=act data-a=sc data-v=gym><span>${i}</span>${n}</button>`:a=='chst'?`<button class=act data-a=chst><span>${i}</span>${n}</button>`:`<button class=act data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
-<h3>✨ Animaciones</h3><div class=anrow>${[['wave','👋','Saludar'],['dance','💃','Bailar'],['flex','💪','Flexionar'],['love','🤗','Mimar'],['happy','😄','Feliz'],['jump','🦘','Saltar'],['celebrate','🎉','Celebrar']].map(([a,i,n])=>`<button data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
+<h3>✨ Animaciones</h3><div class=anrow>${[['wave','👋','Saludar'],['dance','💃','Bailar'],['flex','💪','Flexionar'],['love','🤗','Mimar'],['happy','😄','Feliz'],['jump','🦘','Saltar'],['celebrate','🎉','Celebrar'],['run','🏃','Correr']].map(([a,i,n])=>`<button data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
 <h3>🍽️ Alimentar</h3><div class=bar><i style="width:${fp}%"></i></div><p class=mu>${fav?'Su comida favorita: '+fav[0]+' '+fav[1]:'Prueba distintas comidas para descubrir su favorita.'}</p>
 <div class=g>${FD.map((x,i)=>`<button data-a=food data-v=${i}>${x[0]} ${x[1]}</button>`).join('')}</div>
 <h3>🎮 Mini juegos</h3><div class=g>${[['ban','🍌 Atrapa plátanos'],['rps','✊ Piedra, papel o tijera'],['mem','🧠 Memoria'],['emo','🎬 Adivina el emoji'],['leaf','🍃 Ninja de hojas'],['rhy','🥁 Dojo de ritmo']].map(([a,b])=>`<button class="${gmode==a?'on':''}" data-a=mg data-v=${a}>${b}</button>`).join('')}</div>${gpanel(p)}
