@@ -703,7 +703,7 @@ const e=k=='sho'?214:k=='tig'?238:232,w2=k=='tig'?14:k=='jog'?15:18;
 return`<ellipse cx="100" cy="203" rx="${hw(203)+3}" ry="13" fill="${c}"/>`+[82,118].map(cx=>`<path d="M${cx-18} 198H${cx+18}L${cx+w2} ${e}H${cx-w2}Z" fill="${c}"/>`+(k=='jog'?`<rect x="${cx-w2-1}" y="${e-6}" width="${2*w2+2}" height="8" rx="3" fill="${d}"/>`:k=='sho'?`<path d="M${cx-w2} ${e-3}H${cx+w2}" stroke="${d}" stroke-width="3"/>`:k=='car'?`<rect x="${cx-12}" y="208" width="10" height="13" rx="2" fill="${d}"/>`:k=='tig'?`<path d="M${cx-4} 206L${cx-5} 232" stroke="${l}" stroke-width="3" opacity=".6"/>`:`<path d="M${cx-w2} ${e-4}H${cx+w2}" stroke="${d}" stroke-width="3"/>`)).join('')+wb}
 function SHO(so){return SHO0(so)+ODEC(so)}
 function SHO0(so){const n=so.n,c=so.c,d=shd(c,-.3),l=shd(c,.25),k=/sandalia|chancla/i.test(n)?'san':/bota/i.test(n)?'boo':/aleta/i.test(n)?'fin':/zapatos|claqué|reales/i.test(n)?'dre':'sne';
-return[76,124].map(x=>'<g transform="translate('+x+' 236) scale(.9) translate('+(-x)+' -236)">'+[x].map(x=>{
+return[76,124].map(x=>'<g transform="translate('+x+' 236) scale('+(k=='boo'?.72:.9)+') translate('+(-x)+' -236)">'+[x].map(x=>{
 if(k=='fin')return`<path d="M${x-8} 232L${x-36} 254H${x+36}L${x+8} 232Z" fill="${c}"/><path d="M${x-14} 240L${x-20} 252M${x} 238V253M${x+14} 240L${x+20} 252" stroke="${d}" stroke-width="2"/>`;
 if(k=='san')return`<path d="M${x-22} 242H${x+22}" stroke="${c}" stroke-width="6" stroke-linecap="round"/><path d="M${x-14} 242L${x} 228L${x+14} 242" fill="none" stroke="${c}" stroke-width="4" stroke-linejoin="round"/><path d="M${x-9} 236L${x+9} 236" stroke="${d}" stroke-width="2.5"/><rect x="${x-22}" y="244" width="44" height="4" rx="2" fill="${d}"/>`;
 if(k=='boo')return`<path d="M${x-13} 206H${x+13}V236H${x+24}Q${x+30} 236 ${x+28} 244H${x-24}V238Q${x-24} 236 ${x-16} 236H${x-13}Z" fill="${c}"/><rect x="${x-13}" y="206" width="26" height="6" rx="2" fill="${l}"/><rect x="${x-24}" y="244" width="54" height="5" rx="2" fill="#111"/><path d="M${x-8} 214h12M${x-8} 220h12" stroke="${d}" stroke-width="1.5" opacity=".6"/>`;
@@ -928,7 +928,7 @@ ${s.rk>=3?'<text class="tw" x="22" y="70" font-size="16" fill="#fde047">✦</tex
 ${SR?SR.b:''}
 <path d="${tl}" fill="none" stroke="${oc}" stroke-opacity=".55" stroke-width="16" stroke-linecap="round"/><path d="${tl}" fill="none" stroke="url(#fg)" stroke-width="12" stroke-linecap="round"/><circle cx="160" cy="138" r="7.5" fill="${cr}" stroke="${oc}" stroke-opacity=".45"/>
 <ellipse cx="82" cy="216" rx="16.5" ry="22" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/><ellipse cx="118" cy="216" rx="16.5" ry="22" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/>
-${so&&so.c?'':foot(76)+foot(124)}
+${so&&so.c&&!/sandalia|chancla/i.test(so.n)?'':foot(76)+foot(124)}
 <ellipse cx="100" cy="170" rx="${bw}" ry="54" fill="url(#fg)" stroke="${oc}" stroke-opacity=".5" stroke-width="1.5"/>${clump(100,172,bw,52,20,dk2,.16,1,100,140)}${clump(100,166,bw,48,16,fl,.18,8,100,140)}
 <ellipse cx="100" cy="178" rx="${bw*.64}" ry="38" fill="url(#bgr)"/>${clump(100,182,bw*.62,34,9,cr2,.55,2,100,150)}
 <path d="M${100-bw*.5} 118Q100 134 ${100+bw*.5} 118" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="3" stroke-linecap="round"/>
