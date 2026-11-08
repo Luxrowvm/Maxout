@@ -179,6 +179,7 @@ button.gcell{cursor:pointer}.gcell.ob{background:#7c2d1222}
 .fr2{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;margin:8px 16px}.fr2 small{display:block;color:var(--mu);font-size:12px}
 .fform{display:flex;gap:8px;margin:0 16px}.fform input{flex:1}.fform .pri{padding:0 16px}
 .sw3 .sv{overflow:visible}
+.pv{width:100%;height:58px;display:block}.pcard>.pv{margin:0 auto}
 </style>
 </head>
 <body>
@@ -649,6 +650,14 @@ const SDK=[
 [/hoodie|sudadera/i,()=>`<path d="M92 152V172M108 152V172" stroke="#fff" stroke-width="2.5"/><rect x="92" y="184" width="16" height="6" rx="2" fill="#0004"/>`],
 [/anime|retro/i,()=>`<path d="M86 166h28M86 176h28" stroke="#fff" stroke-width="3" stroke-dasharray="4 3"/>`],
 ];
+function PREV(c){const col=c.c||'';
+if(c.s=='hat'){const H=HT(c.n);return`<svg viewBox="30 0 140 100" class="pv">${H?hat(H[0],H[1]):`<text x="100" y="60" font-size="50" text-anchor="middle">${c.e}</text>`}</svg>`}
+if(c.s=='neck')return`<svg viewBox="50 118 100 66" class="pv">${NEC(c)}</svg>`;
+if(c.s=='hand')return`<svg viewBox="-30 -70 60 80" class="pv">${HI(c)}</svg>`;
+if(c.s=='shirt')return`<svg viewBox="58 136 84 74" class="pv"><path d="M82 146Q100 156 118 146L140 166L128 176L122 170V206H78V170L72 176L60 166Z" fill="${col}"/>${SDEC(c.n,col)}</svg>`;
+if(c.s=='pants')return`<svg viewBox="62 180 76 60" class="pv"><path d="M70 182H130V200L124 238H106L100 210L94 238H76L70 200Z" fill="${col}"/>${PDEC(c.n,col)}</svg>`;
+if(c.s=='shoes'){if(!col)return`<svg viewBox="50 214 100 46" class="pv"><text x="100" y="250" font-size="34" text-anchor="middle">${c.e}</text></svg>`;return`<svg viewBox="50 214 100 46" class="pv"><ellipse cx="76" cy="238" rx="22" ry="10" fill="${col}"/><ellipse cx="124" cy="238" rx="22" ry="10" fill="${col}"/>${ODEC(c)}</svg>`}
+return`<span>${c.e}</span>`}
 const SDEC=(n,c,hw)=>{const e=SDK.find(x=>x[0].test(n));return e?e[1]():''};
 const PDK=[
 [/fuego/i,()=>`<path d="M70 226l4-8 3 5 4-9 3 6 4-7 3 5 4-8 4 7 3-6 3 8 4-5 4 7" stroke="#f97316" stroke-width="2" fill="none"/>`],
@@ -940,7 +949,7 @@ return`<main><div class=scn-w>${SCENE}<div class="sw3 ${cl}" data-a=pet>${svg(p,
 <div class=g style="margin-top:8px">${['Delgado','Normal','Fuerte'].map((n,i)=>`<button class="${z.bd==i?'on':''}" data-a=bd data-v=${i}>${n}</button>`).join('')}</div>
 <div class=arm><div class=arh><b>👕 Armario</b><span>${s.pw} / ${PC.length}</span></div><div class=slots>${SL.map(([k2,n])=>`<button class="${wt==k2?'on':''}" data-a=wt data-v=${k2}>${n}</button>`).join('')}</div>
 <div class=g style="margin:6px 0"><button data-a=rnd>🎲 Aleatorio</button><button data-a=clr>🧺 Quitar todo</button></div>
-<div class=wg>${PC.map((c,i)=>{const own=c.a===null||p.ach[c.a];return c.s!=wt?'':`<button class="pcard ${z.eq[c.s]==i?'on':''} ${own?'':'lk'}" data-a=eqp data-v=${i}><span style="${c.c?`background:${c.c};border-radius:50%`:''}">${c.e}</span><small>${E(c.n)}</small>${own?'':`<small>🔒 ${E(AD[c.a].n)}</small>`}</button>`}).join('')}</div></div></main>`},
+<div class=wg>${PC.map((c,i)=>{const own=c.a===null||p.ach[c.a];return c.s!=wt?'':`<button class="pcard ${z.eq[c.s]==i?'on':''} ${own?'':'lk'}" data-a=eqp data-v=${i}>${PREV(c)}<small>${E(c.n)}</small>${own?'':`<small>🔒 ${E(AD[c.a].n)}</small>`}</button>`}).join('')}</div></div></main>`},
 notas:p=>{p.notes=p.notes||[];p.shop=p.shop||[];
 return`<main><div class=tabs style="margin:0 0 8px"><button data-a=nv data-v=idea class="${nv=='idea'?'on':''}">💡 Ideas</button><button data-a=nv data-v=compra class="${nv=='compra'?'on':''}">🛒 Compra</button></div>`+(nv=='idea'?`<form id=nf><textarea id=nx rows=3 placeholder="Escribe una idea…" required></textarea><button class=pri>Guardar nota</button></form>`+p.notes.map((n,i)=>`<div class=row><span style="white-space:pre-wrap">${E(n)}</span><button data-a=dnote data-v=${i} aria-label="Borrar">🗑</button></div>`).join(''):`<form id=sf><input id=sx placeholder="Añadir a la compra" required><button class=pri>Añadir</button></form>`+p.shop.map((x,i)=>`<div class="row s${x.d?1:0}"><button class=box data-a=sd data-v=${i}>${x.d?'✓':''}</button><span>${E(x.t)}</span><button data-a=ds data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')+(p.shop.some(x=>x.d)?`<button class=sec data-a=cs>Quitar lo comprado</button>`:''))+`</main>`},
 stats:(p,s)=>{const A=[['💪 Fuerza',(s.cEjercicio||0)+s.gw*2],['🧠 Mente',(s.cMente||0)+(s.cClase||0)],['❤️ Vitalidad',(s.cSueño||0)+(s.cComida||0)+(s.cSalud||0)],['🎭 Carisma',s.cSocial||0],['🔥 Disciplina',s.b*3]],M=Math.max(1,...A.map(a=>a[1]));
