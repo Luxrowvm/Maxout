@@ -923,14 +923,14 @@ const rn=(i,k=1)=>{const x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.fl
 const fuzz=(cx,cy,rx,ry,n,len,c,sw=3)=>[...Array(n)].map((_,i)=>{const a=(360*i/n)*Math.PI/180,l=len*(.7+rn(i)*.6),P=(r,d)=>[(cx+r*Math.cos(a+d)).toFixed(1),(cy+(r*ry/rx)*Math.sin(a+d)).toFixed(1)],A=P(rx-2,0),B=P(rx+l*.5,-.08),C=P(rx+l,.12);return`<path d="M${A[0]} ${A[1]}Q${B[0]} ${B[1]} ${C[0]} ${C[1]}" stroke="${c}" stroke-width="${sw}" stroke-linecap="round" fill="none"/>`}).join('');
 const fstr=(cx,cy,rx,ry,n,c,op,k)=>[...Array(n)].map((_,i)=>{const a=rn(i,k)*6.283,r=Math.sqrt(rn(i,k+5)),x=cx+rx*.85*r*Math.cos(a),y=cy+ry*.85*r*Math.sin(a),l=5+rn(i,k+9)*5,dx=Math.cos(a)*.6,dy=Math.abs(Math.sin(a))+.7;return`<path d="M${x.toFixed(1)} ${y.toFixed(1)}q${(dx*l/2).toFixed(1)} ${(dy*l/2).toFixed(1)} ${(dx*l).toFixed(1)} ${(dy*l).toFixed(1)}" stroke="${c}" stroke-opacity="${op}" stroke-width="1.6" stroke-linecap="round" fill="none"/>`}).join('');
 const clump=(cx,cy,rx,ry,n,c,op,k,ox,oy)=>[...Array(n)].map((_,i)=>{const a=rn(i,k)*6.283,r=Math.sqrt(rn(i,k+5))*.7,x=cx+rx*r*Math.cos(a),y=cy+ry*r*Math.sin(a),ang=Math.atan2(y-oy,x-ox),L=8+rn(i,k+9)*5,w=2.4+rn(i,k+3)*1.6,dx=Math.cos(ang)*L,dy=Math.sin(ang)*L,nx=-Math.sin(ang)*w,ny=Math.cos(ang)*w,F=v=>v.toFixed(1);return`<path d="M${F(x)} ${F(y)}Q${F(x+dx*.5+nx)} ${F(y+dy*.5+ny)} ${F(x+dx)} ${F(y+dy)}Q${F(x+dx*.5-nx)} ${F(y+dy*.5-ny)} ${F(x)} ${F(y)}Z" fill="${c}" fill-opacity="${op}"/>`}).join('');
-function POSE(m,sx,side){const cl=v=>Math.max(14,Math.min(186,v)),up=(y)=>Math.max(44,y),
-P={wave:{L:[[sx,144],[sx-14,176],[sx-22,206]],R:[[sx,144],[sx+30,124],[sx+34,86]]},
-dance:{L:[[sx,144],[sx-26,118],[sx-22,72]],R:[[sx,144],[sx+26,118],[sx+22,72]]},
+function POSE(m,sx,side){const cl=v=>Math.max(34,Math.min(166,v)),up=(y)=>Math.max(52,y),
+P={wave:{L:[[sx,144],[sx-14,176],[sx-22,206]],R:[[sx,144],[sx+22,124],[sx+22,90]]},
+dance:{L:[[sx,144],[sx-20,118],[sx-16,76]],R:[[sx,144],[sx+20,118],[sx+16,76]]},
 flex:{L:[[sx,144],[sx-30,132],[sx-10,108]],R:[[sx,144],[sx+30,132],[sx+10,108]]},
 love:{L:[[sx,144],[sx+16,170],[88,166]],R:[[sx,144],[sx-16,170],[112,166]]},
 eat:{L:[[sx,144],[sx-16,178],[sx-22,206]],R:[[sx,144],[sx+14,132],[116,122]]},
-jump:{L:[[sx,144],[sx-32,110],[sx-24,62]],R:[[sx,144],[sx+32,110],[sx+24,62]]},
-celebrate:{L:[[sx,144],[sx-32,110],[sx-24,62]],R:[[sx,144],[sx+32,110],[sx+24,62]]}},
+jump:{L:[[sx,144],[sx-22,112],[sx-16,66]],R:[[sx,144],[sx+22,112],[sx+16,66]]},
+celebrate:{L:[[sx,144],[sx-22,112],[sx-16,66]],R:[[sx,144],[sx+22,112],[sx+16,66]]}},
 def={L:[[sx,144],[sx-16,176],[sx-18,208]],R:[[sx,144],[sx+16,176],[sx+18,208]]};
 return((P[m]||def)[side]).map(([x,y])=>[cl(x),up(y)])}
 function svg(p,s,g,m){m=m||(g>0?'sad':'');
