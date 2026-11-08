@@ -26,7 +26,7 @@ header b{font-size:20px}header small{display:block;color:var(--mu);font-size:13p
 .say{margin:10px 16px 0;padding:10px 14px;border-radius:14px;background:var(--card);border:1px solid var(--bd);font-size:15px}
 @keyframes fl{50%{transform:translateY(-5px)}}
 @keyframes bn{40%{transform:scale(1.35) rotate(-8deg)}}
-.dn{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 0;text-transform:capitalize}
+.dn{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 0}
 .dn button{font-size:30px;width:44px;height:44px;color:var(--ac)}
 .tabs{display:flex;gap:4px;margin:8px 16px;background:var(--card);padding:4px;border-radius:14px}
 .tabs button{flex:1;padding:10px 2px;border-radius:10px;color:var(--mu);font-size:15px}
@@ -150,15 +150,15 @@ main{padding-bottom:110px}.ov{z-index:5}aside{z-index:6}
 .scn{position:absolute;inset:0;width:100%;height:100%}
 .sw3{position:absolute;left:50%;top:50%;transform:translate(-50%,-44%);width:min(52vw,220px)}
 .sw3.jp{animation:jp .7s}.sw3.dc{animation:dc .9s ease-in-out infinite}
-.bub{position:absolute;right:8px;top:12px;max-width:46%;background:#fffffff2;color:#2a1d3d;padding:8px 10px;border-radius:14px;font-size:12.5px;line-height:1.3;box-shadow:0 2px 10px #0005}
-.bub::after{content:"";position:absolute;left:18px;bottom:-7px;border:7px solid transparent;border-top-color:#fffffff2;border-bottom:0}
+.bub{position:absolute;right:8px;bottom:12px;max-width:46%;background:#fffffff2;color:#2a1d3d;padding:8px 10px;border-radius:14px;font-size:12.5px;line-height:1.3;box-shadow:0 2px 10px #0005}
+.bub::after{content:"";position:absolute;left:18px;top:-7px;border:7px solid transparent;border-bottom-color:#fffffff2;border-top:0}
 .sbs{position:absolute;left:8px;top:12px;display:grid;gap:6px;width:38%}
 .sb{background:#0b0920b8;border-radius:12px;padding:6px 8px;color:#fff;font-size:11px}
 .sbt{height:7px;background:#ffffff28;border-radius:5px;overflow:hidden;margin-top:4px}.sbt i{display:block;height:100%;border-radius:5px}
 .acts{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:4px 0 10px}
 .act,.anrow button{background:var(--card);border:1px solid var(--bd);border-radius:16px;color:var(--tx);padding:9px 2px 7px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px;box-shadow:inset 0 -3px 0 #0003}
 .act span,.anrow span{font-size:24px;line-height:1}
-.anrow{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.anrow{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}.anrow button{width:calc(25% - 5px)}
 .arm{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:10px;margin-top:10px;color:var(--tx)}
 .arh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.arh span{color:var(--mu)}
 .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.slots button{background:var(--bg);border:1px solid var(--bd);border-radius:12px;color:var(--tx);padding:8px 4px;font-size:13px}
@@ -924,7 +924,7 @@ if(W&&W.q)return`<main><div class=run><small>${W.f?'🍅 Modo foco':'Temporizado
 if(W){const R=G.rs.find(x=>x.id==W.rid),e=R.ex[W.ei],rs=W.ph=='r',nx=W.si+1<e.s?e:R.ex[W.ei+1];
 return`<main><h3>${E(R.n)} · ejercicio ${W.ei+1}/${R.ex.length}</h3><div class=run><small>${rs?'Descanso':'Serie '+(W.si+1)+' de '+e.s}</small><b class=big>${E(rs?'Siguiente: '+nx.n:e.n)}</b><div class=tm id=tm>${rs||e.d?fm(W.t):'💪'}</div><p class=mu>${rs?'Respira y prepárate':e.d?e.d+' segundos':e.r+' repeticiones'}</p><div class=g style="justify-content:center">${!rs&&!e.d?'<button class=pri data-a=gdone>✓ Serie hecha</button>':''}<button data-a=gskip>${rs?'Saltar descanso':'Saltar'}</button><button data-a=gend>Cancelar</button></div></div></main>`}
 if(ge){const R=G.rs.find(x=>x.id==ge);if(R)return`<main><h3>✎ ${E(R.n)}</h3>${R.ex.map((e,i)=>`<div class=row><div style="flex:1"><b>${E(e.n)}</b><small style="display:block">${e.s} × ${e.d?e.d+' s':e.r+' reps'} · descanso ${e.p} s</small></div><button data-a=gxd data-v=${i} aria-label="Borrar">🗑</button></div>`).join('')||'<p class=empty>Aún no hay ejercicios.</p>'}<div class=g style="margin-top:10px"><button class=pri data-a=gadd>＋ Añadir ejercicio</button><button data-a=grn>Renombrar</button><button data-a=gok>Listo</button></div></main>`;ge=null}
-return`<main><div class=sg><div class=sc><b>${s.gw}</b><small>Entrenos</small></div><div class=sc><b>${s.gm}</b><small>Minutos</small></div></div>
+return`<main>${s.gw?'':'<p class=mu>Tu primer entreno te espera 💪 Pulsa ▶ en una rutina para empezar.</p>'}<div class=sg><div class=sc><b>${s.gw}</b><small>Entrenos</small></div><div class=sc><b>${s.gm}</b><small>Minutos</small></div></div>
 <h3>⏱️ Temporizador rápido</h3><div class=g>${[30,60,90,180].map(x=>`<button data-a=gq data-v=${x}>${x<60?x+' s':x/60+' min'}</button>`).join('')}<button data-a=gqc>Otro…</button><button data-a=gf>🍅 Foco 25 min</button></div>
 <h3>📋 Rutinas</h3>${G.rs.map(t=>`<div class=row><div style="flex:1"><b>${E(t.n)}</b><small style="display:block">${t.ex.length} ejercicios · ~${Math.max(1,Math.round(t.ex.reduce((a,e)=>a+e.s*((e.d||e.r*3)+e.p),0)/60))} min</small></div><button data-a=gs data-v=${t.id} aria-label="Empezar">▶</button><button data-a=ged data-v=${t.id} aria-label="Editar">✎</button><button data-a=gdl data-v=${t.id} aria-label="Borrar">🗑</button></div>`).join('')}
 <form id=gf><input id=gn placeholder="Nueva rutina" required><button class=pri>Crear rutina</button></form></main>`},
@@ -933,7 +933,7 @@ const B=(v,l,c)=>`<div class=sb><span>${l} · ${v}%</span><div class=sbt><i styl
 return`<main><div class=scn-w>${SCENE}<div class="sw3 ${cl}" data-a=pet>${svg(p,s,g,mood)}</div><div class=bub>${smsg||(fp<25?'Tengo hambre… ¿me das algo de comer?':say)}</div><div class=sbs>${B(fp,'Saciedad','#22c55e')}${B(en,'Energía','#3b82f6')}${B(fe,'Felicidad','#facc15')}</div></div>
 <div class=acts>${[['wave','👋','Interactuar'],['gym','🏋️','Entrenar'],['happy','🎮','Jugar'],['sleep','🛏️','Dormir'],['chst','🎁','Regalo']].map(([a,i,n])=>a=='gym'?`<button class=act data-a=sc data-v=gym><span>${i}</span>${n}</button>`:a=='chst'?`<button class=act data-a=chst><span>${i}</span>${n}</button>`:`<button class=act data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
 <h3>✨ Animaciones</h3><div class=anrow>${[['wave','👋','Saludar'],['dance','💃','Bailar'],['flex','💪','Flexionar'],['love','🤗','Mimar'],['happy','😄','Feliz'],['jump','🦘','Saltar'],['celebrate','🎉','Celebrar']].map(([a,i,n])=>`<button data-a=gst data-v=${a}><span>${i}</span>${n}</button>`).join('')}</div>
-<h3>🍽️ Alimentar · saciedad ${fp}%</h3><div class=bar><i style="width:${fp}%"></i></div><p class=mu>${fav?'Su comida favorita: '+fav[0]+' '+fav[1]:'Prueba distintas comidas para descubrir su favorita.'}</p>
+<h3>🍽️ Alimentar</h3><div class=bar><i style="width:${fp}%"></i></div><p class=mu>${fav?'Su comida favorita: '+fav[0]+' '+fav[1]:'Prueba distintas comidas para descubrir su favorita.'}</p>
 <div class=g>${FD.map((x,i)=>`<button data-a=food data-v=${i}>${x[0]} ${x[1]}</button>`).join('')}</div>
 <h3>🎮 Mini juegos</h3><div class=g>${[['ban','🍌 Atrapa plátanos'],['rps','✊ Piedra, papel o tijera'],['mem','🧠 Memoria'],['emo','🎬 Adivina el emoji'],['leaf','🍃 Ninja de hojas'],['rhy','🥁 Dojo de ritmo']].map(([a,b])=>`<button class="${gmode==a?'on':''}" data-a=mg data-v=${a}>${b}</button>`).join('')}</div>${gpanel(p)}
 <h3>🧬 Cuerpo</h3><div class=g>${FUR.map((c,i)=>`<button class="sw ${z.fur==i?'on':''}" style="background:${c}" data-a=fur data-v=${i} aria-label="Pelaje"></button>`).join('')}</div>
@@ -946,7 +946,7 @@ return`<main><div class=tabs style="margin:0 0 8px"><button data-a=nv data-v=ide
 stats:(p,s)=>{const A=[['💪 Fuerza',(s.cEjercicio||0)+s.gw*2],['🧠 Mente',(s.cMente||0)+(s.cClase||0)],['❤️ Vitalidad',(s.cSueño||0)+(s.cComida||0)+(s.cSalud||0)],['🎭 Carisma',s.cSocial||0],['🔥 Disciplina',s.b*3]],M=Math.max(1,...A.map(a=>a[1]));
 const ds=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return[d.toLocaleDateString('es-ES',{weekday:'narrow'}),Object.values(p.done[dk(d)]||{}).filter(v=>v==1).length]}),dm=Math.max(1,...ds.map(x=>x[1]));
 const T=[['Nivel',s.l],['XP',s.x],['Racha',s.cur],['Mejor racha',s.b],['Tareas hechas',s.t],['Días activos',s.dy],['Días redondos',s.p],['Logros',s.ac+'/'+AD.length],['Piezas',s.pw+'/'+PC.length],['Notas',s.nt],['Entrenos',s.gw],['Misiones',s.md+s.mw],['Pelis vistas',s.fs],['Animes vistos',s.as]];
-return`<main><div class=sg>${T.map(([a,b])=>`<div class=sc><b>${b}</b><small>${a}</small></div>`).join('')}</div><h3>⚔️ Atributos</h3>${A.map(([n,v])=>`<div class=at><span>${n}</span><div class=bar><i style="width:${v/M*100}%"></i></div><b>${v}</b></div>`).join('')}<h3>📅 Últimos 7 días</h3><div class=ch>${ds.map(([n,v])=>`<div><i style="height:${v/dm*100}%"></i><small>${n}</small></div>`).join('')}</div><h3>🔥 Actividad (12 semanas)</h3><div class=hm>${HM(p)}</div><h3>🫶 Ánimo (14 días)</h3><div class=mr>${MR(p)}</div></main>`}};
+return`<main><div class=sg>${T.filter(([a,b])=>b||/Nivel|XP|Racha/.test(a)).map(([a,b])=>`<div class=sc><b>${b}</b><small>${a}</small></div>`).join('')}</div><h3>⚔️ Atributos</h3>${A.map(([n,v])=>`<div class=at><span>${n}</span><div class=bar><i style="width:${v/M*100}%"></i></div><b>${v}</b></div>`).join('')}<h3>📅 Últimos 7 días</h3><div class=ch>${ds.map(([n,v])=>`<div><i style="height:${v/dm*100}%"></i><small>${n}</small></div>`).join('')}</div><h3>🔥 Actividad (12 semanas)</h3><div class=hm>${HM(p)}</div><h3>🫶 Ánimo (14 días)</h3><div class=mr>${MR(p)}</div></main>`}};
 const mk=()=>{let i=0,t=[];for(const c in DEF)DEF[c].forEach(x=>t.push({id:'d'+i++,t:x,c}));return{tasks:t,plan:{},done:{},ach:{},pen:0,pg:0,lv:1,rkk:0}};
 const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
 let S=ld(K);
@@ -1007,7 +1007,7 @@ function r(){
 const y=scrollY,p=P(),k=dk(D),pl=p.plan[k]||[],dd=p.done[k]||{};
 const s=fs(p),ts=pl.map(i=>p.tasks.find(t=>t.id===i)).filter(Boolean),ok=ts.filter(t=>dd[t.id]===1).length;
 const g=s.last?dn(td())-dn(s.last)-1:0,l0=C(s.l),l1=C(s.l+1);
-const tit=D.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
+const tit0=D.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'}),tit=tit0.charAt(0).toUpperCase()+tit0.slice(1);
 const say=g>0?'Te he echado de menos… cada día sin entrar me quita fuerza.':ts.length&&ok==ts.length?'¡Día perfecto! Estoy muy orgulloso de ti.':s.cur?`Llevamos ${s.cur} ${s.cur>1?'días':'día'} seguidos. ¡No la rompas!`:'¿Empezamos? Elige las tareas de hoy.';
 const R=document.documentElement,col=S.base=='color';
 R.dataset.b=S.base;R.style.setProperty('--h',S.h);
@@ -1021,7 +1021,7 @@ let h=`<header><button data-a=menu aria-label="Menú">☰</button>${p.pic?`<img 
 <nav class=dn><button data-a=d data-v=-1 aria-label="Día anterior">‹</button><span>${tit}</span><button data-a=d data-v=1 aria-label="Día siguiente">›</button></nav>
 <nav class=tabs>${[['hoy','Hoy'],['elegir','Elegir'],['tareas','Tareas'],['logros','Logros']].map(([a,b])=>`<button data-a=tab data-v=${a} class="${tab==a?'on':''}">${b}</button>`).join('')}</nav><main>`;
 if(tab=='hoy'){
-h+=`<details class=xtra ${xo?'open':''}><summary data-a=xh>✨ Extras del día · misiones, cofre, agua y ánimo</summary>${mcard(p)+bossCard(p)+chestCard(p)+dayCards(p,k)}</details>`;
+h+=`<details class=xtra ${xo?'open':''}><summary data-a=xh>✨ Extras del día</summary>${mcard(p)+bossCard(p)+chestCard(p)+dayCards(p,k)}</details>`;
 h+=`<div class=bar><i style="width:${ts.length?ok/ts.length*100:0}%"></i></div><p class=mu>${ok} de ${ts.length} hechas · cada tarea suma 10 XP</p>`;
 h+=ts.length?ts.map(t=>`<div class="row s${dd[t.id]||0}"><button class=box data-a=chk data-v="${t.id}">${['','✓','✗'][dd[t.id]||0]}</button><span>${E(t.t)}</span><small>${E(t.c)}</small></div>`).join(''):`<p class=empty>No has elegido tareas para este día.</p><button class=pri data-a=tab data-v=elegir>Elegir tareas</button>`;
 }else if(tab=='elegir'){
@@ -1176,7 +1176,7 @@ function profModal(p,s){const pic=p.pic?`<img class="av big" src="${p.pic}" alt=
 return`<div class=ov style="z-index:11" data-a=pclose></div><div class="pu pf" style="z-index:12"><button class=x data-a=pclose aria-label="Cerrar">✕</button><div class="pbn rk${s.rk}"></div><div class=pav>${pic}</div><div class=pbd><h2>${E(S.cur)}</h2><p class=mu>${E(S.rk[s.rk])} · Nivel ${s.l} · ${s.x} XP</p><p>${E(p.bio||'Sin descripción todavía.')}</p></div>
 <div class=sg3><div class=sc><b>🔥 ${s.cur}</b><small>Racha</small></div><div class=sc><b>🏆 ${s.ac}</b><small>Logros</small></div><div class=sc><b>✅ ${s.t}</b><small>Tareas</small></div></div>
 <h3>🏅 Logros</h3><div class=lgr>${A.slice(0,14).map(i=>`<span title="${E(AD[i].n)}">${AD[i].i}</span>`).join('')||'<small class=mu>Aún no hay logros</small>'}</div>
-<h3>👥 Amigos · ${(S.friends||[]).length}</h3>${(S.friends||[]).map((x,i)=>`<div class=fr2><div><b>${E(x.n)}</b><small>${E(x.r)} · Nivel ${x.l} · 🔥 ${x.c}</small></div><button data-a=fdel data-v=${i} aria-label="Quitar">✕</button></div>`).join('')||'<p class=mu>Aún no tienes amigos. Pásale tu código a alguien o pega el suyo.</p>'}<div class=g style="margin:8px 0"><button data-a=fcode>📋 Copiar mi código</button></div><form class=fform onsubmit="return false"><input id=fc placeholder="Pega el código de un amigo"><button type=button class=pri data-a=fadd>Añadir</button></form>
+<h3>👥 Amigos · ${(S.friends||[]).length}</h3>${(S.friends||[]).map((x,i)=>`<div class=fr2><div><b>${E(x.n)}</b><small>${E(x.r)} · Nivel ${x.l} · 🔥 ${x.c}</small></div><button data-a=fdel data-v=${i} aria-label="Quitar">✕</button></div>`).join('')||'<p class=mu>Aún no tienes amigos. Pásale tu código a alguien o pega el suyo.</p>'}<div class=g style="margin:8px 0"><button data-a=fcode>📋 Copiar mi código</button></div><form class=fform onsubmit="return false"><input id=fc placeholder="Código de amigo"><button type=button class=pri data-a=fadd>Añadir</button></form>
 <div class=g style="margin-top:12px"><button class=pri data-a=ped>✏️ Editar perfil</button></div></div>`}
 function drawer(p,s,col){
 const pf=p.pic?`<img class=av src="${p.pic}" alt="">`:`<span class=av>${AX[s.rk]}</span>`;
